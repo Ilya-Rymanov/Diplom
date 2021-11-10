@@ -75,7 +75,7 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        
+
         <footer class="bg-dark" id="tempaltemo_footer">
             <div class="container">
                 <div class="row">
@@ -162,21 +162,22 @@
         </footer>
     </div>
 
-</body>
 
-
-@Scripts.Render("~/js/jquery-1.11.0.min.js")
-@Scripts.Render("~/js/jquery-migrate-1.2.1.min.js")
-@Scripts.Render("~/js/bootstrap.bundle.min.js")
-@Scripts.Render("~/js/templatemo.js")
-@Scripts.Render("~/js/custom.js")
-@Scripts.Render("~/js/slick.min.js")
+<script src="~/js/jquery-1.11.0.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/custom.js"></script>
+<script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="~/js/slick.min.js"></script>
+<script src="~/js/templatemo.js"></script>
+<script src="~/js/templatemo.min.js"></script>
 @*<script src="~/js/jquery-1.11.0.min.js"></script>
+<script src="~/js/slick.min.js"></script>
     <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/templatemo.js"></script>
     <script src="~/js/custom.js"></script>*@
 @RenderSection("scripts", required: false)
+</body>
 </html>
 
 

@@ -296,7 +296,6 @@
     <Content Include="img\Alco-screen.jpg" />
     <Content Include="img\Alcotest7510.jpg" />
     <Content Include="img\AND.jpg" />
-    <Content Include="img\apple-icon.png" />
     <Content Include="img\aquapro.jpg" />
     <Content Include="img\armeddsgc229.jpg" />
     <Content Include="img\B.Well160.jpg" />
@@ -335,11 +334,12 @@
     <Content Include="img\cskid.jpg" />
     <Content Include="img\cs_v1_3.jpg" />
     <Content Include="img\d10b96c2-64f5-11e4-9424-b8ca3aeddcd6-1-w-528-h-528.jpg" />
-    <Content Include="img\dd775270439fbe7732083417a32f0be3.jpg" />
+    <Content Include="img\dd775270439fbe7732083417a32f0be34.jpg" />
     <Content Include="img\dff6c057-7cae-11eb.jpg" />
     <Content Include="img\Dingo_E010.jpg" />
     <Content Include="img\drager6810.jpg" />
     <Content Include="img\Drivesafe_2.jpg" />
+    <Content Include="img\dvukhsektsionnyy_massazhnyy_stol_casada_malta_2a.jpg" />
     <Content Include="img\ea34.jpg" />
     <Content Include="img\em25.jpg" />
     <Content Include="img\em35.jpg" />
@@ -364,6 +364,7 @@
     <Content Include="img\gessRevolver.jpg" />
     <Content Include="img\GessUfoot.jpg" />
     <Content Include="img\gessVelet.jpg" />
+    <Content Include="img\GESS_Integro_red-650x650.jpg" />
     <Content Include="img\H007_H_007-w-528-h-528.jpg" />
     <Content Include="img\hunnamed.jpg" />
     <Content Include="img\il11.jpg" />
@@ -424,7 +425,7 @@
     <Content Include="img\store_apendix_large115_248.jpg" />
     <Content Include="img\store_apendix_large143_309-200x200.jpg" />
     <Content Include="img\store_apendix_large15_133-200x200.jpg" />
-    <Content Include="img\store_apendix_large32_47.jpg" />
+    <Content Include="img\store_apendix_large32_45.jpg" />
     <Content Include="img\sur42.jpg" />
     <Content Include="img\uBlack.jpg" />
     <Content Include="img\us-medica-tokyo-black_b_x.jpg" />
