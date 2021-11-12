@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diplom.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace Diplom.Controllers
 {
     public class HomeController : Controller
     {
+        private Entities db = new Entities();
         public ActionResult Index()
         {
             return View();
@@ -15,9 +17,9 @@ namespace Diplom.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            
 
-            return View();
+            return View(db.Manufacturer.ToList());
         }
 
         public ActionResult Contact()
