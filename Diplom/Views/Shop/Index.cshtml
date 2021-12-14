@@ -78,7 +78,7 @@
 
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
-                            <div class="card rounded-0"style="height: 315px">
+                            <div class="card rounded-0" style="height: 315px">
                                 <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
@@ -113,9 +113,9 @@
                                     </div>
                                 }
                                 catch
-                {
+                                {
 
-                }
+                                }
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
 
                                     <li class="pt-2">
@@ -138,15 +138,7 @@
 
                 <ul class="pagination pagination-lg justify-content-end">
                     @Html.PageLinks(Model.PagingInfo, x => Url.Action("Index", new { page = x }))
-                    @*<li class="page-item disabled">
-                            <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
-                        </li>*@
+                    
                 </ul>
             </div>
         </div>
@@ -154,61 +146,3 @@
     </div>
 
 </div>
-<!-- End Content -->
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id_Product)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NameProduct)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_Guarantee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_Manufacturer)
-        </th>
-        <th></th>
-    </tr>*@
-
-
-@*<tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_Product)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameProduct)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_Guarantee)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_Manufacturer)
-        </td>
-
-    </tr>*@

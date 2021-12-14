@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Diplom.Models
+@model LoginViewModel
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -16,7 +18,7 @@
     @*<link rel="stylesheet" href="~/css/bootstrap.min.css">
         <link rel="stylesheet" href="~/css/templatemo.css">
         <link rel="stylesheet" href="~/css/custom.css">*@
-   
+
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="~/css/fontawesome.min.css">
@@ -26,7 +28,7 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="@Url.Action("Index", "Home")">
-             МедКурьер   
+                МедКурьер
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,10 +66,59 @@
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="@Url.Action("Login", "Account")">
+                    <a class="nav-icon position-relative text-decoration-none" href="#openModal">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
+                    <div id="openModal" class="modalDialog">
+                        <div>
+                            <a href="#close" title="Закрыть" class="close">X</a>
+                            <section id="loginForm">
+                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <h4 class="h2" style="font-weight:500;">Вход в личный кабинет</h4>
+                                    <hr />
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Email, new { @class = "h3 text - decoration - none" })
+                                        <div class="col-md-10" style="margin-bottom:20px;">
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Password, new { @class = "h3 text - decoration - none" })
+                                        <div class="col-md-10" style="margin-bottom:10px;">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <div class="checkbox" style="margin-bottom:15px;">
+                                                @Html.CheckBoxFor(m => m.RememberMe)
+                                                @Html.LabelFor(m => m.RememberMe)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col d-grid">
+                                            <button type="submit" class="btn btn-success btn-lg" name="submit" value="Войти" style="width:150px;">Войти</button>
+                                            <a href="@Url.Action("Register", "Account")">Регестрация</a>
+                                        </div>
+                                    </div>
+
+                                    @* Включите, когда будет включено подтверждение учетной записи для функции сброса пароля
+                                        <p>
+                                            @Html.ActionLink("Забыли пароль?", "ForgotPassword")
+                                        </p>*@
+                                }
+                            </section>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
@@ -161,68 +212,124 @@
 
         </footer>
     </div>
+    <style>
+        .modalDialog {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 99999;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            display: none;
+            pointer-events: none;
+        }
 
+            .modalDialog:target {
+                display: block;
+                pointer-events: auto;
+            }
 
-<script src="~/js/jquery-1.11.0.min.js"></script>
-<script src="~/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/custom.js"></script>
-<script src="~/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="~/js/slick.min.js"></script>
-<script src="~/js/templatemo.js"></script>
-<script src="~/js/templatemo.min.js"></script>
-@*<script src="~/js/jquery-1.11.0.min.js"></script>
-<script src="~/js/slick.min.js"></script>
-    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+            .modalDialog > div {
+                width: 400px;
+                position: relative;
+                margin: 10% auto;
+                padding: 5px 20px 13px 20px;
+                border-radius: 10px;
+                background: #fff;
+                background: -moz-linear-gradient(#fff, #999);
+                background: -webkit-linear-gradient(#fff, #999);
+                background: -o-linear-gradient(#fff, #999);
+            }
+
+        .close {
+            background: #606061;
+            color: #FFFFFF;
+            line-height: 25px;
+            position: absolute;
+            right: -12px;
+            text-align: center;
+            top: -10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 1px 1px 3px #000;
+            -webkit-box-shadow: 1px 1px 3px #000;
+            box-shadow: 1px 1px 3px #000;
+        }
+
+            .close:hover {
+                background: #00d9ff;
+            }
+    </style>
+
+    <script src="~/js/jquery-1.11.0.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
     <script src="~/js/templatemo.js"></script>
-    <script src="~/js/custom.js"></script>*@
-@RenderSection("scripts", required: false)
+    <script src="~/js/templatemo.min.js"></script>
+    @*<script src="~/js/jquery-1.11.0.min.js"></script>
+        <script src="~/js/slick.min.js"></script>
+            <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="~/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/templatemo.js"></script>
+            <script src="~/js/custom.js"></script>*@
+    @RenderSection("scripts", required: false)
 </body>
 </html>
 
 
 @*<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - приложение ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - приложение ASP.NET</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
 
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Информация", "About", "Home")</li>
+                        <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>*@
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@
