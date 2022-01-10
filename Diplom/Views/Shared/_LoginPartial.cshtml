@@ -1,6 +1,87 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
+﻿<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button class="visible-xs btn close-modal" data-dismiss="modal" aria-label="Close">
+                <i class="fa"></i>
+            </button>
+            <div id="login">
+                <div class="modal-header">
+                    <h3 class="modal-title">
+                    <button type="button" class="btn btn-arrow" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i></button> Вход</h3>
+                </div><!-- /.modal-header-->
+                <div class="modal-body">
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group" style="margin-bottom:20px">
+                            @Html.TextBox("Email"
+                                     , null
+                                     , "text"
+                                     , new
+                                     {
+                                         @class = "form-control"
+                                         ,
+                                              @placeholder = "E-mail или телефон"
+                                     })
+                        </div>
+                        <div class="form-group" style="margin-bottom:20px">
+                            @Html.Password("Password"
+                                     , null
+                                     , new
+                                     {
+                                         @class = "form-control"
+                                         ,
+                                              @placeholder = "Пароль"
+                                     })
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox" style="margin-bottom:20px;">
+                                    <input id="RememberMePart" name="RememberMe" type="checkbox" value="true" />
+                                    <label for="RememberMePart"><span></span>Запомнить меня</label>
+                                    <input name="RememberMe" type="hidden" value="false" />
+                                </div>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <div class="col d-grid">
+                                    <div>
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="Войти" style="width:150px; margin-right:15px">Войти</button><button class="btn btn-success btn-lg" href="@Url.Action("Register", "Account")">Регестрация</button>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div><!-- /.modal-body-->
+            </div><!-- /#login-->
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<style>
+    .btn-arrow {
+        background: none;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: solid 1px;
+        color: #81838d;
+        height: 21px;
+        width: 21px;
+        padding: 0;
+        vertical-align: top;
+        display: inline-block;
+        margin-top: 8px;
+    }
+   
+    
+
+</style>
+
+
+@*@using Microsoft.AspNet.Identity*@
+@*@if (Request.IsAuthenticated)*@
+@*{
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
@@ -19,4 +100,4 @@ else
         <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
-}
+}*@

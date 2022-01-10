@@ -26,7 +26,7 @@
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="@Url.Action("Index", "Home")">
-             МедКурьер   
+                МедКурьер
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,10 +64,14 @@
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="@Url.Action("Login", "Account")">
+
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#myModal2">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
+
+
+
                 </div>
             </div>
 
@@ -75,6 +79,7 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
+        @{Html.RenderPartial("_LoginPartial"); }
 
         <footer class="bg-dark" id="tempaltemo_footer">
             <div class="container">
@@ -162,21 +167,306 @@
         </footer>
     </div>
 
+    <style>
+        .modalDialog {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 99999;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            display: none;
+            pointer-events: none;
+        }
 
-<script src="~/js/jquery-1.11.0.min.js"></script>
-<script src="~/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/custom.js"></script>
-<script src="~/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="~/js/slick.min.js"></script>
-<script src="~/js/templatemo.js"></script>
-<script src="~/js/templatemo.min.js"></script>
-@*<script src="~/js/jquery-1.11.0.min.js"></script>
-<script src="~/js/slick.min.js"></script>
-    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+            .modalDialog:target {
+                display: block;
+                pointer-events: auto;
+            }
+
+            .modalDialog > div {
+                width: 400px;
+                position: relative;
+                margin: 10% auto;
+                padding: 5px 20px 13px 20px;
+                border-radius: 10px;
+                background: #fff;
+                background: -moz-linear-gradient(#fff, #999);
+                background: -webkit-linear-gradient(#fff, #999);
+                background: -o-linear-gradient(#fff, #999);
+            }
+
+        .close {
+            background: #606061;
+            color: #FFFFFF;
+            line-height: 25px;
+            position: absolute;
+            right: -12px;
+            text-align: center;
+            top: -10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 1px 1px 3px #000;
+            -webkit-box-shadow: 1px 1px 3px #000;
+            box-shadow: 1px 1px 3px #000;
+        }
+
+            .close:hover {
+                background: #00d9ff;
+            }
+    </style>
+    <script>
+        $(function () {
+            $('.accordion-group').simpleAccordion();
+        });
+    </script>
+    <style>
+        input {
+            width: 200px;
+            font-size: 13px;
+            color: #000000;
+            padding: 6px 0 4px 10px;
+            border: 1px solid #cecece;
+            background: #F6F6f6;
+            border-radius: 5px;
+        }
+    </style>
+    <!--закрытие панели-->
+    <style>
+        .close-help {
+            position: absolute;
+            right: 32px;
+            top: 32px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.3;
+        }
+
+            .close-help:hover {
+                opacity: 1;
+            }
+
+            .close-help:before, .close-help:after {
+                position: absolute;
+                left: 15px;
+                content: ' ';
+                height: 33px;
+                width: 2px;
+                background-color: #ff5800;
+            }
+
+            .close-help:before {
+                transform: rotate(45deg);
+            }
+
+            .close-help:after {
+                transform: rotate(-45deg);
+            }
+    </style>
+    <script>
+        $('.close-help').on('click', function () {
+            $('.side-button-2').removeClass('hide');
+        })
+    </script>
+    <style>
+        .hrefTitle {
+            text-decoration: none !important;
+        }
+    </style>
+    <style>
+        /* Оформление панели */
+        #side-checkbox {
+            display: none;
+        }
+
+        .side-panel {
+            position: fixed;
+            z-index: 999999;
+            top: 0;
+            right: -1500px;
+            /*background: #337AB7;*/
+            background: #464750; /*rgba(255, 88, 0, 0.7);*/ /*#ff5800;*/
+            transition: all 0.5s;
+            width: 620px;
+            height: 100vh;
+            box-shadow: 10px 0 20px rgba(0,0,0,0.4);
+            color: #FFF;
+            padding: 40px 20px;
+            overflow: auto;
+        }
+
+        .side-title {
+            font-size: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #BFE2FF;
+        }
+        /* Оформление кнопки на странице */
+        .side-button-1-wr {
+            text-align: center; /* Контейнер для кнопки, чтобы было удобнее ее разместить */
+        }
+
+        .side-button-1 .side-b {
+            margin: 10px;
+            text-decoration: none;
+            position: relative;
+            font-size: 20px;
+            line-height: 20px;
+            padding: 12px 30px;
+            color: #FFF;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Roboto Condensed', Тahoma, sans-serif;
+            background: #337AB7;
+            cursor: pointer;
+            border: 2px solid #BFE2FF;
+        }
+
+            .side-button-1 .side-b:hover,
+            .side-button-1 .side-b:active,
+            .side-button-1 .side-b:focus {
+                color: #FFF;
+            }
+
+            .side-button-1 .side-b:after,
+            .side-button-1 .side-b:before {
+                position: absolute;
+                height: 4px;
+                left: 50%;
+                bottom: -6px;
+                content: "";
+                transition: all 280ms ease-in-out;
+                width: 0;
+            }
+
+        .side-button-1 .side-open:after,
+        .side-button-1 .side-open:before {
+            background: green;
+        }
+
+        .side-button-1 .side-close:after,
+        .side-button-1 .side-close:before {
+            background: red;
+        }
+
+        .side-button-1 .side-b:before {
+            top: -6px;
+        }
+
+        .side-button-1 .side-b:hover:after,
+        .side-button-1 .side-b:hover:before {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Переключатели кнопки 1 */
+        .side-button-1 .side-close {
+            display: none;
+        }
+
+        #side-checkbox:checked + .side-panel + .side-button-1-wr .side-button-1 .side-open {
+            display: none;
+        }
+
+        #side-checkbox:checked + .side-panel + .side-button-1-wr .side-button-1 .side-close {
+            display: block;
+        }
+
+        #side-checkbox:checked + .side-panel {
+            right: 0;
+        }
+
+        #side-checkbox:checked + .side-panel {
+            /*right: 50px;*/
+        }
+        /* Оформление кнопки на панеле */
+        .side-button-2 {
+            /*font-size: 30px;
+            border-radius: 20px;
+            position: absolute;
+            z-index: 1;
+            top: 8px;
+            right: 8px;
+            cursor: pointer;
+            transform: rotate(45deg);
+            color: #BFE2FF;
+            transition: all 280ms ease-in-out;*/
+            position: fixed;
+            bottom: 100px;
+            right: 0;
+            width: 35px;
+            padding: 5px 0;
+            text-align: center;
+            /*background: #ff5800;*/
+            -webkit-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-border-radius: 0 5px 5px 0;
+            -moz-border-radius: 0 5px 5px 0;
+            border-radius: 0 5px 5px 0;
+            z-index: 1000;
+            visibility: visible;
+        }
+
+            .side-button-2:hover {
+                transform: rotate(35deg) scale(1.1);
+                color: #FFF;
+            }
+
+            .side-button-2:active {
+                visibility: hidden;
+            }
+
+        .hide {
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        $('.side-button-2').on('click', function () {
+            $(this).addClass('hide');
+
+        })
+    </script>
+    <!--/КОНЕЦ Окно справки. Скрипты и стили-->
+    <style>
+        .hrefTitle {
+            text-decoration: none !important;
+        }
+    </style>
+
+    <script src="~/js/jquery-1.11.0.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
     <script src="~/js/templatemo.js"></script>
-    <script src="~/js/custom.js"></script>*@
-@RenderSection("scripts", required: false)
+    <script src="~/js/templatemo.min.js"></script>
+    @*<script src="~/js/jquery-1.11.0.min.js"></script>
+        <script src="~/js/slick.min.js"></script>
+            <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="~/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/templatemo.js"></script>
+            <script src="~/js/custom.js"></script>*@
+    @RenderSection("scripts", required: false)
+    <script>
+        function isSuccess() {
+            $("#success").modal();
+        }
+        function isError() {
+            $("#error").modal();
+        }
+    </script>
+
 </body>
 </html>
 
