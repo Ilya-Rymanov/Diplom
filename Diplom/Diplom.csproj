@@ -448,7 +448,6 @@
     <Content Include="js\custom.js" />
     <Content Include="js\jquery-1.11.0.min.js" />
     <Content Include="js\jquery-migrate-1.2.1.min.js" />
-    <Content Include="js\main.js" />
     <Content Include="js\modernizr.js" />
     <Content Include="js\slick.min.js" />
     <Content Include="js\templatemo.js" />

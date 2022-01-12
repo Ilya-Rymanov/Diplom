@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <div class="checkbox" style="margin-bottom:15px;">
-                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "with1" })
                                     @Html.LabelFor(m => m.RememberMe)
                                 </div>
                             </div>
@@ -60,6 +60,11 @@
         </div>
     </div>
 </div>
+<style>
+    .with1{
+        width:15px;
+    }
+</style>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

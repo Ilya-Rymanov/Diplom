@@ -1,14 +1,12 @@
 ﻿<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <button class="visible-xs btn close-modal" data-dismiss="modal" aria-label="Close">
-                <i class="fa"></i>
-            </button>
             <div id="login">
                 <div class="modal-header">
                     <h3 class="modal-title">
-                    <button type="button" class="btn btn-arrow" data-dismiss="modal" aria-label="Close">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i></button> Вход</h3>
+                        <a href="@Url.Action("Index", "Home")" title="Закрыть" class="close" style="background-color: #59ab6e !important">X</a>
+                         Вход
+                    </h3>
                 </div><!-- /.modal-header-->
                 <div class="modal-body">
                     @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @role = "form" }))
@@ -16,29 +14,31 @@
                         @Html.AntiForgeryToken()
                         <div class="form-group" style="margin-bottom:20px">
                             @Html.TextBox("Email"
-                                     , null
-                                     , "text"
-                                     , new
-                                     {
-                                         @class = "form-control"
-                                         ,
-                                              @placeholder = "E-mail или телефон"
-                                     })
+                                       , null
+                                       , "text"
+                                       , new
+                                       {
+                                           @class = "form-control"
+                                           ,
+                                           @placeholder = "E-mail или телефон"
+                                       })
                         </div>
                         <div class="form-group" style="margin-bottom:20px">
                             @Html.Password("Password"
-                                     , null
-                                     , new
-                                     {
-                                         @class = "form-control"
-                                         ,
-                                              @placeholder = "Пароль"
-                                     })
+                                       , null
+                                       , new
+                                       {
+                                           @class = "form-control"
+                                           ,
+                                           @placeholder = "Пароль"
+                                       })
+                    
                         </div>
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <div class="checkbox" style="margin-bottom:20px;">
-                                    <input id="RememberMePart" name="RememberMe" type="checkbox" value="true" />
+                                    <input id="RememberMePart" name="RememberMe" type="checkbox" value="true" style="width:25px" />
                                     <label for="RememberMePart"><span></span>Запомнить меня</label>
                                     <input name="RememberMe" type="hidden" value="false" />
                                 </div>
@@ -47,11 +47,13 @@
                             <div class="form-group">
                                 <div class="col d-grid">
                                     <div>
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="Войти" style="width:150px; margin-right:15px">Войти</button><button class="btn btn-success btn-lg" href="@Url.Action("Register", "Account")">Регестрация</button>
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="Войти" style="width:150px; margin-right:15px">Войти</button>@*<button class="btn btn-success btn-lg" href="@Url.Action("Register", "Account", null, null)">Регистрация</button>*@
+                                        @Html.ActionLink("Регистрация", "Register", "Account", null, new { @class = "lineDelite" })
                                     </div>
+                                   @*Забыли пароль(добавить)*@
                                 </div>
                             </div>
-                            }
+                    }
                         </div><!-- /.modal-body-->
             </div><!-- /#login-->
         </div><!-- modal-content -->
@@ -73,8 +75,36 @@
         display: inline-block;
         margin-top: 8px;
     }
-   
-    
+    .close {
+        background: #606061;
+        color: #FFFFFF;
+        line-height: 25px;
+        position: absolute;
+        right: -12px;
+        text-align: center;
+        top: -10px;
+        width: 24px;
+        text-decoration: none;
+        font-weight: bold;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        border-radius: 12px;
+        -moz-box-shadow: 1px 1px 3px #000;
+        -webkit-box-shadow: 1px 1px 3px #000;
+        box-shadow: 1px 1px 3px #000;
+    }
+
+    .close:hover {
+            background: #00d9ff;
+            color:red;
+    }
+    .lineDelite {
+        text-decoration: none;
+        color: #59ab6e;
+    }
+    .lineDelite:hover{
+        color:#305C3A;
+    }
 
 </style>
 
