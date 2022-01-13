@@ -12,32 +12,20 @@ namespace Diplom.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Value
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Value()
         {
             this.characteristic = new HashSet<characteristic>();
-            this.Price1 = new HashSet<Price>();
         }
     
-        public int id_Product { get; set; }
-        public string NameProduct { get; set; }
-        public Nullable<int> id_Type { get; set; }
-        public string Price { get; set; }
-        public string Description { get; set; }
-        public string Image { get; set; }
-        public Nullable<int> id_Guarantee { get; set; }
-        public Nullable<int> id_Manufacturer { get; set; }
-        public Nullable<int> id_Price { get; set; }
+        public int id_Value { get; set; }
+        public string Name_Value { get; set; }
+        public Nullable<int> id_Unit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<characteristic> characteristic { get; set; }
-        public virtual Guarantee Guarantee { get; set; }
-        public virtual Manufacturer Manufacturer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Price> Price1 { get; set; }
-        public virtual Price Price2 { get; set; }
-        public virtual TypeProduct TypeProduct { get; set; }
+        public virtual Unit Unit { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Diplom.Controllers
         private Entities db = new Entities();
         public ActionResult Index()
         {
-            return View();
+            return View(db.Category.ToList());
         }
 
         public ActionResult About()
@@ -28,5 +28,7 @@ namespace Diplom.Controllers
 
             return View();
         }
+
+        
     }
 }

@@ -102,8 +102,7 @@
                         </a>
                     </div>
                     <!--End Controls-->
-                    @foreach (var item in Model)
-                    {
+                    
                         <!--Carousel Wrapper-->
                         <div class="col">
                             <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="templatemo-slide-brand" data-bs-ride="carousel">
@@ -113,18 +112,24 @@
                                     <!--First slide-->
                                     <div class="carousel-item active">
                                         <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/@item.Image" alt="Brand Logo"></a>
-                                            </div>
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href="#"><img class="img-fluid brand-img" src="~/img/@item.Image" alt="Brand Logo"></a>
+                                                </div>
+                                            }
                                             @*<div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="~/img/brand_02.png" alt="Brand Logo"></a>
-                                                </div>
-                                                <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="~/img/brand_03.png" alt="Brand Logo"></a>
-                                                </div>
-                                                <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="~/img/brand_04.png" alt="Brand Logo"></a>
-                                                </div>*@
+                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_01.png" alt="Brand Logo"></a>
+                                            </div>
+                                            <div class="col-3 p-md-5">
+                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_02.png" alt="Brand Logo"></a>
+                                            </div>
+                                            <div class="col-3 p-md-5">
+                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_03.png" alt="Brand Logo"></a>
+                                            </div>
+                                            <div class="col-3 p-md-5">
+                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_04.png" alt="Brand Logo"></a>
+                                            </div>*@
                                         </div>
                                     </div>
                                     <!--End First slide-->
@@ -135,7 +140,7 @@
                                 <!--End Slides-->
                             </div>
                         </div>
-                    }
+                    
                     <!--End Carousel Wrapper-->
                     <!--Controls-->
                     <div class="col-1 align-self-center">

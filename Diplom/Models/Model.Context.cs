@@ -36,8 +36,14 @@ namespace Diplom.Models
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Guarantee> Guarantee { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeProduct> TypeProduct { get; set; }
+        public virtual DbSet<All_Characteristic> All_Characteristic { get; set; }
+        public virtual DbSet<characteristic> characteristic { get; set; }
+        public virtual DbSet<Type> Type { get; set; }
+        public virtual DbSet<Unit> Unit { get; set; }
+        public virtual DbSet<Value> Value { get; set; }
+        public virtual DbSet<Price> Price { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
     }
 }

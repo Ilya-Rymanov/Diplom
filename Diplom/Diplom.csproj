@@ -184,6 +184,9 @@
     <Compile Include="Models\AdminOptionValue.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\All_Characteristic.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -197,6 +200,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\characteristic.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\City.cs">
@@ -229,6 +235,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PagingInfo.cs" />
+    <Compile Include="Models\Price.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -236,7 +245,16 @@
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Type.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TypeProduct.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Unit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Value.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -537,6 +555,7 @@
     <Content Include="webfonts\slick.woff" />
     <Content Include="Views\Shop\Details.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Home\CatalogPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

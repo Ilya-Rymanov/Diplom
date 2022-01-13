@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Diplom.Models.Category>
+
+
+@foreach (var item in Model)
+{
+
+    <div class="col-12 col-md-4 p-5 mt-3">
+        <a href="@Url.Action("Index", "Shop")"><img src="~/img/@item.Image" class="rounded-circle img-fluid border" style="margin-left: 30px;"></a>
+        <a class="lineDelite" href="@Url.Action("Index", "Shop")"><h5 class="text-center mt-3 mb-3">@item.NameCategory</h5></a>
+    </div>
+}
+<style>
+    .lineDelite {
+        text-decoration: none;
+        color: #59ab6e;
+    }
+    .lineDelite:hover{
+        color:#305C3A;
+    }
+    .img-fluid {
+        max-width: 80%;
+    }
+</style>
