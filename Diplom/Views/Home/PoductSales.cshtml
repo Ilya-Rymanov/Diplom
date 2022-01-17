@@ -7,7 +7,7 @@
 
         <div class="col-md-4">
             <div class="card mb-4 product-wap rounded-0">
-                <div class="card rounded-0" style="height: 315px">
+                <div class="card rounded-0">
                     <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                         <ul class="list-unstyled">
@@ -24,11 +24,11 @@
                         Nothtml1 = Regex.Replace(Nothtml1, "<[^>]+>", string.Empty);
                         <div data-name="@Nothtml1">
                             <div>
-                                @if (Nothtml1.Length > 23)
+                                @if (Nothtml1.Length > 26)
                                 {
-                                    if (item.NameProduct.Length > 23)
+                                    if (item.NameProduct.Length > 26)
                                     {
-                                        <a href="@Url.Action("Details", "Shop", new { id = item.id_Product })" class="h3 text-decoration-none" style="font-size:19px !important" title="@item.NameProduct">@Nothtml1.Remove(23, Nothtml1.Length - 23)...</a>
+                                        <a href="@Url.Action("Details", "Shop", new { id = item.id_Product })" class="h3 text-decoration-none" style="font-size:19px !important" title="@item.NameProduct">@Nothtml1.Remove(23, Nothtml1.Length - 26)...</a>
 
                                     }
 
@@ -63,3 +63,77 @@
 
     }
 </div>
+@*<div class="row">
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card h-100">
+                <a href="@Url.Action("Index", "Shop")">
+                    <img src="~/img/feature_prod_01.jpg" class="card-img-top" alt="Image">
+                </a>
+                <div class="card-body">
+                    <ul class="list-unstyled d-flex justify-content-between">
+                        <li>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-muted fa fa-star"></i>
+                            <i class="text-muted fa fa-star"></i>
+                        </li>
+                        <li class="text-muted text-right">$240.00</li>
+                    </ul>
+                    <a href="@Url.Action("Index", "Shop")" class="h2 text-decoration-none text-dark">Gym Weight</a>
+                    <p class="card-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
+                    </p>
+                    <p class="text-muted">Reviews (24)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card h-100">
+                <a href="@Url.Action("Index", "Shop")">
+                    <img src="~/img/feature_prod_02.jpg" class="card-img-top" alt="Image">
+                </a>
+                <div class="card-body">
+                    <ul class="list-unstyled d-flex justify-content-between">
+                        <li>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-muted fa fa-star"></i>
+                            <i class="text-muted fa fa-star"></i>
+                        </li>
+                        <li class="text-muted text-right">$480.00</li>
+                    </ul>
+                    <a href="@Url.Action("Index", "Shop")" class="h2 text-decoration-none text-dark">Cloud Nike Shoes</a>
+                    <p class="card-text">
+                        Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
+                    </p>
+                    <p class="text-muted">Reviews (48)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card h-100">
+                <a href="@Url.Action("Index", "Shop")">
+                    <img src="~/img/feature_prod_03.jpg" class="card-img-top" alt="Image">
+                </a>
+                <div class="card-body">
+                    <ul class="list-unstyled d-flex justify-content-between">
+                        <li>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                        </li>
+                        <li class="text-muted text-right">$360.00</li>
+                    </ul>
+                    <a href="@Url.Action("Index", "Shop")" class="h2 text-decoration-none text-dark">Summer Addides Shoes</a>
+                    <p class="card-text">
+                        Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
+                    </p>
+                    <p class="text-muted">Reviews (74)</p>
+                </div>
+            </div>
+        </div>
+    </div>*@
