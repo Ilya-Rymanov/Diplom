@@ -12,7 +12,17 @@ namespace Diplom.Controllers
         private Entities db = new Entities();
         public ActionResult Index()
         {
-            return View(db.Category.ToList());
+            
+            return View();
+        }
+        public ActionResult CatalogPartial()
+        {
+            return PartialView(db.Category);
+        }
+
+        public ActionResult PoductSales()
+        {
+            return PartialView(db.Product);
         }
 
         public ActionResult About()

@@ -294,9 +294,11 @@
     <Content Include="img\5asdaa2124e8f0b.jpg" />
     <Content Include="img\5c9bda803c.jpg" />
     <Content Include="img\5e78cfb9c0989-w-528-h-528.jpg" />
+    <Content Include="img\5e78cfb9c0989-w-528-h-5281.jpg" />
     <Content Include="img\5f1ed56b2e8e9-w-650-h-650.jpg" />
     <Content Include="img\5f1ed710533d0-w-650-h-650.jpg" />
     <Content Include="img\6007662484.jpg" />
+    <Content Include="img\60076624841.jpg" />
     <Content Include="img\600974b2ae247-w-528-h-528.jpg" />
     <Content Include="img\60097ad7e7beb-w-528-h-528.jpg" />
     <Content Include="img\60f6d127043d6-w-528-h-528.jpg" />
@@ -447,6 +449,7 @@
     <Content Include="img\store_apendix_large143_309-200x200.jpg" />
     <Content Include="img\store_apendix_large15_133-200x200.jpg" />
     <Content Include="img\store_apendix_large32_45.jpg" />
+    <Content Include="img\store_apendix_large32_451.jpg" />
     <Content Include="img\sur42.jpg" />
     <Content Include="img\uBlack.jpg" />
     <Content Include="img\us-medica-tokyo-_b_x.jpg" />
@@ -557,6 +560,7 @@
     <Content Include="Views\Shop\Details.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Home\CatalogPartial.cshtml" />
+    <Content Include="Views\Home\PoductSales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
