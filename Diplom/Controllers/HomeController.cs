@@ -22,14 +22,15 @@ namespace Diplom.Controllers
 
         public ActionResult PoductSales()
         {
-            return PartialView(db.Product);
+            
+            return PartialView();
         }
 
         public ActionResult About()
         {
             
 
-            return View(db.Manufacturer.ToList());
+            return View(db.Manufacturer);
         }
 
         public ActionResult Contact()

@@ -132,7 +132,7 @@
           <Key>
             <PropertyRef Name="Id_Price" />
           </Key>
-          <Property Name="Id_Price" Type="int" Nullable="false" />
+          <Property Name="Id_Price" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_Product" Type="int" />
           <Property Name="Price" Type="nvarchar" MaxLength="50" />
           <Property Name="Sales" Type="bit" />
@@ -144,7 +144,6 @@
           <Property Name="id_Product" Type="int" Nullable="false" />
           <Property Name="NameProduct" Type="nvarchar(max)" />
           <Property Name="id_Type" Type="int" />
-          <Property Name="Price" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="id_Guarantee" Type="int" />
@@ -865,7 +864,6 @@
           <Property Name="id_Product" Type="Int32" Nullable="false" />
           <Property Name="NameProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_Type" Type="Int32" />
-          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_Guarantee" Type="Int32" />
@@ -874,8 +872,8 @@
           <NavigationProperty Name="characteristic" Relationship="Model.FK_characteristic_Product" FromRole="Product" ToRole="characteristic" />
           <NavigationProperty Name="Guarantee" Relationship="Model.FK_Product_Guarantee" FromRole="Product" ToRole="Guarantee" />
           <NavigationProperty Name="Manufacturer" Relationship="Model.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <NavigationProperty Name="Price1" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
-          <NavigationProperty Name="Price2" Relationship="Model.FK_Product_Price" FromRole="Product" ToRole="Price" />
+          <NavigationProperty Name="Price" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
+          <NavigationProperty Name="Price1" Relationship="Model.FK_Product_Price" FromRole="Product" ToRole="Price" />
           <NavigationProperty Name="TypeProduct" Relationship="Model.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
         </EntityType>
         <Association Name="FK_characteristic_Product">
@@ -1153,7 +1151,6 @@
                 <ScalarProperty Name="id_Guarantee" ColumnName="id_Guarantee" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="id_Type" ColumnName="id_Type" />
                 <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
                 <ScalarProperty Name="id_Product" ColumnName="id_Product" />

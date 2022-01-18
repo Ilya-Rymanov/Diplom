@@ -18,13 +18,12 @@ namespace Diplom.Models
         public Product()
         {
             this.characteristic = new HashSet<characteristic>();
-            this.Price1 = new HashSet<Price>();
+            this.Price = new HashSet<Price>();
         }
     
         public int id_Product { get; set; }
         public string NameProduct { get; set; }
         public Nullable<int> id_Type { get; set; }
-        public string Price { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
         public Nullable<int> id_Guarantee { get; set; }
@@ -36,8 +35,8 @@ namespace Diplom.Models
         public virtual Guarantee Guarantee { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Price> Price1 { get; set; }
-        public virtual Price Price2 { get; set; }
+        public virtual ICollection<Price> Price { get; set; }
+        public virtual Price Price1 { get; set; }
         public virtual TypeProduct TypeProduct { get; set; }
     }
 }

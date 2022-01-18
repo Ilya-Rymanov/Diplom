@@ -4,6 +4,19 @@
 @model ProductListViewModel
 @{
     ViewBag.Title = "Index";
+    
+        Diplom.Models.Entities db = new Diplom.Models.Entities();
+        var productPrice = db.Price.Join(db.Product,
+            u => u.id_Product,
+            c => c.id_Product,
+            (u, c) => new
+            {
+                Image = c.Image,
+                NameProduct = c.NameProduct,
+                Price = u.Price1,
+                id_Product = c.id_Product
+            });
+    
 }
 <!-- Start Content -->
 
@@ -73,12 +86,12 @@
                 </div>
             </div>
             <div class="row">
-                @foreach (var item in Model.Products)
+                @foreach (var item in productPrice)
                 {
 
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
-                            <div class="card rounded-0"style="height: 315px">
+                            <div class="card rounded-0" style="height: 315px">
                                 <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
@@ -113,9 +126,9 @@
                                     </div>
                                 }
                                 catch
-                {
+                                {
 
-                }
+                                }
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
 
                                     <li class="pt-2">
@@ -155,4 +168,3 @@
 
 </div>
 <!-- End Content -->
-
