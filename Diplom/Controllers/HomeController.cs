@@ -22,21 +22,17 @@ namespace Diplom.Controllers
 
         public ActionResult PoductSales()
         {
-            
             return PartialView();
         }
 
         public ActionResult About()
         {
-            
-
             return View(db.Manufacturer);
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 

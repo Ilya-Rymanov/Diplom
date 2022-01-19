@@ -4,6 +4,7 @@
 
 
 @{ 
+    var sale = 0;
     Diplom.Models.Entities db = new Diplom.Models.Entities();
     var productPrice = db.Price.Join(db.Product,
         u => u.id_Product,
@@ -16,6 +17,7 @@
             Sales = u.Sales,
             id_Product =c.id_Product
         });
+
 }
 
 <div class="row">
@@ -34,6 +36,12 @@
                         <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
                         <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
                     </ul>
+                </div>
+                 
+                <div class="c3c cc4 c9k" style="width: 4em; height: 2em;">
+                    <span>
+                        @sale %
+                    </span>
                 </div>
             </div>
             <div class="card-body">
@@ -76,7 +84,7 @@
                 </ul>
 
                 <p class="text-center mb-0" style="font-size: 24px !important; font-weight: 500 !important; color: green ">@item.Price &#8381;</p>
-
+                <p class="text-center mb-0" style="font-size: 24px !important; font-weight: 500 !important; color: #717173; text-decoration: line-through ">4000 &#8381;</p>
 
             </div>
         </div>
@@ -90,77 +98,28 @@
 
     }
 </div>
-@*<div class="row">
-        <div class="col-12 col-md-4 mb-4">
-            <div class="card h-100">
-                <a href="@Url.Action("Index", "Shop")">
-                    <img src="~/img/feature_prod_01.jpg" class="card-img-top" alt="Image">
-                </a>
-                <div class="card-body">
-                    <ul class="list-unstyled d-flex justify-content-between">
-                        <li>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-muted fa fa-star"></i>
-                            <i class="text-muted fa fa-star"></i>
-                        </li>
-                        <li class="text-muted text-right">$240.00</li>
-                    </ul>
-                    <a href="@Url.Action("Index", "Shop")" class="h2 text-decoration-none text-dark">Gym Weight</a>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
-                    </p>
-                    <p class="text-muted">Reviews (24)</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 mb-4">
-            <div class="card h-100">
-                <a href="@Url.Action("Index", "Shop")">
-                    <img src="~/img/feature_prod_02.jpg" class="card-img-top" alt="Image">
-                </a>
-                <div class="card-body">
-                    <ul class="list-unstyled d-flex justify-content-between">
-                        <li>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-muted fa fa-star"></i>
-                            <i class="text-muted fa fa-star"></i>
-                        </li>
-                        <li class="text-muted text-right">$480.00</li>
-                    </ul>
-                    <a href="@Url.Action("Index", "Shop")" class="h2 text-decoration-none text-dark">Cloud Nike Shoes</a>
-                    <p class="card-text">
-                        Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
-                    </p>
-                    <p class="text-muted">Reviews (48)</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 mb-4">
-            <div class="card h-100">
-                <a href="@Url.Action("Index", "Shop")">
-                    <img src="~/img/feature_prod_03.jpg" class="card-img-top" alt="Image">
-                </a>
-                <div class="card-body">
-                    <ul class="list-unstyled d-flex justify-content-between">
-                        <li>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                            <i class="text-warning fa fa-star"></i>
-                        </li>
-                        <li class="text-muted text-right">$360.00</li>
-                    </ul>
-                    <a href="@Url.Action("Index", "Shop")" class="h2 text-decoration-none text-dark">Summer Addides Shoes</a>
-                    <p class="card-text">
-                        Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
-                    </p>
-                    <p class="text-muted">Reviews (74)</p>
-                </div>
-            </div>
-        </div>
-    </div>*@
+<style>
+    .c3c {
+        align-items: center;
+        background-color: transparent;
+        border-radius: 12px;
+        box-sizing: border-box;
+        color: #fff;
+        display: inline-flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .c9k {
+        order: 0;
+
+    }
+    .cc4 {
+        background-color: #f91155;
+        color: #fff;
+        flex-shrink: 0;
+        font-weight: 600 !important;
+        font-size: 22px !important;
+        line-height: 18px;
+        padding: 3px 10px;
+    }
+</style>
