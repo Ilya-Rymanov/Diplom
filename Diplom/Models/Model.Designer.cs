@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\Core I3\source\repos\Ilya-Rymanov\Diplom\Diplom\Models\Model.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\Core I3\Source\Repos\Diplom\Diplom\Models\Model.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

@@ -148,7 +148,6 @@
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="id_Guarantee" Type="int" />
           <Property Name="id_Manufacturer" Type="int" />
-          <Property Name="id_Price" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -331,18 +330,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Price">
-          <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Price">
-              <PropertyRef Name="Id_Price" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Price" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_TypeProduct">
           <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -455,10 +442,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Price" Association="Self.FK_Product_Price">
-            <End Role="Price" EntitySet="Price" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_TypeProduct" Association="Self.FK_Product_TypeProduct">
@@ -740,10 +723,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Price" EntitySet="Price" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Price" Association="Model.FK_Product_Price">
-            <End Role="Price" EntitySet="Price" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_TypeProduct" Association="Model.FK_Product_TypeProduct">
             <End Role="TypeProduct" EntitySet="TypeProduct" />
             <End Role="Product" EntitySet="Product" />
@@ -855,7 +834,6 @@
           <Property Name="Price1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sales" Type="Boolean" />
           <NavigationProperty Name="Product" Relationship="Model.FK_Price_Product" FromRole="Price" ToRole="Product" />
-          <NavigationProperty Name="Product1" Relationship="Model.FK_Product_Price" FromRole="Price" ToRole="Product" />
           </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -868,12 +846,10 @@
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_Guarantee" Type="Int32" />
           <Property Name="id_Manufacturer" Type="Int32" />
-          <Property Name="id_Price" Type="Int32" />
           <NavigationProperty Name="characteristic" Relationship="Model.FK_characteristic_Product" FromRole="Product" ToRole="characteristic" />
           <NavigationProperty Name="Guarantee" Relationship="Model.FK_Product_Guarantee" FromRole="Product" ToRole="Guarantee" />
           <NavigationProperty Name="Manufacturer" Relationship="Model.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="Price" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
-          <NavigationProperty Name="Price1" Relationship="Model.FK_Product_Price" FromRole="Product" ToRole="Price" />
           <NavigationProperty Name="TypeProduct" Relationship="Model.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
         </EntityType>
         <Association Name="FK_characteristic_Product">
@@ -921,18 +897,6 @@
             </Principal>
             <Dependent Role="Price">
               <PropertyRef Name="id_Product" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Price">
-          <End Type="Model.Price" Role="Price" Multiplicity="0..1" />
-          <End Type="Model.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Price">
-              <PropertyRef Name="Id_Price" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Price" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1146,7 +1110,6 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Model.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="id_Price" ColumnName="id_Price" />
                 <ScalarProperty Name="id_Manufacturer" ColumnName="id_Manufacturer" />
                 <ScalarProperty Name="id_Guarantee" ColumnName="id_Guarantee" />
                 <ScalarProperty Name="Image" ColumnName="Image" />

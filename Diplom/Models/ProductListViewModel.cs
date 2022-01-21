@@ -7,7 +7,7 @@ namespace Diplom.Models
 {
     public class ProductListViewModel
     {
-        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<ProductPrice> Products { get; set; }
         public PagingInfo PagingInfo { get; set; }
     }
 }

@@ -14,19 +14,11 @@ namespace Diplom.Models
     
     public partial class Price
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Price()
-        {
-            this.Product1 = new HashSet<Product>();
-        }
-    
         public int Id_Price { get; set; }
         public Nullable<int> id_Product { get; set; }
         public string Price1 { get; set; }
         public Nullable<bool> Sales { get; set; }
     
         public virtual Product Product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product1 { get; set; }
     }
 }

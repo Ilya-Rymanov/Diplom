@@ -22,7 +22,21 @@ namespace Diplom.Controllers
 
         public ActionResult PoductSales()
         {
-            return PartialView();
+            var productsPricesId = db.Price.Select(currentPrices => currentPrices.id_Product).ToList();
+            ProductListViewModel model = new ProductListViewModel
+            {
+                Products = db.Product.Where(product => productsPricesId.Contains(product.id_Product)).Select(c =>
+                     new ProductPrice()
+                     {
+                         Image = c.Image,
+                         NameProduct = c.NameProduct,
+                         PriceValue = c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1,
+                         OldPrice = c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault(old => old.Id_Price != c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Id_Price).Price1,
+                         Sales = c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Sales,
+                         id_Product = c.id_Product
+                     }),
+            };
+            return PartialView(model);
         }
 
         public ActionResult About()

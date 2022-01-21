@@ -242,6 +242,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductListViewModel.cs" />
+    <Compile Include="Models\ProductPrice.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
