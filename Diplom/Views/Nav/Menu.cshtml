@@ -1,0 +1,25 @@
+﻿@model IEnumerable<string>
+@{
+    Diplom.Models.Entities db = new Diplom.Models.Entities();
+
+}
+
+    @Html.RouteLink("Домой", "opa", new { action = "Index"})
+
+@foreach (var item in Model)
+{
+    @*@Html.RouteLink(item, new
+{
+    url = "Shop/{genre}",
+    controller = "Shop",
+    action = "Index",
+    genry = item,
+    page = 1
+}, new { @class = "btn btn-block btn-default btn-lg" })*@
+    
+        @*@Html.ActionLink(db.TypeProduct.Find(item).NameType, "Index", "Shop", new { genre = item })*@
+    @Html.RouteLink(item ,"Shoproute", new { genre = item})
+    
+    
+}
+
