@@ -23,7 +23,7 @@ namespace Diplom
 
             //1
             routes.MapRoute(
-                name: "opa1",
+                name: "HomeShop",
                 url: "Page_{page}",
                 defaults: new { controller = "Shop", action = "Index", category = (string)null },
                 constraints: new { page = @"\d+" }
@@ -36,7 +36,7 @@ namespace Diplom
                 );
             //3
             routes.MapRoute(
-                name: "Shoproutecat",
+                name: "ShopCategory",
                 url: "Shop/{category}",
                 new { controller = "Shop", action = "Index", page = 1 }
                 );
@@ -46,19 +46,19 @@ namespace Diplom
             routes.MapRoute(
                 name: "opa",
                 url: "Page_{page}",
-                defaults: new { controller = "Shop", action = "Index", genre = (string)null },
+                defaults: new { controller = "Shop", action = "Index", genre = (string)null, category = (string)null },
                 constraints: new { page = @"\d+" }
             );
 
             routes.MapRoute(
                 name: null,
-                url:"Page_{page}/{genre}",
+                url: "Page_{page}/{category}/{genre}",
                 new { controller = "Shop", action = "Index", page = 1 }
                 );
 
             routes.MapRoute(
                 name: "Shoproute",
-                url: "Shop/{genre}",
+                url: "Shop/{category}/{genre}",
                 new { controller = "Shop", action = "Index", page = 1 }
                 );
 

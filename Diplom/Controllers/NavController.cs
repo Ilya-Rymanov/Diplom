@@ -14,7 +14,7 @@ namespace Diplom.Controllers
         public PartialViewResult Menu()
         {
            
-            IEnumerable<string> typeProducts = db.Product.Select(type => type.TypeProduct.NameType).Distinct().OrderBy(x => x);//.Join(db.TypeProduct,
+            IEnumerable<string> categoryProducts = db.Product.Select(type => type.Category.NameCategory).Distinct().OrderBy(x => x);//.Join(db.TypeProduct,
                // u => u.id_Type,
                 //c => c.id_Type,
                 //(u, c) => new
@@ -22,7 +22,7 @@ namespace Diplom.Controllers
                  //   id = u.id_Type,
                  //   NameType = c.NameType
                 //});
-            return PartialView(typeProducts);
+            return PartialView(categoryProducts);
         }
     }  
 }

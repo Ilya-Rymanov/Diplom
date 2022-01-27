@@ -1,14 +1,50 @@
 ﻿@model IEnumerable<string>
 @{
-    Diplom.Models.Entities db = new Diplom.Models.Entities();
+    @*@Html.RouteLink(item, "ShopCategory", new { category = item }, new { @class = "collapsed d-flex justify-content-between h3 text-decoration-none" })*@
 
 }
 
-    @Html.RouteLink("Домой", "HomeShop", new { action = "Index"})
+@Html.RouteLink("Домой", "HomeShop", new { action = "Index" })
 
-@foreach (var item in Model)
-{
-    @Html.RouteLink(item ,"ShopType", new { genre = item})
-       
-}
 
+<div class="col-lg-3">
+    <h1 class="h2 pb-4">Категории</h1>
+    @foreach (var item in Model)
+    {
+        <ul class="list-unstyled templatemo-accordion">
+            <li class="pb-3">
+                <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="@Url.Action("Index", "Shop", new { category = item})">
+                    @item
+                    <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                </a>
+                
+
+                @*<ul class="collapse show list-unstyled pl-3">
+            <li><a class="text-decoration-none" href="#">Men</a></li>
+            <li><a class="text-decoration-none" href="#">Women</a></li>
+        </ul>*@
+            </li>
+            @*<li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Sale
+                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul id="collapseTwo" class="collapse list-unstyled pl-3">
+                        <li><a class="text-decoration-none" href="#">Sport</a></li>
+                        <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                    </ul>
+                </li>*@
+            @*<li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Product
+                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul id="collapseThree" class="collapse list-unstyled pl-3">
+                        <li><a class="text-decoration-none" href="#">Bag</a></li>
+                        <li><a class="text-decoration-none" href="#">Sweather</a></li>
+                        <li><a class="text-decoration-none" href="#">Sunglass</a></li>
+                    </ul>
+                </li>*@
+        </ul>
+    }
+</div>
