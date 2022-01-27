@@ -24,11 +24,13 @@ namespace Diplom.Models
         public int id_Product { get; set; }
         public string NameProduct { get; set; }
         public Nullable<int> id_Type { get; set; }
+        public Nullable<int> id_Category { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
         public Nullable<int> id_Guarantee { get; set; }
         public Nullable<int> id_Manufacturer { get; set; }
     
+        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<characteristic> characteristic { get; set; }
         public virtual Guarantee Guarantee { get; set; }

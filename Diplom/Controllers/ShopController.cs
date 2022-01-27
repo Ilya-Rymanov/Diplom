@@ -15,13 +15,13 @@ namespace Diplom.Controllers
         private Entities db = new Entities();
         public int pageSize = 24;
         // GET: Shop
-        public ActionResult Index(string genre, int page = 1)
+        public ActionResult Index(string category, string genre, int page = 1)
         {
 
             var productsPricesId = db.Price.Select(currentPrices => currentPrices.id_Product).ToList();
             ProductListViewModel model = new ProductListViewModel
             {
-                Products = db.Product.Where(product => productsPricesId.Contains(product.id_Product)).Where(b => genre == null || b.TypeProduct.NameType == genre).OrderBy(Product => Product.id_Product).Skip((page - 1) * pageSize).Take(pageSize).Select(c =>
+                Products = db.Product.Where(product => productsPricesId.Contains(product.id_Product)).Where(b => category == null || b.Category.NameCategory == category).Where(b => genre == null || b.TypeProduct.NameType == genre).OrderBy(Product => Product.id_Product).Skip((page - 1) * pageSize).Take(pageSize).Select(c =>
                       new ProductPrice()
                       {
                           Image = c.Image,
@@ -37,8 +37,8 @@ namespace Diplom.Controllers
                     ItemsPerPage = pageSize,
                     TotalItems = db.Product.Count()
                 },
-
-                CuurentGen = genre
+                CuurentGen = genre,
+                CuurentGen1 = category
             };
             return View(model);
         }

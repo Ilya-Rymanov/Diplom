@@ -144,6 +144,7 @@
           <Property Name="id_Product" Type="int" Nullable="false" />
           <Property Name="NameProduct" Type="nvarchar(max)" />
           <Property Name="id_Type" Type="int" />
+          <Property Name="id_Category" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="id_Guarantee" Type="int" />
@@ -172,7 +173,6 @@
           </Key>
           <Property Name="id_Type" Type="int" Nullable="false" />
           <Property Name="NameType" Type="nvarchar(max)" />
-          <Property Name="id_Category" Type="int" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -306,6 +306,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id_Category" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Guarantee">
           <End Role="Guarantee" Type="Self.Guarantee" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -339,18 +351,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="id_Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TypeProduct_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="id_Category" />
-            </Principal>
-            <Dependent Role="TypeProduct">
-              <PropertyRef Name="id_Category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -436,6 +436,10 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="Price" EntitySet="Price" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Guarantee" Association="Self.FK_Product_Guarantee">
             <End Role="Guarantee" EntitySet="Guarantee" />
             <End Role="Product" EntitySet="Product" />
@@ -447,10 +451,6 @@
           <AssociationSet Name="FK_Product_TypeProduct" Association="Self.FK_Product_TypeProduct">
             <End Role="TypeProduct" EntitySet="TypeProduct" />
             <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TypeProduct_Category" Association="Self.FK_TypeProduct_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="TypeProduct" EntitySet="TypeProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_Unit_Type" Association="Self.FK_Unit_Type">
             <End Role="Type" EntitySet="Type" />
@@ -541,15 +541,6 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="id_Category" />
-          </Key>
-          <Property Name="id_Category" Type="Int32" Nullable="false" />
-          <Property Name="NameCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TypeProduct" Relationship="Self.FK_TypeProduct_Category" FromRole="Category" ToRole="TypeProduct" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="id_City" />
@@ -583,16 +574,6 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="TypeProduct">
-          <Key>
-            <PropertyRef Name="id_Type" />
-          </Key>
-          <Property Name="id_Type" Type="Int32" Nullable="false" />
-          <Property Name="NameType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Category" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_TypeProduct_Category" FromRole="TypeProduct" ToRole="Category" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Product_TypeProduct" FromRole="TypeProduct" ToRole="Product" />
         </EntityType>
         <Association Name="FK_AdminOptions_AdminOptionValue">
           <End Role="AdminOptionValue" Type="Self.AdminOptionValue" Multiplicity="0..1" />
@@ -634,18 +615,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TypeProduct_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="id_Category" />
-            </Principal>
-            <Dependent Role="TypeProduct">
-              <PropertyRef Name="id_Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -658,12 +627,10 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Guarantee" EntityType="Self.Guarantee" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="TypeProduct" EntityType="Self.TypeProduct" />
           <AssociationSet Name="FK_AdminOptions_AdminOptionValue" Association="Self.FK_AdminOptions_AdminOptionValue">
             <End Role="AdminOptionValue" EntitySet="AdminOptionValue" />
             <End Role="AdminOptions" EntitySet="AdminOptions" />
@@ -675,10 +642,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TypeProduct_Category" Association="Self.FK_TypeProduct_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="TypeProduct" EntitySet="TypeProduct" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -706,7 +669,13 @@
             <End Role="Value" EntitySet="Value" />
           </AssociationSet>
           <EntitySet Name="Price" EntityType="Model.Price" />
+          <EntitySet Name="Category" EntityType="Model.Category" />
           <EntitySet Name="Product" EntityType="Model.Product" />
+          <EntitySet Name="TypeProduct" EntityType="Model.TypeProduct" />
+          <AssociationSet Name="FK_Product_Category" Association="Model.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_characteristic_Product" Association="Model.FK_characteristic_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="characteristic" EntitySet="characteristic" />
@@ -835,6 +804,15 @@
           <Property Name="Sales" Type="Boolean" />
           <NavigationProperty Name="Product" Relationship="Model.FK_Price_Product" FromRole="Price" ToRole="Product" />
           </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id_Category" />
+          </Key>
+          <Property Name="id_Category" Type="Int32" Nullable="false" />
+          <Property Name="NameCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_Product_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="id_Product" />
@@ -842,16 +820,38 @@
           <Property Name="id_Product" Type="Int32" Nullable="false" />
           <Property Name="NameProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_Type" Type="Int32" />
+          <Property Name="id_Category" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_Guarantee" Type="Int32" />
           <Property Name="id_Manufacturer" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Model.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="characteristic" Relationship="Model.FK_characteristic_Product" FromRole="Product" ToRole="characteristic" />
           <NavigationProperty Name="Guarantee" Relationship="Model.FK_Product_Guarantee" FromRole="Product" ToRole="Guarantee" />
           <NavigationProperty Name="Manufacturer" Relationship="Model.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="Price" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
           <NavigationProperty Name="TypeProduct" Relationship="Model.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
         </EntityType>
+        <EntityType Name="TypeProduct">
+          <Key>
+            <PropertyRef Name="id_Type" />
+          </Key>
+          <Property Name="id_Type" Type="Int32" Nullable="false" />
+          <Property Name="NameType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_Product_TypeProduct" FromRole="TypeProduct" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Product_Category">
+          <End Type="Model.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="Model.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id_Category" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_characteristic_Product">
           <End Type="Model.Product" Role="Product" Multiplicity="0..1" />
           <End Type="Model.characteristic" Role="characteristic" Multiplicity="*" />
@@ -990,15 +990,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Category">
-            <EntityTypeMapping TypeName="Model.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
-                <ScalarProperty Name="NameCategory" ColumnName="NameCategory" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="City">
             <EntityTypeMapping TypeName="Model.City">
               <MappingFragment StoreEntitySet="City">
@@ -1032,15 +1023,6 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TypeProduct">
-            <EntityTypeMapping TypeName="Model.TypeProduct">
-              <MappingFragment StoreEntitySet="TypeProduct">
-                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
-                <ScalarProperty Name="NameType" ColumnName="NameType" />
-                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1107,6 +1089,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="NameCategory" ColumnName="NameCategory" />
+                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Model.Product">
               <MappingFragment StoreEntitySet="Product">
@@ -1114,9 +1105,18 @@
                 <ScalarProperty Name="id_Guarantee" ColumnName="id_Guarantee" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
                 <ScalarProperty Name="id_Type" ColumnName="id_Type" />
                 <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
                 <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeProduct">
+            <EntityTypeMapping TypeName="Model.TypeProduct">
+              <MappingFragment StoreEntitySet="TypeProduct">
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

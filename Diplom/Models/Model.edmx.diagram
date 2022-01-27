@@ -12,16 +12,13 @@
         <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="10.25" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="10.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="8" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="9.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Guarantee" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Manufacturer" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Guarantee" Width="1.5" PointX="2.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Manufacturer" Width="1.5" PointX="3.125" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TypeProduct" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_AdminOptions_AdminOptionValue" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_TypeProduct_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model.All_Characteristic" Width="1.5" PointX="5" PointY="13.125" />
         <EntityTypeShape EntityType="Model.characteristic" Width="1.5" PointX="7.375" PointY="3.25" />
@@ -33,7 +30,10 @@
         <AssociationConnector Association="Model.FK_Unit_Type" />
         <AssociationConnector Association="Model.FK_Value_Unit" />
         <EntityTypeShape EntityType="Model.Price" Width="1.5" PointX="7.375" PointY="11.75" />
-        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="2.25" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="5.125" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.TypeProduct" Width="1.5" PointX="1.5" PointY="3.125" />
+        <AssociationConnector Association="Model.FK_Product_Category" />
         <AssociationConnector Association="Model.FK_characteristic_Product" />
         <AssociationConnector Association="Model.FK_Product_Guarantee" />
         <AssociationConnector Association="Model.FK_Product_Manufacturer" />

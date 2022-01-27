@@ -22,9 +22,7 @@ namespace Diplom.Models
     
         public int id_Type { get; set; }
         public string NameType { get; set; }
-        public Nullable<int> id_Category { get; set; }
     
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
     }

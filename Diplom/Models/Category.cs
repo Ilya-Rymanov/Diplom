@@ -17,7 +17,7 @@ namespace Diplom.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.TypeProduct = new HashSet<TypeProduct>();
+            this.Product = new HashSet<Product>();
         }
     
         public int id_Category { get; set; }
@@ -25,6 +25,6 @@ namespace Diplom.Models
         public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TypeProduct> TypeProduct { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 }
