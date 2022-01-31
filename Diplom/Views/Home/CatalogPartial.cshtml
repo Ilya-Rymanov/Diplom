@@ -5,8 +5,8 @@
 {
 
     <div class="col-12 col-md-4 p-5 mt-3">
-        <a href="@Url.Action("Index", "Shop")"><img src="~/img/@item.Image" class="rounded-circle img-fluid border" style="margin-left: 2.5em; max-width: 80%;"></a>
-        <a class="lineDelite" href="@Url.Action("Index", "Shop")"><h5 class="text-center mt-3 mb-3">@item.NameCategory</h5></a>
+        <a href="@Url.RouteUrl("ShopCategory", new { category = item.NameCategory})"><img src="~/img/@item.Image" class="rounded-circle img-fluid border" style="margin-left: 2.5em; max-width: 80%;"></a>
+        <a class="lineDelite" href="@Url.RouteUrl("ShopCategory", new { category = item.NameCategory})"><h5 class="text-center mt-3 mb-3">@item.NameCategory</h5></a>
     </div>
 }
 <style>

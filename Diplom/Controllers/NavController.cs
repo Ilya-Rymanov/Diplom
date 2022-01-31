@@ -13,15 +13,8 @@ namespace Diplom.Controllers
         private Entities db = new Entities();
         public PartialViewResult Menu()
         {
-           
-            IEnumerable<string> categoryProducts = db.Product.Select(type => type.Category.NameCategory).Distinct().OrderBy(x => x);//.Join(db.TypeProduct,
-               // u => u.id_Type,
-                //c => c.id_Type,
-                //(u, c) => new
-                //{
-                 //   id = u.id_Type,
-                 //   NameType = c.NameType
-                //});
+
+            IEnumerable<string> categoryProducts = db.Product.Select(cat => cat.Category.NameCategory).Distinct().OrderBy(x => x); db.Product.Select(cat => cat.TypeProduct.NameType).Distinct().OrderBy(x => x);
             return PartialView(categoryProducts);
         }
     }  
