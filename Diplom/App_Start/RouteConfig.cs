@@ -51,7 +51,7 @@ namespace Diplom
             );
 
             routes.MapRoute(
-                name: null,
+                name: "TypeCategory",
                 url: "Page_{page}/{category}/{genre}",
                 new { controller = "Shop", action = "Index", page = 1 }
                 );

@@ -14,7 +14,7 @@ namespace Diplom.Controllers
         public PartialViewResult Menu()
         {
 
-            IEnumerable<string> categoryProducts = db.Product.Select(cat => cat.Category.NameCategory).Distinct().OrderBy(x => x); db.Product.Select(cat => cat.TypeProduct.NameType).Distinct().OrderBy(x => x);
+            IEnumerable<string> categoryProducts = db.Product.Select(cat => cat.TypeProduct.NameType).Distinct().OrderBy(x => x);
             return PartialView(categoryProducts);
         }
     }  
