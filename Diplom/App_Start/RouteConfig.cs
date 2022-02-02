@@ -19,36 +19,11 @@ namespace Diplom
             //    new { controller = "Home", action = "Index", id = UrlParameter.Optional, page = 1 }
             //    );
 
-            //Дублирую подключеня для категории
-
-            //1
-            routes.MapRoute(
-                name: "HomeShop",
-                url: "Page_{page}",
-                defaults: new { controller = "Shop", action = "Index", category = (string)null },
-                constraints: new { page = @"\d+" }
-            );
-            //2
-            routes.MapRoute(
-                name: null,
-                url: "Page_{page}/{category}",
-                new { controller = "Shop", action = "Index", page = 1 }
-                );
-            //3
             routes.MapRoute(
                 name: "ShopCategory",
                 url: "Shop/{category}",
                 new { controller = "Shop", action = "Index", page = 1 }
                 );
-            //все
-
-
-            routes.MapRoute(
-                name: "opa",
-                url: "Page_{page}",
-                defaults: new { controller = "Shop", action = "Index", genre = (string)null, category = (string)null },
-                constraints: new { page = @"\d+" }
-            );
 
             routes.MapRoute(
                 name: "TypeCategory",
@@ -57,8 +32,21 @@ namespace Diplom
                 );
 
             routes.MapRoute(
+                name: "opa",
+                url: "Page_{page}",
+                defaults: new { controller = "Shop", action = "Index", genre = (string)null },
+                constraints: new { page = @"\d+" }
+            );
+
+            routes.MapRoute(
+                name: null,
+                url: "Page_{page}/{genre}",
+                new { controller = "Shop", action = "Index", page = 1 }
+                );
+
+            routes.MapRoute(
                 name: "Shoproute",
-                url: "Shop/{category}/{genre}",
+                url: "Shop/{genre}",
                 new { controller = "Shop", action = "Index", page = 1 }
                 );
 
@@ -71,7 +59,7 @@ namespace Diplom
 
             routes.MapRoute(
                 null,
-                "{controller}/{action}" 
+                "{controller}/{action}"
                 );
         }
     }

@@ -12,10 +12,9 @@ namespace Diplom.Controllers
     {
         private Entities db = new Entities();
         public PartialViewResult Menu()
-        {
-
-            IEnumerable<string> categoryProducts = db.Product.Select(cat => cat.TypeProduct.NameType).Distinct().OrderBy(x => x);
-            return PartialView(categoryProducts);
+        {               
+            /*db.Product.Select(cat => cat.TypeProduct.NameType).Distinct().OrderBy(x => x);*/
+            return PartialView();
         }
     }  
 }

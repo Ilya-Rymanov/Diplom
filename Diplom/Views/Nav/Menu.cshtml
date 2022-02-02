@@ -1,6 +1,16 @@
-﻿@model IEnumerable<string>
+﻿
 @{
     @*@Html.RouteLink(item, "ShopCategory", new { category = item }, new { @class = "collapsed d-flex justify-content-between h3 text-decoration-none" })*@
+    Diplom.Models.Entities db = new Diplom.Models.Entities();
+    var categoryProducts = from product in db.Product
+                           join categore in db.Category on product.id_Category equals categore.id_Category
+                           join typeProduct in db.TypeProduct on product.id_Type equals typeProduct.id_Type
+                           select new
+                           {
+                               NameCategory = categore.NameCategory,
+                               NameType = typeProduct.NameType
+};
+/*db.Product.Select(cat => cat.TypeProduct.NameType).Distinct().OrderBy(x => x);*/
 
 }
 
@@ -9,24 +19,23 @@
 
 <div class="col-lg-3">
     <h1 class="h2 pb-4">Категории</h1>
-    @foreach (var item in Model)
+    @foreach (var item in categoryProducts)
     {
         <ul class="list-unstyled">
             <li class="pb-3">
-                <a class="collapsed d-flex justify-content-between h3 text-decoration-none" style="color:#000;" href="@Url.RouteUrl("TypeCategory", new { category = item})">
-                    @item
+                <a class="collapsed d-flex justify-content-between h3 text-decoration-none" style="color:#000;" href="@Url.RouteUrl("TypeCategory", new {category = item.NameCategory, genre = item.NameType})">
+                    @item.NameType
                     <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                 </a>
-               
+
                 <style>
                     a:hover {
                         color: green !important;
                     }
-
                 </style>
 
             </li>
-            
+
         </ul>
     }
 </div>

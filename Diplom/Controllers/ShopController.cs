@@ -15,7 +15,7 @@ namespace Diplom.Controllers
         private Entities db = new Entities();
         public int pageSize = 24;
         // GET: Shop
-        public ActionResult Index(string category, string genre, int page = 1)
+        public ActionResult Index(string category,string genre, int page = 1)
         {
 
             var productsPricesId = db.Price.Select(currentPrices => currentPrices.id_Product).ToList();
