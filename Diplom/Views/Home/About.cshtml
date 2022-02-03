@@ -105,39 +105,80 @@
                                     <!--First slide-->
                                     <div class="carousel-item active">
                                         <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_01.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
+                                            @foreach (var item in Model.Where(man => man.id_Manufacturer <= 4))
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href=""><img class="img-fluid brand-img" src="~/img/@item.Image" alt="@item.Name"></a>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
-                                    <!--End First slide-->
-                                    <!--Second slide-->
+                                 
                                     <div class="carousel-item ">
                                         <div class="row">
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_02.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_03.png" alt="Brand Logo"></a>
-                                            </div>
-                                            <div class="col-3 p-md-5">
-                                                <a href="#"><img class="img-fluid brand-img" src="~/img/brand_04.png" alt="Brand Logo"></a>
-                                            </div>
+                                            @foreach (var item in Model.Where(man => man.id_Manufacturer >= 9 && man.id_Manufacturer <= 12))
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href=""><img class="img-fluid brand-img" src="~/img/@item.Image" alt="@item.Name"></a>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
-                                    <!--End Third slide-->
+
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            @foreach (var item in Model.Where(man => man.id_Manufacturer >= 13 && man.id_Manufacturer <= 16))
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href=""><img class="img-fluid brand-img" src="~/img/@item.Image" alt="@item.Name"></a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            @foreach (var item in Model.Where(man => man.id_Manufacturer >= 17 && man.id_Manufacturer <= 20))
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href=""><img class="img-fluid brand-img" src="~/img/@item.Image" alt="@item.Name"></a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            @foreach (var item in Model.Where(man => man.id_Manufacturer >= 20 && man.id_Manufacturer <= 23))
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href=""><img class="img-fluid brand-img" src="~/img/@item.Image" alt="@item.Name"></a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            @foreach (var item in Model.Where(man => man.id_Manufacturer >= 24 && man.id_Manufacturer <= 27))
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href=""><img class="img-fluid brand-img" src="~/img/@item.Image" alt="@item.Name"></a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            @foreach (var item in Model.Where(man => man.id_Manufacturer >= 28 && man.id_Manufacturer <= 31))
+                                            {
+                                                <div class="col-3 p-md-5">
+                                                    <a href=""><img class="img-fluid brand-img" src="~/img/@item.Image" alt="@item.Name"></a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <!--End Slides-->
@@ -157,36 +198,3 @@
             </div>
         </div>
     </section>
-<!-- СКРИПТ ИЗ САЙТА МЕДТЕХДОМ
-$(document).ready(function() {
-
-     if ($(window).width() >= '768'){
-    $('#carousel0 ul').jcarousel({
-     vertical: false,
-    visible: 8,
-    scroll: 150   });
-     } else {
-     $('#carousel0 ul').jcarousel({
-     vertical: false,
-     visible: 2,
-     scroll: 1
-   });
-     }
-
-     $(window).resize(function (){
-       if ($(window).width() >= '768'){
-       $('#carousel0 ul').jcarousel({
-     vertical: false,
-    visible: 8,
-    scroll: 150	 });
-      } else {
-         $('#carousel0 ul').jcarousel({
-     vertical: false,
-     visible: 2,
-     scroll: 1
-   });
-      }
-    });
-});
-//-->
-<!--End Brands-->
