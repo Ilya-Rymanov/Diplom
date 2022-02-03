@@ -13,7 +13,6 @@ namespace Diplom.Controllers
         private Entities db = new Entities();
         public PartialViewResult Menu()
         {               
-            /*db.Product.Select(cat => cat.TypeProduct.NameType).Distinct().OrderBy(x => x);*/
             return PartialView();
         }
     }  

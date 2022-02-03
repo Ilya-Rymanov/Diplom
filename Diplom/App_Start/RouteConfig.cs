@@ -20,6 +20,12 @@ namespace Diplom
             //    );
 
             routes.MapRoute(
+                name: "Home",
+                url: "Shop/{action}",
+                new { controller = "Shop", action = "Index", page = 1 }
+                );
+
+            routes.MapRoute(
                 name: "ShopCategory",
                 url: "Shop/{category}",
                 new { controller = "Shop", action = "Index", page = 1 }
