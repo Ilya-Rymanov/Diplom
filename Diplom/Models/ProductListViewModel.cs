@@ -12,5 +12,6 @@ namespace Diplom.Models
         public string CuurentGen { get; set; }
         public string CuurentGen1 { get; set; }
         public TypeProduct TypeProducts { get; set; }
+        public Manufacturer Manufacturers { get; set; }
     }
 }
