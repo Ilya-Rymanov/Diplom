@@ -21,12 +21,15 @@
     <!-- Open Content -->
     <section class="bg-light">
         <div class="container pb-5">
+            <div style="padding-top: 15px;padding-left: 15px">
+                <a class="h3 text-dark text-decoration-none mr-3" href="@Url.Action("Index", "Shop")">Главная</a>
+            </div>
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3" style="max-width:80%; margin-left:60px">
                         <img class="card-img img-fluid" src="~/img/@Model.Image" @*Здесь будет изображение товара*@ alt="Card image cap" id="product-detail">
                     </div>
-                    
+
                 </div>
                 <!-- col end -->
                 <div class="col-lg-7 mt-5">
@@ -39,21 +42,24 @@
                                     <h6>Производитель:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                        <img src="~/img/@Model.Manufacturer.Image" style="width:100px; height:20px">
+                                    <img src="~/img/@Model.Manufacturer.Image" style="width:4em; height:2em">
                                 </li>
                             </ul>
 
                             <h6>Описание:</h6>
-                            <p>@Model.Description</p>
+                            <p style="text-align:justify">@Model.Description</p>
 
                             <h6>Характеристики:</h6>
                             <ul class="list-unstyled pb-3">
-                                @foreach(var item in Characteristic.Where(c => c.id_Product == navID)) 
+                                @foreach (var item in Characteristic.Where(c => c.id_Product == navID))
                                 {
-                                    
-                                    <li>@item.Position  @item.NameCharacteristic  @item.NameValue  @item.NameUnit</li>
+
+                                    <li>&bull; @item.NameCharacteristic @item.NameValue @if (item.NameUnit == "0") { }
+                                    else
+                                    {@item.NameUnit}</li>
                                 }
                             </ul>
+
 
                             <form action="" method="GET">
                                 <input type="hidden" name="product-title" value="Activewear">
