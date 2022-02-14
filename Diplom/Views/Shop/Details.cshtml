@@ -69,7 +69,8 @@
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Купить</button>
                                     </div>
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Добавить в корзину</button>
+                                    <a class="btn btn-success btn-lg" style="font-size: 1.25rem !important; font-weight: 400 !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a>    
+                                   @*<button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Добавить в корзину</button>*@
                                     </div>
                                 </div>
                             </form>

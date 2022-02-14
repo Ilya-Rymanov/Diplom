@@ -35,8 +35,8 @@ namespace Diplom.Models
         public virtual ICollection<characteristic> characteristic { get; set; }
         public virtual Guarantee Guarantee { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
+        public virtual TypeProduct TypeProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Price> Price { get; set; }
-        public virtual TypeProduct TypeProduct { get; set; }
     }
 }

@@ -29,7 +29,6 @@
         <AssociationConnector Association="Model.FK_characteristic_Value" />
         <AssociationConnector Association="Model.FK_Unit_Type" />
         <AssociationConnector Association="Model.FK_Value_Unit" />
-        <EntityTypeShape EntityType="Model.Price" Width="1.5" PointX="7.375" PointY="11.75" />
         <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="2.25" PointY="0.75" />
         <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="5.125" PointY="0.875" />
         <EntityTypeShape EntityType="Model.TypeProduct" Width="1.5" PointX="1.5" PointY="3.125" />
@@ -37,8 +36,9 @@
         <AssociationConnector Association="Model.FK_characteristic_Product" />
         <AssociationConnector Association="Model.FK_Product_Guarantee" />
         <AssociationConnector Association="Model.FK_Product_Manufacturer" />
-        <AssociationConnector Association="Model.FK_Price_Product" />
         <AssociationConnector Association="Model.FK_Product_TypeProduct" />
+        <EntityTypeShape EntityType="Model.Price" Width="1.5" PointX="7.375" PointY="11.75" />
+        <AssociationConnector Association="Model.FK_Price_Product" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

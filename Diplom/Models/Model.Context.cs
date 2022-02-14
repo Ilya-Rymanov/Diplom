@@ -41,9 +41,9 @@ namespace Diplom.Models
         public virtual DbSet<Type> Type { get; set; }
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<Value> Value { get; set; }
-        public virtual DbSet<Price> Price { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<TypeProduct> TypeProduct { get; set; }
+        public virtual DbSet<Price> Price { get; set; }
     }
 }

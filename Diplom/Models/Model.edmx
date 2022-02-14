@@ -134,7 +134,7 @@
           </Key>
           <Property Name="Id_Price" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_Product" Type="int" />
-          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Sales" Type="bit" />
         </EntityType>
         <EntityType Name="Product">
@@ -668,7 +668,6 @@
             <End Role="Unit" EntitySet="Unit" />
             <End Role="Value" EntitySet="Value" />
           </AssociationSet>
-          <EntitySet Name="Price" EntityType="Model.Price" />
           <EntitySet Name="Category" EntityType="Model.Category" />
           <EntitySet Name="Product" EntityType="Model.Product" />
           <EntitySet Name="TypeProduct" EntityType="Model.TypeProduct" />
@@ -688,13 +687,14 @@
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Price_Product" Association="Model.FK_Price_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Price" EntitySet="Price" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_TypeProduct" Association="Model.FK_Product_TypeProduct">
             <End Role="TypeProduct" EntitySet="TypeProduct" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <EntitySet Name="Price" EntityType="Model.Price" />
+          <AssociationSet Name="FK_Price_Product" Association="Model.FK_Price_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Price" EntitySet="Price" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="All_Characteristic">
@@ -794,16 +794,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Price">
-          <Key>
-            <PropertyRef Name="Id_Price" />
-          </Key>
-          <Property Name="Id_Price" Type="Int32" Nullable="false" />
-          <Property Name="id_Product" Type="Int32" />
-          <Property Name="Price1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sales" Type="Boolean" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Price_Product" FromRole="Price" ToRole="Product" />
-          </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id_Category" />
@@ -829,8 +819,8 @@
           <NavigationProperty Name="characteristic" Relationship="Model.FK_characteristic_Product" FromRole="Product" ToRole="characteristic" />
           <NavigationProperty Name="Guarantee" Relationship="Model.FK_Product_Guarantee" FromRole="Product" ToRole="Guarantee" />
           <NavigationProperty Name="Manufacturer" Relationship="Model.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <NavigationProperty Name="Price" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
           <NavigationProperty Name="TypeProduct" Relationship="Model.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
+          <NavigationProperty Name="Price" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
         </EntityType>
         <EntityType Name="TypeProduct">
           <Key>
@@ -888,18 +878,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Price_Product">
-          <End Type="Model.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Model.Price" Role="Price" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="id_Product" />
-            </Principal>
-            <Dependent Role="Price">
-              <PropertyRef Name="id_Product" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_TypeProduct">
           <End Type="Model.TypeProduct" Role="TypeProduct" Multiplicity="0..1" />
           <End Type="Model.Product" Role="Product" Multiplicity="*" />
@@ -909,6 +887,28 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="Id_Price" />
+          </Key>
+          <Property Name="Id_Price" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Product" Type="Int32" />
+          <Property Name="Price1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Sales" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_Price_Product" FromRole="Price" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Price_Product">
+          <End Type="Model.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Model.Price" Role="Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id_Product" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="id_Product" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1079,16 +1079,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Price">
-            <EntityTypeMapping TypeName="Model.Price">
-              <MappingFragment StoreEntitySet="Price">
-                <ScalarProperty Name="Sales" ColumnName="Sales" />
-                <ScalarProperty Name="Price1" ColumnName="Price" />
-                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
-                <ScalarProperty Name="Id_Price" ColumnName="Id_Price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="Model.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -1117,6 +1107,16 @@
               <MappingFragment StoreEntitySet="TypeProduct">
                 <ScalarProperty Name="NameType" ColumnName="NameType" />
                 <ScalarProperty Name="id_Type" ColumnName="id_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price">
+            <EntityTypeMapping TypeName="Model.Price">
+              <MappingFragment StoreEntitySet="Price">
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+                <ScalarProperty Name="Price1" ColumnName="Price" />
+                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+                <ScalarProperty Name="Id_Price" ColumnName="Id_Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

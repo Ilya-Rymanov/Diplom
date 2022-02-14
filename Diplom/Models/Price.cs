@@ -16,7 +16,7 @@ namespace Diplom.Models
     {
         public int Id_Price { get; set; }
         public Nullable<int> id_Product { get; set; }
-        public string Price1 { get; set; }
+        public Nullable<decimal> Price1 { get; set; }
         public Nullable<bool> Sales { get; set; }
     
         public virtual Product Product { get; set; }

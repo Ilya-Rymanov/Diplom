@@ -7,8 +7,8 @@ namespace Diplom.Models
 {
     public class ProductPrice : Product
     {
-        public string PriceValue { get; set; }
-        public string OldPrice { get; set; }
+        public decimal? PriceValue { get; set; }
+        public decimal? OldPrice { get; set; }
         public Nullable<bool> Sales { get; set; }
     }
 }

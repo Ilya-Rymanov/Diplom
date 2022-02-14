@@ -1,0 +1,38 @@
+﻿@model Diplom.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Корзина";
+}
+
+<h2>@ViewBag.Title</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Количество</th>
+            <th>Наименование</th>
+            <th class="text-right">Цена</th>
+            <th class="text-right">Сумма</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Cart.Lines)
+            {
+                <tr>
+                    <td class="text-center">@item.Quantity</td>
+                    <td class="text-left">@item.Product.NameProduct</td>
+                    <td class="text-right">@item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1 &#8381;</td>
+                    <td class="text-right">@((item.Quantity * item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1)) &#8381;</td>
+                </tr>
+            }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Итого:</td>
+            <td class="text-right">@Model.Cart.ComputeTotalValue() &#8381;</td>
+        </tr>
+    </tfoot>
+</table>
+
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Index", "Shop")">Продолжить покупки</a>
+</div>
