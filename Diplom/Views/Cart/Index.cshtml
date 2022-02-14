@@ -4,8 +4,13 @@
     ViewBag.Title = "Корзина";
 }
 
-<h2>@ViewBag.Title</h2>
-<table class="table">
+<style>
+    #cartTable td {
+        vertical-align:middle;
+    }
+</style>
+
+<table id="cartTable" style="margin-top: 5em" class="table">
     <thead>
         <tr>
             <th>Количество</th>
@@ -20,19 +25,32 @@
                 <tr>
                     <td class="text-center">@item.Quantity</td>
                     <td class="text-left">@item.Product.NameProduct</td>
-                    <td class="text-right">@item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1 &#8381;</td>
-                    <td class="text-right">@((item.Quantity * item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1)) &#8381;</td>
+                    <td class="text-right" >@item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1 &#8381;</td>
+                    <td class="text-right" >@((item.Quantity * item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1)) &#8381;</td>
+                    <td style="border-style: hidden">
+                        @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                        {
+                            @Html.Hidden("productId", item.Product.id_Product)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            <input class="btn-sm btn-success btn-lg" style="width:40px;" type="submit" value="&#10006;"/>
+                        }
+                    </td>
                 </tr>
             }
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3" class="text-right">Итого:</td>
-            <td class="text-right">@Model.Cart.ComputeTotalValue() &#8381;</td>
+            <td colspan="3" style="text-align: right; font-size: 20px !important; font-weight: 500 !important;">Итого:</td>
+            <td class="text-right" style="font-size: 20px !important; font-weight: 500 !important;">@Model.Cart.ComputeTotalValue() &#8381;</td>
         </tr>
     </tfoot>
 </table>
 
 <div>
-    <a class="btn btn-primary" href="@Url.Action("Index", "Shop")">Продолжить покупки</a>
+    <a class="btn btn-success btn-lg" style="margin-bottom: 1em" href="@Url.Action("Index", "Shop")">Продолжить покупки</a>
 </div>
+<style>
+    .btn-lg:hover {
+        background-color: #157347 !important;
+    }
+</style>
