@@ -1,0 +1,59 @@
+﻿@using Diplom.Models
+@model ProductListViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #cartTable td {
+        vertical-align: middle;
+    }
+</style>
+
+<h2>Index</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Список товаров
+    </div>
+    <div class="panel-body">
+        <table id="cartTable" style="margin-top: 5em" class="table">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Название продукта
+                </th>
+                <th>
+                    Цена
+                </th>
+                <th class="text-center">Действия</th>
+            </tr>
+
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id_Product)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.NameProduct, "Edit", new { item.id_Product})
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriceValue) &#8381;
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div>
+        <a class="btn btn-success btn-lg" style="margin-bottom: 1em" href="@Url.Action("Create New", "Create")">Создать товар</a>
+    </div>
+</div>

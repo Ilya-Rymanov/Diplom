@@ -23,7 +23,7 @@
         @foreach(var item in Model.Cart.Lines)
             {
                 <tr>
-                    <td class="text-center">@item.Quantity</td>
+                    <td class="text-center">@*@item.Quantity*@<input type="number" step="1" min="1" max="100" value="@item.Quantity" id="quant" name="quant" style="width:75px; background: white; border: white;"/></td>
                     <td class="text-left">@item.Product.NameProduct</td>
                     <td class="text-right" >@item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1 &#8381;</td>
                     <td class="text-right" >@((item.Quantity * item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1)) &#8381;</td>
