@@ -476,6 +476,7 @@
     <Content Include="img\СОЭКС.jpg" />
     <Content Include="js\bootstrap.bundle.min.js" />
     <Content Include="js\custom.js" />
+    <Content Include="js\IncrementProductScript.js" />
     <Content Include="js\jquery-1.11.0.min.js" />
     <Content Include="js\jquery-migrate-1.2.1.min.js" />
     <Content Include="js\modernizr.js" />

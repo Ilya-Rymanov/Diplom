@@ -11,6 +11,13 @@ namespace Diplom
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapRoute(
+                name: "Cart",
+                url: "Cart/{action}/{id}",
+                new { controller = "Cart", action = "Index", id = UrlParameter.Optional }
+                );
+
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             //routes.MapRoute(

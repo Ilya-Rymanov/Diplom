@@ -1,50 +1,66 @@
 ﻿@model Diplom.Models.CartIndexViewModel
-
-@{
-    ViewBag.Title = "Корзина";
-}
-
 <style>
-    #cartTable td {
-        vertical-align:middle;
+    .scale {
+        transition: 0.5s; /* Время эффекта */
     }
+
+        .scale:hover {
+            transform: scale(1.2); /* Увеличиваем масштаб */
+            background-color: #babec4 !important
+        }
 </style>
 
-<table id="cartTable" style="margin-top: 5em" class="table">
-    <thead>
-        <tr>
-            <th>Количество</th>
-            <th>Наименование</th>
-            <th class="text-right">Цена</th>
-            <th class="text-right">Сумма</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var item in Model.Cart.Lines)
+@if (Model.Cart.Lines.Any() == false)
+{
+    <h3 style="margin-top:20px; margin-bottom:20px">В корзине пока ничего нет</h3>
+}
+else
+{
+    <h3 style="margin-top:20px;">Корзина</h3>
+    <table id="cartTable" style="margin-top: 4em" class="table">
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th class="text-right">Цена</th>
+                <th class="text-right">Сумма</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cart.Lines)
             {
                 <tr>
-                    <td class="text-center">@*@item.Quantity*@<input type="number" step="1" min="1" max="100" value="@item.Quantity" id="quant" name="quant" style="width:75px; background: white; border: white;"/></td>
-                    <td class="text-left">@item.Product.NameProduct</td>
-                    <td class="text-right" >@item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1 &#8381;</td>
-                    <td class="text-right" >@((item.Quantity * item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1)) &#8381;</td>
-                    <td style="border-style: hidden">
-                        @using (Html.BeginForm("RemoveFromCart", "Cart"))
-                        {
-                            @Html.Hidden("productId", item.Product.id_Product)
-                            @Html.HiddenFor(x => x.ReturnUrl)
-                            <input class="btn-sm btn-success btn-lg" style="width:40px;" type="submit" value="&#10006;"/>
-                        }
+                    <td>
+                        @Html.DisplayFor(model => item.Product.NameProduct)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1) &#8381;
+                    </td>
+                    <td class="text-right">@((item.Quantity * item.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1)) &#8381;</td>
+                    <td class="qty@(item.Product.id_Product)">
+                        <a href="#" onclick="reload_interval(200);return false;" style="text-decoration: none; margin-right:5px;" class="scale incproduct badge rounded-pill bg-light text-dark" data-id="@item.Product.id_Product">+</a>
+                        @Html.DisplayFor(model => item.Quantity)
+                        <a href="#" onclick="reload_interval(200);return false;" style="text-decoration: none; margin-left: 5px" class="scale decproduct badge rounded-pill bg-light text-dark" data-id="@item.Product.id_Product">&ndash;</a>
+                        <a href="#" onclick="reload_interval(200);return false;" style="text-decoration: none; margin-left: 5px; background-color: #59ab6e !important;" class="scale removeproduct badge rounded-pill text-dark" data-id="@item.Product.id_Product"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3" style="text-align: right; font-size: 20px !important; font-weight: 500 !important;">Итого:</td>
-            <td class="text-right" style="font-size: 20px !important; font-weight: 500 !important;">@Model.Cart.ComputeTotalValue() &#8381;</td>
-        </tr>
-    </tfoot>
-</table>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" style="text-align: right; font-size: 20px !important; font-weight: 500 !important;">Итого:</td>
+                <td class="text-right" style="font-size: 20px !important; font-weight: 500 !important;">@Model.Cart.ComputeTotalValue() &#8381;</td>
+            </tr>
+        </tfoot>
+    </table>
+}
+<style>
+    #cartTable td {
+        vertical-align: middle;
+    }
+</style>
+
+
 
 <div>
     <a class="btn btn-success btn-lg" style="margin-bottom: 1em" href="@Url.Action("Index", "Shop")">Продолжить покупки</a>
@@ -54,3 +70,14 @@
         background-color: #157347 !important;
     }
 </style>
+@section Scripts
+{
+    <script>
+        function reload_interval(time) {
+            setTimeout(function () {
+                location.reload();
+            }, time);
+        }
+    </script>
+    <script src="~/js/IncrementProductScript.js"></script>
+}

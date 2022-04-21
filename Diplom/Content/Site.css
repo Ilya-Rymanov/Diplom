@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+span.loader {
+    display:none;
+}
+.ib {
+    display: inline-block !important;
+}

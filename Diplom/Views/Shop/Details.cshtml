@@ -1,86 +1,128 @@
 ﻿@using Diplom.Models
 @model Product
-@{ 
+@{
     Diplom.Models.Entities db = new Diplom.Models.Entities();
     var Characteristic = (from product in db.Product
-                            join characteristic in db.characteristic on product.id_Product equals characteristic.id_goods
-                            join all_characteristic in db.All_Characteristic on characteristic.id_Param equals all_characteristic.id
-                            join value in db.Value on characteristic.id_Value equals value.id_Value
-                            join unit in db.Unit on value.id_Unit equals unit.id_Unit
-                            select new
-                            {
-                               id_Product = product.id_Product,
-                               Position = characteristic.Position,
-                               NameCharacteristic = all_characteristic.Name_characteristic,
-                               NameValue = value.Name_Value,
-                               NameUnit = unit.Name_Unit
+                          join characteristic in db.characteristic on product.id_Product equals characteristic.id_goods
+                          join all_characteristic in db.All_Characteristic on characteristic.id_Param equals all_characteristic.id
+                          join value in db.Value on characteristic.id_Value equals value.id_Value
+                          join unit in db.Unit on value.id_Unit equals unit.id_Unit
+                          select new
+                          {
+                              id_Product = product.id_Product,
+                              Position = characteristic.Position,
+                              NameCharacteristic = all_characteristic.Name_characteristic,
+                              NameValue = value.Name_Value,
+                              NameUnit = unit.Name_Unit
 
-                            }).ToList();
+                          }).ToList();
     int? navID = ViewBag.ID;
 }
-    <!-- Open Content -->
-    <section class="bg-light">
-        <div class="container pb-5">
-            <div style="padding-top: 15px;padding-left: 15px">
-                <a class="h3 text-dark text-decoration-none mr-3" href="@Url.Action("Index", "Shop")">Главная</a>
-            </div>
-            <div class="row">
-                <div class="col-lg-5 mt-5">
-                    <div class="card mb-3" style="max-width:80%; margin-left:60px">
-                        <img class="card-img img-fluid" src="~/img/@Model.Image" @*Здесь будет изображение товара*@ alt="Card image cap" id="product-detail">
-                    </div>
-
+<!-- Open Content -->
+<section class="bg-light">
+    <div class="container pb-5">
+        <div style="padding-top: 15px;padding-left: 15px">
+            <a class="h3 text-dark text-decoration-none mr-3" href="@Url.Action("Index", "Shop")">Главная</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3" style="max-width:80%; margin-left:60px">
+                    <img class="card-img img-fluid" src="~/img/@Model.Image" @*Здесь будет изображение товара*@ alt="Card image cap" id="product-detail">
                 </div>
-                <!-- col end -->
-                <div class="col-lg-7 mt-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="h2">@Model.NameProduct</h1>
-                            <p class="h3 py-2" style="font-size: 24px !important; font-weight: 500 !important; color: green ">@Model.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1 &#8381;</p>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <h6>Производитель:</h6>
-                                </li>
-                                <li class="list-inline-item">
-                                    <img src="~/img/@Model.Manufacturer.Image" style="width:4em; height:2em">
-                                </li>
-                            </ul>
 
-                            <h6>Описание:</h6>
-                            <p style="text-align:justify">@Model.Description</p>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">@Model.NameProduct</h1>
+                        <p class="h3 py-2" style="font-size: 24px !important; font-weight: 500 !important; color: green ">@Model.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1 &#8381;</p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Производитель:</h6>
+                            </li>
+                            <li class="list-inline-item">
+                                <img src="~/img/@Model.Manufacturer.Image" style="width:4em; height:2em">
+                            </li>
+                        </ul>
 
-                            <h6>Характеристики:</h6>
-                            <ul class="list-unstyled pb-3">
-                                @foreach (var item in Characteristic.Where(c => c.id_Product == navID))
-                                {
+                        <h6>Описание:</h6>
+                        <p style="text-align:justify">@Model.Description</p>
 
-                                    <li>&bull; @item.NameCharacteristic @item.NameValue @if (item.NameUnit == "0") { }
+                        <h6>Характеристики:</h6>
+                        <ul class="list-unstyled pb-3">
+                            @foreach (var item in Characteristic.Where(c => c.id_Product == navID))
+                            {
+
+                                <li>
+                                    &bull; @item.NameCharacteristic @item.NameValue @if (item.NameUnit == "0") { }
                                     else
-                                    {@item.NameUnit}</li>
-                                }
-                            </ul>
+                                    {@item.NameUnit}
+                                </li>
+                            }
+                        </ul>
 
 
-                            <form action="" method="GET">
-                                <input type="hidden" name="product-title" value="Activewear">
+                        <form action="" method="GET">
+                            <input type="hidden" name="product-title" value="Activewear">
 
-                                <div class="row pb-3">
-                                    <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Купить</button>
-                                    </div>
-                                    <div class="col d-grid">
-                                    <a class="btn btn-success btn-lg" style="font-size: 1.25rem !important; font-weight: 400 !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a>    
-                                   @*<button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Добавить в корзину</button>*@
-                                    </div>
+                            <div class="row pb-3">
+                                <div class="col d-grid">
+                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Купить</button>
                                 </div>
-                            </form>
+                                <div class="col d-grid">
+                                    @*Добавление в корзину*@
+                                    @*<div class="addtocart">
+                                        <a href="#" class="addtocart btn btn-success">Добавить в корзину</a>
+                                        <span class="loader">
+                                            <img src="~/img/ajax-loader.gif" height="100" width="150" />
+                                        </span>
+                                        <div class="ajaxmsg">
+                                            Товар добавлен в вашу корзину
+                                        </div>
+                                    </div>*@
+                                    <a class="btn btn-success btn-lg" style="font-size: 1.25rem !important; font-weight: 400 !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a>
 
-                        </div>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    @*@section Scripts{
+        <script>
+/********************Add to cart*********************/
+$(function () {
+    $("a.addtocart").click(function (e) {
+        e.preventDefault();
 
+        $("span.loader").addClass("ib");
 
+        var url = "/Сart/AddToCartPartial";
 
+        $.get(url, { id: @Model.id_Product
+        }, function myfuct(data) {
+            $(".ajaxcart").html(data);
+        }).done(function () {
+            $("span.loader").removeClass("ib");
+            $("div.ajaxmsg").addClass("ib");
+
+            setTimeout(function () {
+                $("div.ajaxmsg").fadeOut("fast");
+                $("div.ajaxmsg").removeClass("ib");
+            }, 2000);
+        });
+    });
+});
+/****************************************************/
+        </script>
+    }
+</section>
+<style>
+    .ib {
+        display: inline-block !important;
+    }
+</style>*@

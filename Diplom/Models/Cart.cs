@@ -25,9 +25,35 @@ namespace Diplom.Models
             }
         }
 
+        public void AddItemsNew(Product product, int quantity)
+        {
+            CartLine line = lineCollection.FirstOrDefault(x=>x.Product.id_Product == product.id_Product);
+
+            line.Quantity++;
+            var result = new { qty = line.Quantity, price = line.Price };
+        }
+
+        public void DecrementProductNew(Product product, int quantity)
+        {
+            CartLine line = lineCollection.FirstOrDefault(x => x.Product.id_Product == product.id_Product);
+
+            if(line.Quantity > 1)
+            {
+                line.Quantity--;
+            }
+            else
+            {
+                line.Quantity = 0;
+                lineCollection.Remove(line);
+            }
+
+            var result = new { qty = line.Quantity, price = line.Price };
+        }
+
         public void RemoveLine(Product product)
         {
-            lineCollection.RemoveAll(l => l.Product.id_Product == product.id_Product);
+            CartLine line = lineCollection.FirstOrDefault(x => x.Product.id_Product == product.id_Product);
+            lineCollection.Remove(line);
         }
 
         public decimal? ComputeTotalValue()
@@ -44,5 +70,7 @@ namespace Diplom.Models
     {
         public Product Product { get; set; }
         public int Quantity { get; set; }
+        public decimal Price { get; set; }
+        public decimal Total { get { return Quantity * Price; } }
     }
 }

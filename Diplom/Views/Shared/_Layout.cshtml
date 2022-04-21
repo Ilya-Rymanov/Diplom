@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    <a class="nav-icon position-relative text-decoration-none" title="Корзина" href="@Url.Action("AddToCart", "Cart", new {productId = 0 })">
+                    <a class="nav-icon position-relative text-decoration-none" title="Корзина" href="@Url.Action("Index", "Cart")">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         @Html.Action("Summary", "Cart")
                     </a>
