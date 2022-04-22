@@ -73,15 +73,26 @@
                                 <div class="col d-grid">
                                     @*Добавление в корзину*@
                                     @*<div class="addtocart">
-                                        <a href="#" class="addtocart btn btn-success">Добавить в корзину</a>
-                                        <span class="loader">
-                                            <img src="~/img/ajax-loader.gif" height="100" width="150" />
-                                        </span>
-                                        <div class="ajaxmsg">
-                                            Товар добавлен в вашу корзину
+                                            <a href="#" class="addtocart btn btn-success">Добавить в корзину</a>
+                                            <span class="loader">
+                                                <img src="~/img/ajax-loader.gif" height="100" width="150" />
+                                            </span>
+                                            <div class="ajaxmsg">
+                                                Товар добавлен в вашу корзину
+                                            </div>
+                                        </div>*@
+                                    <i class="btn btn-success btn-lg" style="font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a></i>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel" style="color:green; text-align:center" >Товар успешно добавлен в корзину</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>*@
-                                    <a class="btn btn-success btn-lg" style="font-size: 1.25rem !important; font-weight: 400 !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a>
+                                    </div>
 
                                 </div>
                             </div>
@@ -92,6 +103,7 @@
             </div>
         </div>
     </div>
+</section>
     @*@section Scripts{
         <script>
 /********************Add to cart*********************/

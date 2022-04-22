@@ -44,7 +44,7 @@ namespace Diplom.Controllers
             {
                 cart.AddItems(product, 1);
             }
-            return RedirectToAction("Index", new { returnUrl });
+            return RedirectToAction("Index", "Shop");
         }
 
         public RedirectToRouteResult RemoveFromCart(Cart cart,int productId, string returnUrl)
