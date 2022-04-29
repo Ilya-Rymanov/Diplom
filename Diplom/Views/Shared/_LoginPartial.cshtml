@@ -4,8 +4,8 @@
             <div id="login">
                 <div class="modal-header">
                     <h3 class="modal-title">
-                        <a onclose="close" href="@Url.Action("Index", "Home")" title="Закрыть" class="close" style="background-color: #59ab6e !important">X</a>
-                         Вход
+                        <a href="" title="Закрыть" class="close" style="background-color: #59ab6e !important">X</a>
+                        Вход
                     </h3>
                 </div><!-- /.modal-header-->
                 <div class="modal-body">
@@ -32,7 +32,7 @@
                                            ,
                                            @placeholder = "Пароль"
                                        })
-                    
+
                         </div>
 
                         <div class="form-group">
@@ -44,21 +44,22 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="form-group">
-                                <div class="col d-grid">
-                                    <div>
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="Войти" style="width:150px; margin-right:15px">Войти</button>@*<button class="btn btn-success btn-lg" href="@Url.Action("Register", "Account", null, null)">Регистрация</button>*@
-                                        @Html.ActionLink("Регистрация", "Register", "Account", null, new { @class = "lineDelite" })
-                                    </div>
-                                   @*Забыли пароль(добавить)*@
+                        <div class="form-group">
+                            <div class="col d-grid">
+                                <div>
+                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="Войти" style="width:150px; margin-right:15px">Войти</button>@*<button class="btn btn-success btn-lg" href="@Url.Action("Register", "Account", null, null)">Регистрация</button>*@
+                                    @Html.ActionLink("Регистрация", "Register", "Account", null, new { @class = "lineDelite" })
                                 </div>
+                                @*Забыли пароль(добавить)*@
                             </div>
+                        </div>
                     }
-                        </div><!-- /.modal-body-->
+                </div><!-- /.modal-body-->
             </div><!-- /#login-->
         </div><!-- modal-content -->
     </div><!-- modal-dialog -->
 </div><!-- modal -->
+
 
 <style>
     .btn-arrow {
@@ -74,6 +75,18 @@
         vertical-align: top;
         display: inline-block;
         margin-top: 8px;
+    }
+
+
+
+        .close:hover {
+            background: #00d9ff;
+            color: red;
+        }
+
+    .lineDelite {
+        text-decoration: none;
+        color: #59ab6e;
     }
     .close {
         background: #606061;
@@ -93,41 +106,31 @@
         -webkit-box-shadow: 1px 1px 3px #000;
         box-shadow: 1px 1px 3px #000;
     }
-
-    .close:hover {
-            background: #00d9ff;
-            color:red;
-    }
-    .lineDelite {
-        text-decoration: none;
-        color: #59ab6e;
-    }
-    .lineDelite:hover{
-        color:#305C3A;
-    }
-
+        .lineDelite:hover {
+            color: #305C3A;
+        }
 </style>
 
 
 @*@using Microsoft.AspNet.Identity*@
 @*@if (Request.IsAuthenticated)*@
 @*{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Здравствуйте " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Здравствуйте " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
+        </ul>
+        }
     }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}*@
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }*@

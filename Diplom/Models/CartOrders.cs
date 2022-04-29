@@ -12,9 +12,14 @@ namespace Diplom.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class CartOrders
     {
-        public int id_City { get; set; }
-        public string City_Name { get; set; }
+        public int id_CartOrders { get; set; }
+        public Nullable<int> id_Orders { get; set; }
+        public Nullable<int> id_Product { get; set; }
+        public Nullable<int> quantity { get; set; }
+    
+        public virtual Orders Orders { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

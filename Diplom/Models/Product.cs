@@ -19,6 +19,7 @@ namespace Diplom.Models
         {
             this.characteristic = new HashSet<characteristic>();
             this.Price = new HashSet<Price>();
+            this.CartOrders = new HashSet<CartOrders>();
         }
     
         public int id_Product { get; set; }
@@ -38,5 +39,7 @@ namespace Diplom.Models
         public virtual TypeProduct TypeProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Price> Price { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartOrders> CartOrders { get; set; }
     }
 }

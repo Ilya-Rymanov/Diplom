@@ -395,6 +395,8 @@ namespace Diplom.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

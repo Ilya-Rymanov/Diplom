@@ -68,9 +68,6 @@
 
                             <div class="row pb-3">
                                 <div class="col d-grid">
-                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Купить</button>
-                                </div>
-                                <div class="col d-grid">
                                     @*Добавление в корзину*@
                                     @*<div class="addtocart">
                                             <a href="#" class="addtocart btn btn-success">Добавить в корзину</a>
@@ -81,7 +78,7 @@
                                                 Товар добавлен в вашу корзину
                                             </div>
                                         </div>*@
-                                    <i class="btn btn-success btn-lg" style="font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a></i>
+                                    <i class="btn btn-success btn-lg" style="width:17em; font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a></i>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">

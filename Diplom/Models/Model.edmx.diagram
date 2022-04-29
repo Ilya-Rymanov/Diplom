@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="10.25" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="10.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="8" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.City" Width="1.5" PointX="9.5" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Guarantee" Width="1.5" PointX="2.5" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Manufacturer" Width="1.5" PointX="3.125" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
@@ -39,6 +38,13 @@
         <AssociationConnector Association="Model.FK_Product_TypeProduct" />
         <EntityTypeShape EntityType="Model.Price" Width="1.5" PointX="7.375" PointY="11.75" />
         <AssociationConnector Association="Model.FK_Price_Product" />
+        <EntityTypeShape EntityType="Model.CartOrders" Width="1.5" PointX="14" PointY="6.125" />
+        <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="11.75" PointY="11.5" />
+        <AssociationConnector Association="Model.FK_CartOrders_Orders" />
+        <AssociationConnector Association="Model.FK_CartOrders_Product" />
+        <AssociationConnector Association="Model.FK_Orders_AspNetUsers" />
+        <EntityTypeShape EntityType="Model.CityNew" Width="1.5" PointX="12.375" PointY="0.875" />
+        <AssociationConnector Association="Model.FK_Orders_CityNew" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

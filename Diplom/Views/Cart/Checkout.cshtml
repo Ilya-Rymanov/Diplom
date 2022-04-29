@@ -1,0 +1,30 @@
+﻿@model Diplom.Models.Orders
+@{
+    ViewBag.Title = "Форма заказа";
+}
+
+<h2>Офрмить заказ</h2>
+<p>Пожалуйста, введите ваши контактные данные.</p>
+
+@using (Html.BeginForm())
+{
+    <h3>Данные</h3>
+    <div class="form-group">
+        <label>Ваш адрес: </label>
+        @Html.TextBoxFor(x => x.Adress, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Ваш город: </label>
+        @Html.TextBoxFor(x => x.CityNew.CityName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label>Цена за доставку: 300 &#8381;</label>
+        
+    </div>
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Обработать заказ"/>
+    </div>
+}

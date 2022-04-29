@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Diplom.Models
 {
@@ -63,6 +64,35 @@ namespace Diplom.Models
          public void Clear()
         {
             lineCollection.Clear();
+        }
+
+        
+        public void Checkout()
+        {
+            using (Entities db = new Entities())
+            {
+                Orders orders = new Orders();
+                orders.Date = DateTime.Now;
+                
+                db.Orders.Add(orders);
+                db.SaveChanges();
+
+                int idOrder = orders.id_Orders;
+
+                CartOrders cartOrders = new CartOrders();
+
+                foreach (var item in lineCollection)
+                {
+                    cartOrders.id_Orders = idOrder;
+                    cartOrders.id_Product = item.Product.id_Product;
+                    cartOrders.quantity = item.Quantity;
+
+                    db.CartOrders.Add(cartOrders);
+                    db.SaveChanges();
+                }
+            }
+             
+
         }
 
     }

@@ -1,4 +1,7 @@
 ﻿@model Diplom.Models.CartIndexViewModel
+@{
+    string userName = User.Identity.Name;
+}
 <style>
     .scale {
         transition: 0.5s; /* Время эффекта */
@@ -12,11 +15,19 @@
 
 @if (Model.Cart.Lines.Any() == false)
 {
-    <h3 style="margin-top:20px; margin-bottom:20px">В корзине пока ничего нет</h3>
+    <div style="display: inline-flex; margin-top: 1em; margin-bottom: 20px" >
+        <a title="Вернуться в магазин" style="background-color: #e9eef5 !important; color:black;" class="btn btn-lg rounded-pill" href="@Url.Action("Index", "Shop")">&lt;</a>
+        <h3 style="margin-left:10px; margin-top:5px">В корзине пока ничего нет</h3>
+    </div>
+    
 }
 else
 {
-    <h3 style="margin-top:20px;">Корзина</h3>
+    <div style="display:inline-flex; margin-top:1em">
+        <a title="Вернуться в магазин" style="background-color: #e9eef5 !important; color:black;" class="btn btn-lg rounded-pill" href="@Url.Action("Index", "Shop")">&lt;</a>
+        <h3 style="margin-left:10px; margin-top:5px">Корзина</h3>
+    </div>
+
     <table id="cartTable" style="margin-top: 4em" class="table">
         <thead>
             <tr>
@@ -46,7 +57,7 @@ else
                 </tr>
             }
         </tbody>
-        <tfoot>
+        <tfoot style=" border-bottom: hidden">
             <tr>
                 <td colspan="3" style="text-align: right; font-size: 20px !important; font-weight: 500 !important;">Итого:</td>
                 <td class="text-right" style="font-size: 20px !important; font-weight: 500 !important;">@Model.Cart.ComputeTotalValue() &#8381;</td>
@@ -54,17 +65,160 @@ else
         </tfoot>
     </table>
 }
+
+@*Если не авторизован пользователь, показывать форму авторизации, Иначе дать выбор адреса доставки.*@
+@if (!string.IsNullOrEmpty(userName))
+{
+    <form class="decor" style="width:50em !important">
+        <div class="form-left-decoration"></div>
+        <div class="form-right-decoration"></div>
+        <div class="circle"></div>
+        <div style=" margin-bottom: 35px;" class="form-inner">
+            <h3 style="margin-bottom:20px">Способ доставки</h3>
+            <a href="@Url.Action("Checkout", "Cart")">Выбрать способ доставки</a>
+        </div>
+    </form>
+}
+else
+{
+    using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @role = "form", @class = "decor" }))
+    {
+
+        <div class="form-left-decoration"></div>
+        <div class="form-right-decoration"></div>
+        <div class="circle"></div>
+        <div class="form-inner" style=" margin-bottom: 35px;">
+            <h3 style="margin-bottom:20px">Авторизируйтесь</h3>
+            @Html.AntiForgeryToken()
+            <div class="form-group" style="margin-bottom:20px">
+                @Html.TextBox("Email"
+                           , null
+                           , "text"
+                           , new
+                           {
+                               @class = "form-control"
+                               ,
+                               @placeholder = "E-mail или телефон"
+                           })
+            </div>
+            <div class="form-group" style="margin-bottom:20px">
+                @Html.Password("Password"
+                           , null
+                           , new
+                           {
+                               @class = "form-control"
+                               ,
+                               @placeholder = "Пароль"
+                           })
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox" style="margin-bottom:20px;">
+                        <input id="RememberMePart" name="RememberMe" type="checkbox" value="true" style="width:25px" />
+                        <label for="RememberMePart"><span></span>Запомнить меня</label>
+                        <input name="RememberMe" type="hidden" value="false" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col d-grid">
+                    <div>
+                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="Войти" style="width:150px; margin-right:15px">Войти</button>@*<button class="btn btn-success btn-lg" href="@Url.Action("Register", "Account", null, null)">Регистрация</button>*@
+                        @Html.ActionLink("Регистрация", "Register", "Account", null, new { @class = "lineDelite" })
+                    </div>
+                    @*Забыли пароль(добавить)*@
+                </div>
+            </div>
+
+        </div>
+    }
+}
+
 <style>
     #cartTable td {
         vertical-align: middle;
     }
+
+    .decor {
+        position: relative;
+        background: #e9e9e947;
+        border-radius: 30px;
+        width: 25em
+    }
+
+
+    .form-left-decoration {
+        bottom: 60px;
+        left: -30px;
+    }
+
+    .form-right-decoration {
+        top: 60px;
+        right: -30px;
+    }
+
+    .form-left-decoration:before {
+        top: -20px;
+    }
+
+    .form-left-decoration:after {
+        top: 20px;
+        left: 10px;
+    }
+
+    .form-right-decoration:before {
+        top: -20px;
+        right: 0;
+    }
+
+    .form-right-decoration:after {
+        top: 20px;
+        right: 10px;
+    }
+
+
+    .form-inner {
+        padding: 50px;
+    }
+
+        .form-inner input, .form-inner textarea {
+            display: block;
+            width: 100%;
+            padding: 0 20px;
+            margin-bottom: 10px;
+            background: #E9EFF6;
+            line-height: 40px;
+            border-width: 0;
+            border-radius: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+            .form-inner input[type="submit"] {
+                margin-top: 30px;
+                background: #59ab6e !important;
+                border-bottom: #59ab6e !important;
+                color: white;
+                font-size: 14px;
+            }
+
+        .form-inner textarea {
+            resize: none;
+        }
+
+        .form-inner h3 {
+            margin-top: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 24px;
+            color: black;
+        }
 </style>
 
 
 
-<div>
-    <a class="btn btn-success btn-lg" style="margin-bottom: 1em" href="@Url.Action("Index", "Shop")">Продолжить покупки</a>
-</div>
+
 <style>
     .btn-lg:hover {
         background-color: #157347 !important;

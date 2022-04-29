@@ -88,6 +88,15 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="CartOrders">
+          <Key>
+            <PropertyRef Name="id_CartOrders" />
+          </Key>
+          <Property Name="id_CartOrders" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Orders" Type="int" />
+          <Property Name="id_Product" Type="int" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id_Category" />
@@ -106,12 +115,13 @@
           <Property Name="Position" Type="int" />
           <Property Name="id_Value" Type="int" />
         </EntityType>
-        <EntityType Name="City">
+        <EntityType Name="CityNew">
           <Key>
             <PropertyRef Name="id_City" />
           </Key>
-          <Property Name="id_City" Type="int" Nullable="false" />
-          <Property Name="City_Name" Type="nvarchar(max)" />
+          <Property Name="id_City" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Guarantee">
           <Key>
@@ -127,6 +137,16 @@
           <Property Name="id_Manufacturer" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_Orders" />
+          </Key>
+          <Property Name="id_Orders" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar(max)" />
+          <Property Name="id_City" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Date" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="Price">
           <Key>
@@ -199,6 +219,30 @@
             </Principal>
             <Dependent Role="AdminOptions">
               <PropertyRef Name="id_Value" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartOrders_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="CartOrders" Type="Self.CartOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_Orders" />
+            </Principal>
+            <Dependent Role="CartOrders">
+              <PropertyRef Name="id_Orders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartOrders_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CartOrders" Type="Self.CartOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id_Product" />
+            </Principal>
+            <Dependent Role="CartOrders">
+              <PropertyRef Name="id_Product" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -291,6 +335,30 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CityNew">
+          <End Role="CityNew" Type="Self.CityNew" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityNew">
+              <PropertyRef Name="id_City" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_City" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -388,11 +456,13 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartOrders" EntityType="Self.CartOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="characteristic" EntityType="Self.characteristic" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CityNew" EntityType="Self.CityNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guarantee" EntityType="Self.Guarantee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Price" EntityType="Self.Price" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -403,6 +473,14 @@
           <AssociationSet Name="FK_AdminOptions_AdminOptionValue" Association="Self.FK_AdminOptions_AdminOptionValue">
             <End Role="AdminOptionValue" EntitySet="AdminOptionValue" />
             <End Role="AdminOptions" EntitySet="AdminOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartOrders_Orders" Association="Self.FK_CartOrders_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="CartOrders" EntitySet="CartOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartOrders_Product" Association="Self.FK_CartOrders_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CartOrders" EntitySet="CartOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_characteristic_All_Characteristic" Association="Self.FK_characteristic_All_Characteristic">
             <End Role="All_Characteristic" EntitySet="All_Characteristic" />
@@ -431,6 +509,14 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_AspNetUsers" Association="Self.FK_Orders_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CityNew" Association="Self.FK_Orders_CityNew">
+            <End Role="CityNew" EntitySet="CityNew" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Price_Product" Association="Self.FK_Price_Product">
             <End Role="Product" EntitySet="Product" />
@@ -540,13 +626,7 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="City">
-          <Key>
-            <PropertyRef Name="id_City" />
-          </Key>
-          <Property Name="id_City" Type="Int32" Nullable="false" />
-          <Property Name="City_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_AspNetUsers" FromRole="AspNetUsers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Guarantee">
           <Key>
@@ -627,7 +707,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Guarantee" EntityType="Self.Guarantee" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -695,6 +774,25 @@
           <AssociationSet Name="FK_Price_Product" Association="Model.FK_Price_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Price" EntitySet="Price" />
+          </AssociationSet>
+          <EntitySet Name="CartOrders" EntityType="Model.CartOrders" />
+          <EntitySet Name="Orders" EntityType="Model.Orders" />
+          <AssociationSet Name="FK_CartOrders_Orders" Association="Model.FK_CartOrders_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="CartOrders" EntitySet="CartOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartOrders_Product" Association="Model.FK_CartOrders_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CartOrders" EntitySet="CartOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_AspNetUsers" Association="Model.FK_Orders_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="CityNew" EntityType="Model.CityNew" />
+          <AssociationSet Name="FK_Orders_CityNew" Association="Model.FK_Orders_CityNew">
+            <End Role="CityNew" EntitySet="CityNew" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="All_Characteristic">
@@ -821,6 +919,7 @@
           <NavigationProperty Name="Manufacturer" Relationship="Model.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="TypeProduct" Relationship="Model.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
           <NavigationProperty Name="Price" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
+          <NavigationProperty Name="CartOrders" Relationship="Model.FK_CartOrders_Product" FromRole="Product" ToRole="CartOrders" />
         </EntityType>
         <EntityType Name="TypeProduct">
           <Key>
@@ -912,6 +1011,87 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CartOrders">
+          <Key>
+            <PropertyRef Name="id_CartOrders" />
+          </Key>
+          <Property Name="id_CartOrders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Orders" Type="Int32" />
+          <Property Name="id_Product" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_CartOrders_Orders" FromRole="CartOrders" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_CartOrders_Product" FromRole="CartOrders" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_Orders" />
+          </Key>
+          <Property Name="id_Orders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_City" Type="Int32" />
+          <NavigationProperty Name="CartOrders" Relationship="Model.FK_CartOrders_Orders" FromRole="Orders" ToRole="CartOrders" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_Orders_AspNetUsers" FromRole="Orders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CityNew" Relationship="Model.FK_Orders_CityNew" FromRole="Orders" ToRole="CityNew" />
+        </EntityType>
+        <Association Name="FK_CartOrders_Orders">
+          <End Type="Model.Orders" Role="Orders" Multiplicity="0..1" />
+          <End Type="Model.CartOrders" Role="CartOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id_Orders" />
+            </Principal>
+            <Dependent Role="CartOrders">
+              <PropertyRef Name="id_Orders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartOrders_Product">
+          <End Type="Model.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Model.CartOrders" Role="CartOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id_Product" />
+            </Principal>
+            <Dependent Role="CartOrders">
+              <PropertyRef Name="id_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_AspNetUsers">
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CityNew">
+          <Key>
+            <PropertyRef Name="id_City" />
+          </Key>
+          <Property Name="id_City" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_CityNew" FromRole="CityNew" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_Orders_CityNew">
+          <End Type="Model.CityNew" Role="CityNew" Multiplicity="0..1" />
+          <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityNew">
+              <PropertyRef Name="id_City" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -987,14 +1167,6 @@
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="City">
-            <EntityTypeMapping TypeName="Model.City">
-              <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="id_City" ColumnName="id_City" />
-                <ScalarProperty Name="City_Name" ColumnName="City_Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1117,6 +1289,36 @@
                 <ScalarProperty Name="Price1" ColumnName="Price" />
                 <ScalarProperty Name="id_Product" ColumnName="id_Product" />
                 <ScalarProperty Name="Id_Price" ColumnName="Id_Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartOrders">
+            <EntityTypeMapping TypeName="Model.CartOrders">
+              <MappingFragment StoreEntitySet="CartOrders">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+                <ScalarProperty Name="id_Orders" ColumnName="id_Orders" />
+                <ScalarProperty Name="id_CartOrders" ColumnName="id_CartOrders" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Model.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id_City" ColumnName="id_City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="id_Orders" ColumnName="id_Orders" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CityNew">
+            <EntityTypeMapping TypeName="Model.CityNew">
+              <MappingFragment StoreEntitySet="CityNew">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="id_City" ColumnName="id_City" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -32,7 +32,6 @@ namespace Diplom.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Guarantee> Guarantee { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
@@ -45,5 +44,8 @@ namespace Diplom.Models
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<TypeProduct> TypeProduct { get; set; }
         public virtual DbSet<Price> Price { get; set; }
+        public virtual DbSet<CartOrders> CartOrders { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<CityNew> CityNew { get; set; }
     }
 }

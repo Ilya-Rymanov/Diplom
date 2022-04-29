@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Diplom.Models
+@{ 
+    string userName = User.Identity.Name;
+}
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -16,7 +20,7 @@
     @*<link rel="stylesheet" href="~/css/bootstrap.min.css">
         <link rel="stylesheet" href="~/css/templatemo.css">
         <link rel="stylesheet" href="~/css/custom.css">*@
-   
+
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="~/css/fontawesome.min.css">
@@ -63,10 +67,35 @@
                         @Html.Action("Summary", "Cart")
                     </a>
 
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#myModal2">
-                        <i class="fa fa-fw fa-user text-dark mr-3" title="Авторизация"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
-                    </a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken();
+                        }
+                        
+                            <div class="info">
+                                <input id="info__body_1" class="info__switch" type="checkbox">
+                                <label for="info__body_1" class="info__headline"><i class="fa fa-fw fa-user text-dark mr-3" title="Авторизация"></i></label>
+                                <div class="info__body">
+                                    <p></p>
+                                    <a style="text-decoration:none" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                </div>
+                            </div>
+                            
+                        
+
+
+                    }
+                    else
+                    {
+                        <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#myModal2">
+                            <i class="fa fa-fw fa-user text-dark mr-3" title="Авторизация"></i>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        </a>
+                    }
+
+
 
                 </div>
             </div>
@@ -164,6 +193,40 @@
     </div>
 
     <style>
+        .info__switch {
+            display: none;
+        }
+
+        .info__body {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .info__switch:checked ~ .info__body {
+            max-height: 100px;
+        }
+
+
+
+
+
+        .info__headline {
+
+            cursor: pointer;
+        }
+
+
+    </style>
+
+    <style>
+        .navbar-autorization {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            z-index: 1;
+            position: relative;
+        }
+
         .modalDialog {
             position: fixed;
             font-family: Arial, Helvetica, sans-serif;
@@ -221,10 +284,10 @@
             }
     </style>
     @*<script>
-        $(function () {
-            $('.accordion-group').simpleAccordion();
-        });
-    </script>*@
+            $(function () {
+                $('.accordion-group').simpleAccordion();
+            });
+        </script>*@
     <style>
         input {
             width: 200px;
@@ -269,10 +332,10 @@
             }
     </style>
     @*<script>
-        $('.close-help').on('click', function () {
-            $('.side-button-2').removeClass('hide');
-        })
-    </script>*@
+            $('.close-help').on('click', function () {
+                $('.side-button-2').removeClass('hide');
+            })
+        </script>*@
     <style>
         .hrefTitle {
             text-decoration: none !important;
@@ -428,11 +491,11 @@
         }
     </style>
     @*<script>
-        $('.side-button-2').on('click', function () {
-            $(this).addClass('hide');
+            $('.side-button-2').on('click', function () {
+                $(this).addClass('hide');
 
-        })
-    </script>*@
+            })
+        </script>*@
     <!--/КОНЕЦ Окно справки. Скрипты и стили-->
     <style>
         .hrefTitle {
