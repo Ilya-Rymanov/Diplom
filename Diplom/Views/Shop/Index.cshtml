@@ -44,7 +44,7 @@
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
                                     <li><a class="btn btn-success text-white mt-2" href="@Url.Action("Details", "Shop", new { id = item.id_Product })"><i class="far fa-eye"></i></a></li>
-                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn btn-success text-white mt-2" href="@Url.Action("AddToCart", "Cart", new {productId = item.id_Product })"><i class="fas fa-cart-plus"></i></a></li>
+                                    <li data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn btn-success text-white mt-2" onclick="addToCart(@item.id_Product)"><i class="fas fa-cart-plus"></i></a></li>
                                 </ul>
                             </div>
                         </div>
