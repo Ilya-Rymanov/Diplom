@@ -1,4 +1,5 @@
 ﻿using Diplom.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,19 @@ namespace Diplom.Controllers
     {
         private Entities db = new Entities();
         
-        public ViewResult Checkout(Cart cart, Orders orders)
+        public ViewResult Checkout(Cart cart)
         {
+            Orders orders = new Orders();
             return View(orders);
         }
         [HttpPost]
-        public ViewResult Checkout(Cart cart)
+        public ViewResult Checkout(Cart cart, Orders order)
         {
+            string userId =  User.Identity.GetUserId();
+            order.UserId = userId;
+            cart.Order = order;
             cart.Checkout();
-            return View();
+            return View(order);
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -31,15 +36,16 @@ namespace Diplom.Controllers
             });
         }
 
-        public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
+        public string AddToCart(Cart cart, int productId, string returnUrl)
         {
             Product product = db.Product.FirstOrDefault(p => p.id_Product == productId);
 
-            if(product != null)
-            {
-                cart.AddItems(product, 1);
-            }
-            return RedirectToAction("Index", "Shop");
+            if (product == null) return "";
+
+            cart.AddItems(product, 1);
+            int sumCart = cart.Lines.Sum(x => x.Quantity);
+
+            return sumCart.ToString();
         }
 
         public RedirectToRouteResult RemoveFromCart(Cart cart,int productId, string returnUrl)

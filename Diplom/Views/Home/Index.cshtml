@@ -162,5 +162,26 @@
     <script src="~/js/templatemo.js"></script>
     <script src="~/js/custom.js"></script>
     <!-- End Script -->
+   
+        <script>
+        function addToCart(idProduct) {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data: {
+                    productId: idProduct,
+                },
+                success: function (data) {
+                    var cartSum = document.getElementById('cartQuont');
+
+                    if (cartSum != null) {
+                        cartSum.innerHTML = data;
+                    }
+                }
+            });
+        }
+        </script>
+    
 </body>
 </html>

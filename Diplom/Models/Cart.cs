@@ -9,7 +9,7 @@ namespace Diplom.Models
     public class Cart
     {
         private List<CartLine> lineCollection = new List<CartLine>();
-
+        public Orders Order { get; set; }
         public IEnumerable<CartLine> Lines { get { return lineCollection; } }
 
         public void AddItems(Product product, int quantity)
@@ -71,13 +71,11 @@ namespace Diplom.Models
         {
             using (Entities db = new Entities())
             {
-                Orders orders = new Orders();
-                orders.Date = DateTime.Now;
-                
-                db.Orders.Add(orders);
+                Order.Date = DateTime.Now;
+                db.Orders.Add(Order);
                 db.SaveChanges();
 
-                int idOrder = orders.id_Orders;
+                int idOrder = Order.id_Orders;
 
                 CartOrders cartOrders = new CartOrders();
 

@@ -78,13 +78,13 @@
                                                 Товар добавлен в вашу корзину
                                             </div>
                                         </div>*@
-                                    <i class="btn btn-success btn-lg" style="width:17em; font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" href="@Url.Action("AddToCart", "Cart", new {productId = Model.id_Product })">Добавить в корзину</a></i>
+                                    <i class="btn btn-success btn-lg" style="width:17em; font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" onclick="addToCart(@Model.id_Product)">Добавить в корзину</a></i>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel" style="color:green; text-align:center" >Товар успешно добавлен в корзину</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel" style="color:green; text-align:center">Товар успешно добавлен в корзину</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                                                 </div>
                                             </div>
@@ -101,37 +101,25 @@
         </div>
     </div>
 </section>
-    @*@section Scripts{
-        <script>
-/********************Add to cart*********************/
-$(function () {
-    $("a.addtocart").click(function (e) {
-        e.preventDefault();
+@section Scripts
+{
+    <script>
+        function addToCart(idProduct) {
 
-        $("span.loader").addClass("ib");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data: {
+                    productId: idProduct,
+                },
+                success: function (data) {
+                    var cartSum = document.getElementById('cartQuont');
 
-        var url = "/Сart/AddToCartPartial";
-
-        $.get(url, { id: @Model.id_Product
-        }, function myfuct(data) {
-            $(".ajaxcart").html(data);
-        }).done(function () {
-            $("span.loader").removeClass("ib");
-            $("div.ajaxmsg").addClass("ib");
-
-            setTimeout(function () {
-                $("div.ajaxmsg").fadeOut("fast");
-                $("div.ajaxmsg").removeClass("ib");
-            }, 2000);
-        });
-    });
-});
-/****************************************************/
-        </script>
-    }
-</section>
-<style>
-    .ib {
-        display: inline-block !important;
-    }
-</style>*@
+                    if (cartSum != null) {
+                        cartSum.innerHTML = data;
+                    }
+                }
+            });
+        }
+    </script>
+}
