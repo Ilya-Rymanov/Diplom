@@ -1,7 +1,9 @@
 ﻿using Diplom.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -31,6 +33,31 @@ namespace Diplom.Controllers
                       }),
             };
             return View(model);
+        }
+
+        //Get
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Product.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(product);
+        }
+
+        //Post
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

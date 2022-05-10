@@ -10,20 +10,18 @@
     }
 </style>
 
-<h2>Index</h2>
+<h2 style="margin-top:15px">Список товаров</h2>
 
 @if (User.IsInRole("Admin"))
 {
+    <div>
+        <a class="btn btn-success btn-lg" style="margin-top: 10px" href="@Url.Action("Create New", "Create")">Создать товар</a>
+    </div>
     <div class="panel panel-default">
-        <div class="panel-heading">
-            Список товаров
-        </div>
         <div class="panel-body">
-            <table id="cartTable" style="margin-top: 5em" class="table">
+            <table id="cartTable" style="margin-top: 2em" class="table">
                 <tr>
-                    <th>
-                        Id
-                    </th>
+
                     <th>
                         Название продукта
                     </th>
@@ -36,31 +34,36 @@
                 @foreach (var item in Model.Products)
                 {
                     <tr>
+
                         <td>
-                            @Html.DisplayFor(modelItem => item.id_Product)
-                        </td>
-                        <td>
-                            @Html.ActionLink(item.NameProduct, "Edit", new { item.id_Product })
+                            @Html.ActionLink(item.NameProduct, "Edit", new { id = item.id_Product })
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.PriceValue) &#8381;
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            @Html.ActionLink("Изменить", "Edit", new { id = item.id_Product }) |
+                            
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.id_Product })
                         </td>
                     </tr>
                 }
 
             </table>
         </div>
-        <div>
-            <a class="btn btn-success btn-lg" style="margin-bottom: 1em" href="@Url.Action("Create New", "Create")">Создать товар</a>
-        </div>
+
     </div>
 }
-            else
-            {
-                <p>А ты же пользователь</p>
-            }
+else
+{
+    <p>А ты же пользователь</p>
+}
+<style>
+    a {
+        text-decoration: none !important;
+    }
+
+        a:hover {
+            color: #59ab6e
+        }
+</style>
