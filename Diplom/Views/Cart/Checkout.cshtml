@@ -10,29 +10,29 @@
 @using (Html.BeginForm())
 {
     <h3>Данные</h3>
-    <div class="form-group">
+
+    <div class="form-group" style="margin-bottom:15px">
+        <label>Ваш город: </label>
+        @*@Html.TextBoxFor(x => x, new { @class = "form-control" })*@
+    
+        <select name="@Model.id_City">
+            @foreach (var city in db.CityNew)
+            {
+                <option value="@city.id_City">@city.CityName @city.Price &#8381;</option>
+            }
+
+        </select>
+    
+    </div>
+
+    <div class="form-group" style="margin-bottom:15px">
         <label>Ваш адрес: </label>
         @Html.TextBoxFor(x => x.Adress, new { @class = "form-control" })
     </div>
 
-    <div class="form-group">
-        <label>Ваш город: </label>
-        @*@Html.TextBoxFor(x => x, new { @class = "form-control" })*@
-    <select id="@Model.id_City"  name="@Model.id_City">
-        @foreach (var city in db.CityNew)
-        {
-            <option value="@city.id_City">@city.CityName</option>
-        }
 
-    </select>
-    </div>
-
-    <div class="form-group">
-        <label>Цена за доставку: 300 &#8381;</label>
-            
-    </div>
 
     <div class="text-center">
-        <input class="btn btn-primary" type="submit" value="Обработать заказ"/>
+        <button type="submit" class="btn btn-success btn-lg" name="submit" value="Оформить заказ" style="width:200px; margin-bottom:15px">Оформить заказ</button>
     </div>
 }

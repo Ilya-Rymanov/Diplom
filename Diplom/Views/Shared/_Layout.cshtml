@@ -73,13 +73,21 @@
                         {
                             @Html.AntiForgeryToken();
                         }
-                        
+
                             <div class="info">
                                 <input id="info__body_1" class="info__switch" type="checkbox">
                                 <label for="info__body_1" class="info__headline"><i class="fa fa-fw fa-user text-dark mr-3" title="Авторизация"></i></label>
-                                <div class="info__body">
-                                    <p></p>
-                                    <a style="text-decoration:none" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                <div class="info__body" style="position:fixed">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a style="text-decoration:none" href="@Url.Action("Index", "Admin")">Админ</a>
+                                        <a style="text-decoration:none" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                    }
+                                    else 
+                                    {
+                                        <a style="text-decoration:none" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                    }
+                                    
                                 </div>
                             </div>
                             

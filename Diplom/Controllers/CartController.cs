@@ -18,13 +18,13 @@ namespace Diplom.Controllers
             return View(orders);
         }
         [HttpPost]
-        public ViewResult Checkout(Cart cart, Orders order)
+        public ActionResult Checkout(Cart cart, Orders order)
         {
             string userId =  User.Identity.GetUserId();
             order.UserId = userId;
             cart.Order = order;
             cart.Checkout();
-            return View(order);
+            return RedirectToAction("AddOrders", order);
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -80,10 +80,9 @@ namespace Diplom.Controllers
             
         }
        
-        public PartialViewResult AddOrders()
+        public ViewResult AddOrders()
         {
-            List<CartLine> cart = Session["Cart"] as List<CartLine>;
-            return PartialView(cart);
+            return View();
         }
         
      

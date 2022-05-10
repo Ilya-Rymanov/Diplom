@@ -72,6 +72,8 @@ namespace Diplom.Models
             using (Entities db = new Entities())
             {
                 Order.Date = DateTime.Now;
+                int? idSity = 0;
+                idSity = Order.id_City;
                 db.Orders.Add(Order);
                 db.SaveChanges();
 
