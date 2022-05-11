@@ -1,0 +1,18 @@
+﻿@model Diplom.Models.Product
+
+@{
+    
+}
+<div style="display: inline-flex; margin-top: 1em; margin-bottom: 20px">
+    <a title="Вернуться в магазин" style="background-color: #e9eef5 !important; color:black;" class="btn btn-lg rounded-pill" href="@Url.Action("Index", "Admin")">&lt;</a>
+    <h2 style="margin-left:10px">Вы действительно хотите удалить товар: </h2>
+</div>
+<h3 style="margin-bottom:15px">@Model.NameProduct</h3>
+<div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+            <input style="margin-bottom:20px" type="submit" value="Удалить" class="btn btn-success"/>
+        
+    }
+</div>

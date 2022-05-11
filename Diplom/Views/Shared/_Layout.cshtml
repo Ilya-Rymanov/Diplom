@@ -41,15 +41,36 @@
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("About", "Home")">Информация</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Заказы</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("About", "Home")">Информация</a>
+                            </li>
+                        }
+
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Shop")">Магазин</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Contact", "Home")">Связатья с нами</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Admin")">Админ версия</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Contact", "Home")">Связатья с нами</a>
+                            </li>
+                        }
+
                     </ul>
                     @*@Html.Partial("_LoginPartial")*@
                 </div>
@@ -81,7 +102,7 @@
                                 <div class="info__body" style="position:fixed">
                                     @if (User.IsInRole("Admin"))
                                     {
-                                        <a style="text-decoration:none" href="@Url.Action("Index", "Admin")">Админ</a>
+                                        
                                         <a style="text-decoration:none" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
                                     }
                                     else 
@@ -124,7 +145,8 @@
                         <ul class="list-unstyled text-light footer-link-list">
                             <li>
                                 <i class="fas fa-map-marker-alt fa-fw"></i>
-                                123 Consectetur at ligula 10660
+                                Улица 8 Марта, 12А
+                                Екатеринбург, Свердловская область, Россия, 620014
                             </li>
                             <li>
                                 <i class="fa fa-phone fa-fw"></i>

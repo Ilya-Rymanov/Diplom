@@ -223,7 +223,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CartOrders_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CartOrders" Type="Self.CartOrders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
@@ -235,7 +237,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CartOrders_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CartOrders" Type="Self.CartOrders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -247,7 +251,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_characteristic_All_Characteristic">
-          <End Role="All_Characteristic" Type="Self.All_Characteristic" Multiplicity="0..1" />
+          <End Role="All_Characteristic" Type="Self.All_Characteristic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="characteristic" Type="Self.characteristic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="All_Characteristic">
@@ -259,7 +265,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_characteristic_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="characteristic" Type="Self.characteristic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -271,7 +279,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_characteristic_Value">
-          <End Role="Value" Type="Self.Value" Multiplicity="0..1" />
+          <End Role="Value" Type="Self.Value" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="characteristic" Type="Self.characteristic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Value">
@@ -339,7 +349,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -351,7 +363,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_CityNew">
-          <End Role="CityNew" Type="Self.CityNew" Multiplicity="0..1" />
+          <End Role="CityNew" Type="Self.CityNew" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CityNew">
@@ -363,7 +377,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Price_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Price" Type="Self.Price" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -375,7 +391,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
@@ -399,7 +417,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Manufacturer">
-          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manufacturer">
@@ -411,7 +431,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_TypeProduct">
-          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="0..1" />
+          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeProduct">
@@ -423,7 +445,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Unit_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Unit" Type="Self.Unit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type">
@@ -435,7 +459,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Value_Unit">
-          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Value" Type="Self.Value" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Unit">

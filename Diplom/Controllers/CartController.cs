@@ -14,6 +14,8 @@ namespace Diplom.Controllers
         
         public ViewResult Checkout(Cart cart)
         {
+            SelectList idcity = new SelectList(db.CityNew, "id_City", "CityName");
+            ViewBag.idCity = idcity;
             Orders orders = new Orders();
             return View(orders);
         }

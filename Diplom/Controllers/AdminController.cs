@@ -35,7 +35,7 @@ namespace Diplom.Controllers
             return View(model);
         }
 
-        //Get
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -47,7 +47,18 @@ namespace Diplom.Controllers
             {
                 return HttpNotFound();
             }
-            
+            SelectList idtype = new SelectList(db.TypeProduct, "id_Type", "NameType", product.id_Type);
+            ViewBag.idType = idtype;
+
+            SelectList idcategory = new SelectList(db.Category, "id_Category", "NameCategory", product.id_Category);
+            ViewBag.idCategory = idcategory;
+
+            SelectList idgarant = new SelectList(db.Guarantee, "id_Guarantee", "Name", product.id_Guarantee);
+            ViewBag.idGarant = idgarant;
+
+            SelectList idmanufact = new SelectList(db.Manufacturer, "id_Manufacturer", "Name", product.id_Manufacturer);
+            ViewBag.idManufact = idmanufact;
+
             return View(product);
         }
 
@@ -56,6 +67,30 @@ namespace Diplom.Controllers
         public ActionResult Edit(Product product)
         {
             db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            Product product = db.Product.Find(id);
+            if(product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            Product product = db.Product.Find(id);
+            if(product == null)
+            {
+                return HttpNotFound();
+            }
+            db.Product.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

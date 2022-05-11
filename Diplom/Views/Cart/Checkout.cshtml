@@ -13,16 +13,7 @@
 
     <div class="form-group" style="margin-bottom:15px">
         <label>Ваш город: </label>
-        @*@Html.TextBoxFor(x => x, new { @class = "form-control" })*@
-    
-        <select name="@Model.id_City">
-            @foreach (var city in db.CityNew)
-            {
-                <option value="@city.id_City">@city.CityName @city.Price &#8381;</option>
-            }
-
-        </select>
-    
+        @Html.DropDownListFor(x => x.id_City, ViewBag.idCity as SelectList)
     </div>
 
     <div class="form-group" style="margin-bottom:15px">
@@ -30,7 +21,10 @@
         @Html.TextBoxFor(x => x.Adress, new { @class = "form-control" })
     </div>
 
-
+    <div class="form-group" style="margin-bottom:15px">
+        <label>Цена за доставку: </label>
+        
+    </div>
 
     <div class="text-center">
         <button type="submit" class="btn btn-success btn-lg" name="submit" value="Оформить заказ" style="width:200px; margin-bottom:15px">Оформить заказ</button>
