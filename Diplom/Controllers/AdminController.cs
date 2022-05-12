@@ -13,7 +13,7 @@ namespace Diplom.Controllers
     {
         private Entities db = new Entities();
         // GET: Admin
-        
+
 
         public ActionResult Index()
         {
@@ -28,11 +28,68 @@ namespace Diplom.Controllers
                           PriceValue = c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1,
                           OldPrice = c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault(old => old.Id_Price != c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Id_Price).Price1,
                           Sales = c.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Sales,
-                          Description =c.Description,
+                          Description = c.Description,
                           id_Product = c.id_Product
                       }),
             };
             return View(model);
+        }
+
+        public ActionResult _CreateCharakteristic()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult _EditCharakteristic(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            characteristic characteristics = db.characteristic.Find(id);
+            if(characteristics == null)
+            {
+                return HttpNotFound();
+            }
+            return View(characteristics);
+        }
+
+        [HttpPost]
+        public ActionResult _EditCharakteristic(characteristic characteristics)
+        {
+            db.Entry(characteristics).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Edit");
+        }
+
+        [HttpGet]
+        public ActionResult _DeleteCharakteristic(int? id)
+        {
+            characteristic characteristics = db.characteristic.Find(id);
+            if (characteristics == null)
+            {
+                return HttpNotFound();
+            }
+            return View(characteristics);
+        }
+
+        [HttpPost, ActionName("_DeleteCharakteristic")]
+        public ActionResult _DeleteCharakteristicCondirm(int? id)
+        {
+            characteristic characteristics = db.characteristic.Find(id);
+            if (characteristics == null)
+            {
+                return HttpNotFound();
+            }
+            db.characteristic.Remove(characteristics);
+            db.SaveChanges();
+            return RedirectToAction("Edit");
+        }
+
+        public ActionResult Create()
+        {
+            return View();
         }
 
         [HttpGet]

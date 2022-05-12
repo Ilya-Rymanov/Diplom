@@ -1,0 +1,71 @@
+﻿@model Diplom.Models.characteristic
+
+@{
+    ViewBag.Title = "_EditCharakteristic";
+}
+
+<div style="display: inline-flex; margin-top: 1em; margin-bottom: 20px">
+    <a title="Вернуться" style="background-color: #e9eef5 !important; color:black;" class="btn btn-lg rounded-pill" href="@Url.Action("Edit", "Admin", new { id = Model.id_goods})">&lt;</a>
+    <h2 style="margin-left:10px;">Редактирование характеристики</h2>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <table style="font-size: larger; width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Характеристика
+                </th>
+                <th>
+                    Значение
+                </th>
+                <th style="text-align: center;">
+                    Ед. измерения
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+
+            <tr style="border-top: 1px solid #e4e7f2;">
+                <td style="padding-right: 10px;">
+                    @Html.EditorFor(model => model.All_Characteristic.Name_characteristic, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td style="min-width:200px; padding:10px;">
+                    @Html.EditorFor(model => model.Value.Name_Value, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td style="text-align: center;">
+                    @if (Model.Value.Unit.Name_Unit == "0")
+                    {
+
+                    }
+                    else
+                    {
+                        <p>@Model.Value.Unit.Name_Unit</p>
+                    }
+
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+
+
+    <input style="margin-top:15px; margin-bottom:15px; width:220px" type="submit" value="Сохранить изменения" class="btn btn-success" />
+}
+
+<style>
+    .form-control {
+        width: 50%
+    }
+</style>

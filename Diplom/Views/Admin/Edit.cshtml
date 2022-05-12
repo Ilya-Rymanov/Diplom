@@ -1,63 +1,147 @@
 ﻿@model Diplom.Models.Product
 
 @{
+    Diplom.Models.Entities db = new Diplom.Models.Entities();
+    var Characteristic = (from product in db.Product
+                          join characteristic in db.characteristic on product.id_Product equals characteristic.id_goods
+                          join all_characteristic in db.All_Characteristic on characteristic.id_Param equals all_characteristic.id
+                          join value in db.Value on characteristic.id_Value equals value.id_Value
+                          join unit in db.Unit on value.id_Unit equals unit.id_Unit
+                          select new
+                          {
+                              id_Product = product.id_Product,
+                              id_characteristic = characteristic.id_characteristic,
+                              Position = characteristic.Position,
+                              NameCharacteristic = all_characteristic.Name_characteristic,
+                              NameValue = value.Name_Value,
+                              NameUnit = unit.Name_Unit
 
+                          }).ToList();
 }
 <div style="display: inline-flex; margin-top: 1em; margin-bottom: 20px">
     <a title="Вернуться в магазин" style="background-color: #e9eef5 !important; color:black;" class="btn btn-lg rounded-pill" href="@Url.Action("Index", "Admin")">&lt;</a>
     <h2 style="margin-left:10px;">Редактирование товара</h2>
 </div>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.id_Product)
 
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <label>Название продукта: </label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    @Html.HiddenFor(m => m.Image)
 
-            <div class="form-group">
-                <label>Категория: </label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.id_Category, ViewBag.idCategory as SelectList)
-                </div>
-            </div>
+    @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                <label>Подкотегория: </label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model=>model.id_Type, ViewBag.idType as SelectList)
-                </div>
-            </div>
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <textarea style="width:100%; height:250px">@Model.Description</textarea>
-                </div>
-            </div>*@
-
-            <div class="form-group">
-                <label>Гарантия: </label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.id_Guarantee, ViewBag.idGarant as SelectList)
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Производитель: </label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.id_Manufacturer, ViewBag.idManufact as SelectList)
-                </div>
-            </div>
-
-            <input style="margin-top:15px; margin-bottom:15px; width:220px" type="submit" value="Сохранить изменения" class="btn btn-success" />
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label>Название продукта: </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
         </div>
+    </div>
+
+    <div class="form-group">
+        <label>Категория: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Category, ViewBag.idCategory as SelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Подкотегория: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Type, ViewBag.idType as SelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Описание: </label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Description, new { @class = "t1" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Гарантия: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Guarantee, ViewBag.idGarant as SelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Производитель: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Manufacturer, ViewBag.idManufact as SelectList)
+        </div>
+    </div>
+    <div style="text-align:right; margin-bottom:15px">
+        <a href="@Url.Action("_CreateCharakteristic", "Admin")" style=" font-size:22px !important; text-decoration: none; color: #59ab6e;">Добавить характеристику</a>
+    </div>
+    <table style="font-size: larger; width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Характеристика
+                </th>
+                <th>
+                    Значение
+                </th>
+                <th style="text-align: center;">
+                    Ед. измерения
+                </th>
+                <th>
+                    
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Characteristic.Where(x=>x.id_Product == Model.id_Product))
+            {
+
+                <tr style="border-top: 1px solid #e4e7f2;">
+                    <td style="padding-right: 10px;">
+                        @item.NameCharacteristic
+                    </td>
+                    <td style="min-width:200px; padding:10px;">
+                        @item.NameValue
+                    </td>
+                    <td style="text-align: center;">
+                        @if (item.NameUnit == "0")
+                        {
+
+                        }
+                        else
+                        {
+                            <p>@item.NameUnit</p>
+                        }
+
+                    </td>
+                    <td>
+                        <a class="ad" href="@Url.Action("_EditCharakteristic", "Admin", new { id = item.id_characteristic})">&#9998;</a>|
+                        <a class="ad" href="@Url.Action("_DeleteCharakteristic", "Admin", new { id = item.id_characteristic})"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <input style="margin-top:15px; margin-bottom:15px; width:220px" type="submit" value="Сохранить изменения" class="btn btn-success" />
+</div>
+}
+<style>
+    .t1 {
+        width: 700px;
+        height: 250px;
     }
+    .col-md-10{
+        margin-bottom:15px
+    }
+    .ad {
+        text-decoration: none;
+        color: #59ab6e
+    }
+</style>
