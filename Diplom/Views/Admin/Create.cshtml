@@ -1,91 +1,94 @@
 ﻿@model Diplom.Models.Product
-
+@using Diplom.Models;
 @{
-    ViewBag.Title = "Create";
+    Price price = new Price();
 }
 
-<h2>Create</h2>
+<div style="display: inline-flex; margin-top: 1em; margin-bottom: 20px">
+    <a title="Вернуться в магазин" style="background-color: #e9eef5 !important; color:black;" class="btn btn-lg rounded-pill" href="@Url.Action("Index", "Admin")">&lt;</a>
+    <h2 style="margin-left:10px;">Создание товара</h2>
+</div>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Product</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_Product, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_Product, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_Product, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NameProduct, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.HiddenFor(m => m.id_Product)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_Type, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.HiddenFor(m => m.Image)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_Category, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_Category, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_Category, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_Guarantee, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_Guarantee, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_Guarantee, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_Manufacturer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_Manufacturer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_Manufacturer, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label>Название продукта: </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-group">
+        <label>Цена продукта: </label>
+        <div class="col-md-10">
+            <input id="Price1" name="Price1" class="form-control" value="" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Категория: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Category, ViewBag.idCategory as SelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Подкотегория: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Type, ViewBag.idType as SelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Описание: </label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Description, new { @class = "t1" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Гарантия: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Guarantee, ViewBag.idGarant as SelectList)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Производитель: </label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.id_Manufacturer, ViewBag.idManufact as SelectList)
+        </div>
+    </div>
+    <div style="text-align:right; margin-bottom:15px">
+        <a href="@Url.Action("_CreateCharakteristic", "Admin")" style=" font-size:22px !important; text-decoration: none; color: #59ab6e;">Добавить характеристику</a>
+    </div>
+    <input style="margin-bottom:15px" type="submit" value="Создать" class="btn btn-success" />
 </div>
+}
+<style>
+    .t1 {
+        width: 700px;
+        height: 250px;
+    }
+
+    .col-md-10 {
+        margin-bottom: 15px
+    }
+
+    .ad {
+        text-decoration: none;
+        color: #59ab6e
+    }
+</style>

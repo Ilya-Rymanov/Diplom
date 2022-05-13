@@ -87,9 +87,39 @@ namespace Diplom.Controllers
             return RedirectToAction("Edit");
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
+            Product product = new Product();
+
+            SelectList idtype = new SelectList(db.TypeProduct, "id_Type", "NameType", product.id_Type);
+            ViewBag.idType = idtype;
+
+            SelectList idcategory = new SelectList(db.Category, "id_Category", "NameCategory", product.id_Category);
+            ViewBag.idCategory = idcategory;
+
+            SelectList idgarant = new SelectList(db.Guarantee, "id_Guarantee", "Name", product.id_Guarantee);
+            ViewBag.idGarant = idgarant;
+
+            SelectList idmanufact = new SelectList(db.Manufacturer, "id_Manufacturer", "Name", product.id_Manufacturer);
+            ViewBag.idManufact = idmanufact;
             return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Product product, string Price1)
+        {
+                product = db.Product.Add(product);
+            db.SaveChanges();
+            Price priceObj = new Price()
+            {
+                id_Product = product.id_Product,
+                Price1 = decimal.Parse(Price1),
+                //Sales
+            };
+            db.Price.Add(priceObj);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -121,10 +151,19 @@ namespace Diplom.Controllers
 
         //Post
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, string Price1)
         {
             db.Entry(product).State = EntityState.Modified;
             db.SaveChanges();
+            Price priceObj = new Price()
+            {
+                id_Product = product.id_Product,
+                Price1 = decimal.Parse(Price1),
+                //Sales
+            };
+            db.Price.Add(priceObj);
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

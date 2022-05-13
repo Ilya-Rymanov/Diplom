@@ -29,6 +29,20 @@ namespace Diplom.Controllers
             return RedirectToAction("AddOrders", order);
         }
 
+        [HttpPost]
+        public decimal GetDelivery(int idCity)
+        {
+            string userId = User.Identity.GetUserId();
+            CityNew city = db.CityNew.FirstOrDefault(currentCity=>currentCity.id_City == idCity);
+
+            decimal delivery = 0;
+            if (city != null && city.Price != null)
+            {
+                delivery = city.Price.Value;
+            }
+            return delivery;
+        }
+
         public ViewResult Index(Cart cart, string returnUrl)
         {
             return View(new CartIndexViewModel

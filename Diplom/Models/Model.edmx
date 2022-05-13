@@ -161,7 +161,7 @@
           <Key>
             <PropertyRef Name="id_Product" />
           </Key>
-          <Property Name="id_Product" Type="int" Nullable="false" />
+          <Property Name="id_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameProduct" Type="nvarchar(max)" />
           <Property Name="id_Type" Type="int" />
           <Property Name="id_Category" Type="int" />

@@ -4,29 +4,51 @@
     Diplom.Models.Entities db = new Diplom.Models.Entities();
 }
 
-<h2>Офрмить заказ</h2>
-<p>Пожалуйста, введите ваши контактные данные.</p>
+<div style="display: inline-flex; margin-top: 1em; margin-bottom: 20px">
+    <a title="Вернуться" style="background-color: #e9eef5 !important; color:black;" class="btn btn-lg rounded-pill" href="@Url.Action("Index", "Cart")">&lt;</a>
+    <h2 style="margin-left:10px;">Оформление заказа</h2>
+</div>
 
 @using (Html.BeginForm())
 {
-    <h3>Данные</h3>
-
     <div class="form-group" style="margin-bottom:15px">
-        <label>Ваш город: </label>
-        @Html.DropDownListFor(x => x.id_City, ViewBag.idCity as SelectList)
+        <label>Выберите город: </label>
+        @Html.DropDownListFor(x => x.id_City, ViewBag.idCity as SelectList, new { @onchange = "OnSelectionChange(this)" })
     </div>
 
     <div class="form-group" style="margin-bottom:15px">
-        <label>Ваш адрес: </label>
+        <label>Введите улицу и дом: </label>
         @Html.TextBoxFor(x => x.Adress, new { @class = "form-control" })
     </div>
 
     <div class="form-group" style="margin-bottom:15px">
-        <label>Цена за доставку: </label>
-        
+        <label>Цена за доставку: <span id="priceDelivery"></span>&#8381;</label>
+
     </div>
 
     <div class="text-center">
         <button type="submit" class="btn btn-success btn-lg" name="submit" value="Оформить заказ" style="width:200px; margin-bottom:15px">Оформить заказ</button>
     </div>
+}
+@section Scripts
+{
+    <script>
+        function OnSelectionChange(select) {
+         
+            var selectedOption = select.options[select.selectedIndex];
+            var idCity = selectedOption.value;
+
+             $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDelivery", "Cart")',
+                data: {
+                    idCity: idCity,
+                },
+                success: function (data) {
+                    var priceDelivery = document.getElementById('priceDelivery');
+                    priceDelivery.innerHTML = data;
+                }
+            });
+        }
+    </script>
 }

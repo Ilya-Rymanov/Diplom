@@ -15,7 +15,7 @@
 @if (User.IsInRole("Admin"))
 {
     <div>
-        <a class="btn btn-success btn-lg" style="margin-top: 10px" href="@Url.Action("Create New", "Create")">Создать товар</a>
+        <a class="btn btn-success btn-lg" style="margin-top: 10px" href="@Url.Action("Create", "Admin")">Создать товар</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
