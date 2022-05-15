@@ -151,7 +151,7 @@ namespace Diplom.Controllers
 
         //Post
         [HttpPost]
-        public ActionResult Edit(Product product, string Price1)
+        public ActionResult Edit(Product product, string Price1, string sales)
         {
             db.Entry(product).State = EntityState.Modified;
             db.SaveChanges();
@@ -159,7 +159,7 @@ namespace Diplom.Controllers
             {
                 id_Product = product.id_Product,
                 Price1 = decimal.Parse(Price1),
-                //Sales
+                Sales = bool.Parse(sales)
             };
             db.Price.Add(priceObj);
             db.SaveChanges();

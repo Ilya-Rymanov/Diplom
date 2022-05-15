@@ -40,7 +40,15 @@
                     <div class="card mb-4 product-wap rounded-0">
                         <div class="card rounded-0">
                             
-                            <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
+                            @if (item.Image == null)
+                            {
+                                <img class="card-img rounded-0 img-fluid" src="~/img/default.png">
+                            }
+                            else
+                            {
+                                <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
+                            }
+                            
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
                                     <li><a class="btn btn-success text-white mt-2" href="@Url.Action("Details", "Shop", new { id = item.id_Product })"><i class="far fa-eye"></i></a></li>
@@ -101,7 +109,14 @@
                 <div class="col-md-4">
                     <div class="card mb-4 product-wap rounded-0">
                         <div class="card rounded-0">
-                            <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
+                            @if (item.Image == null)
+                            {
+                                <img class="card-img rounded-0 img-fluid" src="~/img/default.png">
+                            }
+                            else
+                            {
+                                <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
+                            }
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
 
@@ -113,7 +128,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel" style="color:green; text-align:center" >Товар успешно добавлен в корзину</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel" style="color:green; text-align:center">Товар успешно добавлен в корзину</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                                         </div>
                                     </div>

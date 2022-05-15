@@ -46,8 +46,12 @@
 
     <div class="form-group">
         <label>Цена продукта: </label>
+        <label style="margin-left:10em">Добавить в акцию: </label>
         <div class="col-md-10">
-            <input id="Price1" name="Price1" class="form-control" value="@Model.Price.OrderByDescending(model => model.Id_Price).FirstOrDefault().Price1" />
+            <div style="display:inline-flex">
+                <input id="Price1" style="margin-right:25px" name="Price1" class="form-control" value="@Model.Price.OrderByDescending(model => model.Id_Price).FirstOrDefault().Price1" />        
+                    @Html.CheckBox("Sales", Model.Price.OrderByDescending(c => c.Id_Price).FirstOrDefault().Sales)
+            </div>
         </div>
     </div>
 

@@ -30,16 +30,25 @@
             <div class="col-md-4">
                 <div class="card mb-4 product-wap rounded-0">
                     <div class="card rounded-0">
-                        <div class="c3c cc4 c9k" style="width: 4em; height: 2em;">
+                        <div class="c3c cc4 c9k" style="margin-bottom:1px; width: 4em; height: 2em;">
                             <span>
                                 Sale
                             </span>
                         </div>
-                        <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
+
+                        @if (item.Image == null)
+                        {
+                            <img class="card-img rounded-0 img-fluid" src="~/img/default.png">
+                        }
+                        else
+                        {
+                            <img class="card-img rounded-0 img-fluid" src="~/img/@item.Image">
+                        }
                         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                             <ul class="list-unstyled">
                                 <li><a class="btn btn-success text-white mt-2" href="@Url.Action("Details", "Shop", new { id = item.id_Product })"><i class="far fa-eye"></i></a></li>
-                                <li data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn btn-success text-white mt-2" onclick="addToCart(@item.id_Product)"><i class="fas fa-cart-plus"></i></a></li>                            </ul>
+                                <li data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn btn-success text-white mt-2" onclick="addToCart(@item.id_Product)"><i class="fas fa-cart-plus"></i></a></li>
+                            </ul>
 
                         </div>
 

@@ -90,6 +90,7 @@ namespace Diplom.Models
                     db.CartOrders.Add(cartOrders);
                     db.SaveChanges();
                 }
+                lineCollection.Clear();
             }
              
 
