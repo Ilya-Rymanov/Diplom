@@ -34,7 +34,6 @@
                 @foreach (var item in Model.Products)
                 {
                     <tr>
-
                         <td>
                             @Html.ActionLink(item.NameProduct, "Edit", new { id = item.id_Product })
                         </td>
@@ -56,7 +55,7 @@
 }
 else
 {
-    <p>А ты же пользователь</p>
+    <p>Доступ пользователям закрыт</p>
 }
 <style>
     a {

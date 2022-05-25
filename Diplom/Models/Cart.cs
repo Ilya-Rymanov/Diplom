@@ -69,7 +69,7 @@ namespace Diplom.Models
         
         public void Checkout()
         {
-            using (Entities db = new Entities())
+            using (Entities1 db = new Entities1())
             {
                 Order.Date = DateTime.Now;
                 int? idSity = 0;

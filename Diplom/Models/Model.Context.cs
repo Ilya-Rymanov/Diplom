@@ -13,10 +13,10 @@ namespace Diplom.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Entities1 : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Entities1()
+            : base("name=Entities1")
         {
         }
     
@@ -26,26 +26,19 @@ namespace Diplom.Models
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AdminOptions> AdminOptions { get; set; }
-        public virtual DbSet<AdminOptionValue> AdminOptionValue { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<CartOrders> CartOrders { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<CityNew> CityNew { get; set; }
         public virtual DbSet<Guarantee> Guarantee { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<All_Characteristic> All_Characteristic { get; set; }
-        public virtual DbSet<characteristic> characteristic { get; set; }
-        public virtual DbSet<Type> Type { get; set; }
-        public virtual DbSet<Unit> Unit { get; set; }
-        public virtual DbSet<Value> Value { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<TypeProduct> TypeProduct { get; set; }
-        public virtual DbSet<Price> Price { get; set; }
-        public virtual DbSet<CartOrders> CartOrders { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<CityNew> CityNew { get; set; }
+        public virtual DbSet<Price> Price { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TypeProduct> TypeProduct { get; set; }
     }
 }

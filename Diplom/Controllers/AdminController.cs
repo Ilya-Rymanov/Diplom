@@ -11,7 +11,7 @@ namespace Diplom.Controllers
 {
     public class AdminController : Controller
     {
-        private Entities db = new Entities();
+        private Entities1 db = new Entities1();
         // GET: Admin
 
 
@@ -33,58 +33,6 @@ namespace Diplom.Controllers
                       }),
             };
             return View(model);
-        }
-
-        public ActionResult _CreateCharakteristic()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult _EditCharakteristic(int? id)
-        {
-            if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            characteristic characteristics = db.characteristic.Find(id);
-            if(characteristics == null)
-            {
-                return HttpNotFound();
-            }
-            return View(characteristics);
-        }
-
-        [HttpPost]
-        public ActionResult _EditCharakteristic(characteristic characteristics)
-        {
-            db.Entry(characteristics).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Edit");
-        }
-
-        [HttpGet]
-        public ActionResult _DeleteCharakteristic(int? id)
-        {
-            characteristic characteristics = db.characteristic.Find(id);
-            if (characteristics == null)
-            {
-                return HttpNotFound();
-            }
-            return View(characteristics);
-        }
-
-        [HttpPost, ActionName("_DeleteCharakteristic")]
-        public ActionResult _DeleteCharakteristicCondirm(int? id)
-        {
-            characteristic characteristics = db.characteristic.Find(id);
-            if (characteristics == null)
-            {
-                return HttpNotFound();
-            }
-            db.characteristic.Remove(characteristics);
-            db.SaveChanges();
-            return RedirectToAction("Edit");
         }
 
         [HttpGet]

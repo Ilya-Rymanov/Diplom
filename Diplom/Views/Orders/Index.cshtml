@@ -1,0 +1,113 @@
+﻿@using Diplom.Models;
+@using System.Text
+@using System.Text.RegularExpressions
+@{
+    Diplom.Models.Entities1 db = new Diplom.Models.Entities1();
+    var ordersAll = (from cartOrders in db.CartOrders
+                     join product in db.Product on cartOrders.id_Product equals product.id_Product
+                     join order in db.Orders on cartOrders.id_Orders equals order.id_Orders
+                     join cityNew in db.CityNew on order.id_City equals cityNew.id_City
+                     join priceProd in db.Price on product.id_Product equals priceProd.id_Product
+                     join users in db.AspNetUsers on order.UserId equals users.Id
+                     select new
+                     {
+                         //Стоимость товара
+                         priceValue = priceProd.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1,
+                         mail = users.Email,
+                         idProduct = product.id_Product,
+                         id_Orders = order.id_Orders,
+                         NameProduct = product.NameProduct,
+                         Adress = order.Adress,
+                         CityName = cityNew.CityName,
+                         quantity = cartOrders.quantity,
+                         price = cityNew.Price,
+                         Date = order.Date
+
+                     }).ToList();
+}
+
+<h2 style="margin-top:15px; margin-bottom:15px">Просмотр заказов</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Код
+        </th>
+        <th>
+            Наименование
+        </th>
+        <th>
+            Адрес
+        </th>
+        <th>
+            Город
+        </th>
+        <th>
+            Кол-во
+        </th>
+        <th>
+            Итого
+        </th>
+        <th>
+            Дата
+        </th>
+        <th>
+            Почта
+        </th>
+    </tr>
+
+    @foreach (var item in ordersAll.OrderByDescending(x=>x.id_Orders))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_Orders)
+            </td>
+            <td>
+                @try
+                {
+                    string Nothtml1 = @HttpUtility.UrlDecode(HttpUtility.UrlDecode(item.NameProduct, Encoding.UTF8));
+                    Nothtml1 = Regex.Replace(Nothtml1, "<[^>]+>", string.Empty);
+                    <div data-name="@Nothtml1">
+                        <div>
+                            @if (Nothtml1.Length > 23)
+                            {
+                                if (item.NameProduct.Length > 23)
+                                {
+                                    <a style="text-decoration:none" href="@Url.Action("Details", "Shop", new { id = item.idProduct})" title="@item.NameProduct">@Nothtml1.Remove(18, Nothtml1.Length - 18)...</a>
+                                }
+
+                            }
+                            else
+                            {
+                                <a style="text-decoration:none" href="@Url.Action("Details", "Shop", new { id = item.idProduct})" title="@item.NameProduct">@Nothtml1</a>
+                            }
+                        </div>
+                    </div>
+                }
+                catch
+                {
+
+                }
+            </td>
+            <td>
+                @item.Adress
+            </td>
+            <td>
+                @item.CityName
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @((item.quantity * item.priceValue + item.price)) &#8381;
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @item.mail
+            </td>
+        </tr>
+    }
+
+</table>

@@ -10,7 +10,7 @@ namespace Diplom.Controllers
 
     public class NavController : Controller
     {
-        private Entities db = new Entities();
+        private Entities1 db = new Entities1();
         public PartialViewResult Menu()
         {               
             return PartialView();

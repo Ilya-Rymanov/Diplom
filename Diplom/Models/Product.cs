@@ -17,9 +17,8 @@ namespace Diplom.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.characteristic = new HashSet<characteristic>();
-            this.Price = new HashSet<Price>();
             this.CartOrders = new HashSet<CartOrders>();
+            this.Price = new HashSet<Price>();
         }
     
         public int id_Product { get; set; }
@@ -31,15 +30,13 @@ namespace Diplom.Models
         public Nullable<int> id_Guarantee { get; set; }
         public Nullable<int> id_Manufacturer { get; set; }
     
-        public virtual Category Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<characteristic> characteristic { get; set; }
-        public virtual Guarantee Guarantee { get; set; }
-        public virtual Manufacturer Manufacturer { get; set; }
-        public virtual TypeProduct TypeProduct { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Price> Price { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartOrders> CartOrders { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Guarantee Guarantee { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Price> Price { get; set; }
+        public virtual TypeProduct TypeProduct { get; set; }
     }
 }

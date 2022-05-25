@@ -12,7 +12,7 @@ namespace Diplom.Controllers
 {
     public class ShopController : Controller
     {
-        private Entities db = new Entities();
+        private Entities1 db = new Entities1();
         public int pageSize = 24;
         // GET: Shop
         public ActionResult Index(string category,string genre, int page = 1)

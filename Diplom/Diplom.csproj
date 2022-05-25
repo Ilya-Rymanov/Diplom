@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,15 +188,6 @@
     <Compile Include="HtmlHelpers\PaginHelper.cs" />
     <Compile Include="Infrastructure\CartModelBinder.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AdminOptions.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AdminOptionValue.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\All_Characteristic.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -214,9 +206,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\characteristic.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CityNew.cs">
@@ -263,16 +252,7 @@
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Type.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TypeProduct.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Unit.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Value.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -591,10 +571,8 @@
     <Content Include="Views\Cart\AddOrders.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
-    <Content Include="Views\Admin\_EditCharakteristic.cshtml" />
-    <Content Include="Views\Admin\_CreateCharakteristic.cshtml" />
-    <Content Include="Views\Admin\_DeleteCharakteristic.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

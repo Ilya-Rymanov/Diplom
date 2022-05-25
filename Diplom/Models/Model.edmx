@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -14,28 +14,6 @@
           <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AdminOptions">
-          <Key>
-            <PropertyRef Name="id_Option" />
-          </Key>
-          <Property Name="id_Option" Type="int" Nullable="false" />
-          <Property Name="Name_Option" Type="nvarchar" MaxLength="50" />
-          <Property Name="id_Value" Type="int" />
-        </EntityType>
-        <EntityType Name="AdminOptionValue">
-          <Key>
-            <PropertyRef Name="id_Value" />
-          </Key>
-          <Property Name="id_Value" Type="int" Nullable="false" />
-          <Property Name="Value" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="All_Characteristic">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="Name_characteristic" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -105,16 +83,6 @@
           <Property Name="NameCategory" Type="nvarchar(max)" />
           <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="characteristic">
-          <Key>
-            <PropertyRef Name="id_characteristic" />
-          </Key>
-          <Property Name="id_characteristic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_goods" Type="int" />
-          <Property Name="id_Param" Type="int" />
-          <Property Name="Position" Type="int" />
-          <Property Name="id_Value" Type="int" />
-        </EntityType>
         <EntityType Name="CityNew">
           <Key>
             <PropertyRef Name="id_City" />
@@ -180,13 +148,6 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Type">
-          <Key>
-            <PropertyRef Name="id_Type" />
-          </Key>
-          <Property Name="id_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name_Type" Type="nvarchar(max)" />
-        </EntityType>
         <EntityType Name="TypeProduct">
           <Key>
             <PropertyRef Name="id_Type" />
@@ -194,34 +155,6 @@
           <Property Name="id_Type" Type="int" Nullable="false" />
           <Property Name="NameType" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Unit">
-          <Key>
-            <PropertyRef Name="id_Unit" />
-          </Key>
-          <Property Name="id_Unit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name_Unit" Type="nvarchar(max)" />
-          <Property Name="id_Type" Type="int" />
-        </EntityType>
-        <EntityType Name="Value">
-          <Key>
-            <PropertyRef Name="id_Value" />
-          </Key>
-          <Property Name="id_Value" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name_Value" Type="nvarchar(max)" />
-          <Property Name="id_Unit" Type="int" />
-        </EntityType>
-        <Association Name="FK_AdminOptions_AdminOptionValue">
-          <End Role="AdminOptionValue" Type="Self.AdminOptionValue" Multiplicity="0..1" />
-          <End Role="AdminOptions" Type="Self.AdminOptions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdminOptionValue">
-              <PropertyRef Name="id_Value" />
-            </Principal>
-            <Dependent Role="AdminOptions">
-              <PropertyRef Name="id_Value" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CartOrders_Orders">
           <End Role="Orders" Type="Self.Orders" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -247,48 +180,6 @@
             </Principal>
             <Dependent Role="CartOrders">
               <PropertyRef Name="id_Product" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_characteristic_All_Characteristic">
-          <End Role="All_Characteristic" Type="Self.All_Characteristic" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="characteristic" Type="Self.characteristic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="All_Characteristic">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="characteristic">
-              <PropertyRef Name="id_Param" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_characteristic_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="characteristic" Type="Self.characteristic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="id_Product" />
-            </Principal>
-            <Dependent Role="characteristic">
-              <PropertyRef Name="id_goods" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_characteristic_Value">
-          <End Role="Value" Type="Self.Value" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="characteristic" Type="Self.characteristic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Value">
-              <PropertyRef Name="id_Value" />
-            </Principal>
-            <Dependent Role="characteristic">
-              <PropertyRef Name="id_Value" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -444,39 +335,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Unit_Type">
-          <End Role="Type" Type="Self.Type" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Unit" Type="Self.Unit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="id_Type" />
-            </Principal>
-            <Dependent Role="Unit">
-              <PropertyRef Name="id_Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Value_Unit">
-          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Value" Type="Self.Value" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unit">
-              <PropertyRef Name="id_Unit" />
-            </Principal>
-            <Dependent Role="Value">
-              <PropertyRef Name="id_Unit" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AdminOptions" EntityType="Self.AdminOptions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AdminOptionValue" EntityType="Self.AdminOptionValue" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="All_Characteristic" EntityType="Self.All_Characteristic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -484,7 +344,6 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartOrders" EntityType="Self.CartOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="characteristic" EntityType="Self.characteristic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CityNew" EntityType="Self.CityNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Guarantee" EntityType="Self.Guarantee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
@@ -492,14 +351,7 @@
           <EntitySet Name="Price" EntityType="Self.Price" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeProduct" EntityType="Self.TypeProduct" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Value" EntityType="Self.Value" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AdminOptions_AdminOptionValue" Association="Self.FK_AdminOptions_AdminOptionValue">
-            <End Role="AdminOptionValue" EntitySet="AdminOptionValue" />
-            <End Role="AdminOptions" EntitySet="AdminOptions" />
-          </AssociationSet>
           <AssociationSet Name="FK_CartOrders_Orders" Association="Self.FK_CartOrders_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="CartOrders" EntitySet="CartOrders" />
@@ -507,18 +359,6 @@
           <AssociationSet Name="FK_CartOrders_Product" Association="Self.FK_CartOrders_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="CartOrders" EntitySet="CartOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_characteristic_All_Characteristic" Association="Self.FK_characteristic_All_Characteristic">
-            <End Role="All_Characteristic" EntitySet="All_Characteristic" />
-            <End Role="characteristic" EntitySet="characteristic" />
-          </AssociationSet>
-          <AssociationSet Name="FK_characteristic_Product" Association="Self.FK_characteristic_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="characteristic" EntitySet="characteristic" />
-          </AssociationSet>
-          <AssociationSet Name="FK_characteristic_Value" Association="Self.FK_characteristic_Value">
-            <End Role="Value" EntitySet="Value" />
-            <End Role="characteristic" EntitySet="characteristic" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -564,16 +404,9 @@
             <End Role="TypeProduct" EntitySet="TypeProduct" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Unit_Type" Association="Self.FK_Unit_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="Unit" EntitySet="Unit" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Value_Unit" Association="Self.FK_Value_Unit">
-            <End Role="Unit" EntitySet="Unit" />
-            <End Role="Value" EntitySet="Value" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -586,23 +419,6 @@
           <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AdminOptions">
-          <Key>
-            <PropertyRef Name="id_Option" />
-          </Key>
-          <Property Name="id_Option" Type="Int32" Nullable="false" />
-          <Property Name="Name_Option" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="id_Value" Type="Int32" />
-          <NavigationProperty Name="AdminOptionValue" Relationship="Self.FK_AdminOptions_AdminOptionValue" FromRole="AdminOptions" ToRole="AdminOptionValue" />
-        </EntityType>
-        <EntityType Name="AdminOptionValue">
-          <Key>
-            <PropertyRef Name="id_Value" />
-          </Key>
-          <Property Name="id_Value" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AdminOptions" Relationship="Self.FK_AdminOptions_AdminOptionValue" FromRole="AdminOptionValue" ToRole="AdminOptions" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -651,8 +467,37 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_AspNetUsers" FromRole="AspNetUsers" ToRole="Orders" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_AspNetUsers" FromRole="AspNetUsers" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="CartOrders">
+          <Key>
+            <PropertyRef Name="id_CartOrders" />
+          </Key>
+          <Property Name="id_CartOrders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Orders" Type="Int32" />
+          <Property Name="id_Product" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_CartOrders_Orders" FromRole="CartOrders" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_CartOrders_Product" FromRole="CartOrders" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id_Category" />
+          </Key>
+          <Property Name="id_Category" Type="Int32" Nullable="false" />
+          <Property Name="NameCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="CityNew">
+          <Key>
+            <PropertyRef Name="id_City" />
+          </Key>
+          <Property Name="id_City" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_CityNew" FromRole="CityNew" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Guarantee">
           <Key>
@@ -660,7 +505,7 @@
           </Key>
           <Property Name="id_Guarantee" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Product_Guarantee" FromRole="Guarantee" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Guarantee" FromRole="Guarantee" ToRole="Product" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -669,7 +514,49 @@
           <Property Name="id_Manufacturer" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_Orders" />
+          </Key>
+          <Property Name="id_Orders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_City" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Orders_AspNetUsers" FromRole="Orders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CartOrders" Relationship="Self.FK_CartOrders_Orders" FromRole="Orders" ToRole="CartOrders" />
+          <NavigationProperty Name="CityNew" Relationship="Self.FK_Orders_CityNew" FromRole="Orders" ToRole="CityNew" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="Id_Price" />
+          </Key>
+          <Property Name="Id_Price" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Product" Type="Int32" />
+          <Property Name="Price1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Sales" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Price_Product" FromRole="Price" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id_Product" />
+          </Key>
+          <Property Name="id_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_Type" Type="Int32" />
+          <Property Name="id_Category" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_Guarantee" Type="Int32" />
+          <Property Name="id_Manufacturer" Type="Int32" />
+          <NavigationProperty Name="CartOrders" Relationship="Self.FK_CartOrders_Product" FromRole="Product" ToRole="CartOrders" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Guarantee" Relationship="Self.FK_Product_Guarantee" FromRole="Product" ToRole="Guarantee" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
+          <NavigationProperty Name="Price" Relationship="Self.FK_Price_Product" FromRole="Product" ToRole="Price" />
+          <NavigationProperty Name="TypeProduct" Relationship="Self.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -681,18 +568,14 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_AdminOptions_AdminOptionValue">
-          <End Role="AdminOptionValue" Type="Self.AdminOptionValue" Multiplicity="0..1" />
-          <End Role="AdminOptions" Type="Self.AdminOptions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdminOptionValue">
-              <PropertyRef Name="id_Value" />
-            </Principal>
-            <Dependent Role="AdminOptions">
-              <PropertyRef Name="id_Value" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="TypeProduct">
+          <Key>
+            <PropertyRef Name="id_Type" />
+          </Key>
+          <Property Name="id_Type" Type="Int32" Nullable="false" />
+          <Property Name="NameType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_TypeProduct" FromRole="TypeProduct" ToRole="Product" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -721,349 +604,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AdminOptions" EntityType="Self.AdminOptions" />
-          <EntitySet Name="AdminOptionValue" EntityType="Self.AdminOptionValue" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Guarantee" EntityType="Self.Guarantee" />
-          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_AdminOptions_AdminOptionValue" Association="Self.FK_AdminOptions_AdminOptionValue">
-            <End Role="AdminOptionValue" EntitySet="AdminOptionValue" />
-            <End Role="AdminOptions" EntitySet="AdminOptions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="All_Characteristic" EntityType="Model.All_Characteristic" />
-          <EntitySet Name="characteristic" EntityType="Model.characteristic" />
-          <EntitySet Name="Type" EntityType="Model.Type" />
-          <EntitySet Name="Unit" EntityType="Model.Unit" />
-          <EntitySet Name="Value" EntityType="Model.Value" />
-          <AssociationSet Name="FK_characteristic_All_Characteristic" Association="Model.FK_characteristic_All_Characteristic">
-            <End Role="All_Characteristic" EntitySet="All_Characteristic" />
-            <End Role="characteristic" EntitySet="characteristic" />
-          </AssociationSet>
-          <AssociationSet Name="FK_characteristic_Value" Association="Model.FK_characteristic_Value">
-            <End Role="Value" EntitySet="Value" />
-            <End Role="characteristic" EntitySet="characteristic" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Unit_Type" Association="Model.FK_Unit_Type">
-            <End Role="Type" EntitySet="Type" />
-            <End Role="Unit" EntitySet="Unit" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Value_Unit" Association="Model.FK_Value_Unit">
-            <End Role="Unit" EntitySet="Unit" />
-            <End Role="Value" EntitySet="Value" />
-          </AssociationSet>
-          <EntitySet Name="Category" EntityType="Model.Category" />
-          <EntitySet Name="Product" EntityType="Model.Product" />
-          <EntitySet Name="TypeProduct" EntityType="Model.TypeProduct" />
-          <AssociationSet Name="FK_Product_Category" Association="Model.FK_Product_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_characteristic_Product" Association="Model.FK_characteristic_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="characteristic" EntitySet="characteristic" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Guarantee" Association="Model.FK_Product_Guarantee">
-            <End Role="Guarantee" EntitySet="Guarantee" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Manufacturer" Association="Model.FK_Product_Manufacturer">
-            <End Role="Manufacturer" EntitySet="Manufacturer" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_TypeProduct" Association="Model.FK_Product_TypeProduct">
-            <End Role="TypeProduct" EntitySet="TypeProduct" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <EntitySet Name="Price" EntityType="Model.Price" />
-          <AssociationSet Name="FK_Price_Product" Association="Model.FK_Price_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Price" EntitySet="Price" />
-          </AssociationSet>
-          <EntitySet Name="CartOrders" EntityType="Model.CartOrders" />
-          <EntitySet Name="Orders" EntityType="Model.Orders" />
-          <AssociationSet Name="FK_CartOrders_Orders" Association="Model.FK_CartOrders_Orders">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="CartOrders" EntitySet="CartOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CartOrders_Product" Association="Model.FK_CartOrders_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="CartOrders" EntitySet="CartOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Orders_AspNetUsers" Association="Model.FK_Orders_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <EntitySet Name="CityNew" EntityType="Model.CityNew" />
-          <AssociationSet Name="FK_Orders_CityNew" Association="Model.FK_Orders_CityNew">
-            <End Role="CityNew" EntitySet="CityNew" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="All_Characteristic">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Name_characteristic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="characteristic" Relationship="Model.FK_characteristic_All_Characteristic" FromRole="All_Characteristic" ToRole="characteristic" />
-        </EntityType>
-        <EntityType Name="characteristic">
-          <Key>
-            <PropertyRef Name="id_characteristic" />
-          </Key>
-          <Property Name="id_characteristic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_goods" Type="Int32" />
-          <Property Name="id_Param" Type="Int32" />
-          <Property Name="Position" Type="Int32" />
-          <Property Name="id_Value" Type="Int32" />
-          <NavigationProperty Name="All_Characteristic" Relationship="Model.FK_characteristic_All_Characteristic" FromRole="characteristic" ToRole="All_Characteristic" />
-          <NavigationProperty Name="Value" Relationship="Model.FK_characteristic_Value" FromRole="characteristic" ToRole="Value" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_characteristic_Product" FromRole="characteristic" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Type">
-          <Key>
-            <PropertyRef Name="id_Type" />
-          </Key>
-          <Property Name="id_Type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Unit" Relationship="Model.FK_Unit_Type" FromRole="Type" ToRole="Unit" />
-        </EntityType>
-        <EntityType Name="Unit">
-          <Key>
-            <PropertyRef Name="id_Unit" />
-          </Key>
-          <Property Name="id_Unit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name_Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Type" Type="Int32" />
-          <NavigationProperty Name="Type" Relationship="Model.FK_Unit_Type" FromRole="Unit" ToRole="Type" />
-          <NavigationProperty Name="Value" Relationship="Model.FK_Value_Unit" FromRole="Unit" ToRole="Value" />
-        </EntityType>
-        <EntityType Name="Value">
-          <Key>
-            <PropertyRef Name="id_Value" />
-          </Key>
-          <Property Name="id_Value" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name_Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Unit" Type="Int32" />
-          <NavigationProperty Name="characteristic" Relationship="Model.FK_characteristic_Value" FromRole="Value" ToRole="characteristic" />
-          <NavigationProperty Name="Unit" Relationship="Model.FK_Value_Unit" FromRole="Value" ToRole="Unit" />
-        </EntityType>
-        <Association Name="FK_characteristic_All_Characteristic">
-          <End Type="Model.All_Characteristic" Role="All_Characteristic" Multiplicity="0..1" />
-          <End Type="Model.characteristic" Role="characteristic" Multiplicity="*" />
+        <Association Name="FK_Orders_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="All_Characteristic">
-              <PropertyRef Name="id" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="characteristic">
-              <PropertyRef Name="id_Param" />
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_characteristic_Value">
-          <End Type="Model.Value" Role="Value" Multiplicity="0..1" />
-          <End Type="Model.characteristic" Role="characteristic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Value">
-              <PropertyRef Name="id_Value" />
-            </Principal>
-            <Dependent Role="characteristic">
-              <PropertyRef Name="id_Value" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Unit_Type">
-          <End Type="Model.Type" Role="Type" Multiplicity="0..1" />
-          <End Type="Model.Unit" Role="Unit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Type">
-              <PropertyRef Name="id_Type" />
-            </Principal>
-            <Dependent Role="Unit">
-              <PropertyRef Name="id_Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Value_Unit">
-          <End Type="Model.Unit" Role="Unit" Multiplicity="0..1" />
-          <End Type="Model.Value" Role="Value" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unit">
-              <PropertyRef Name="id_Unit" />
-            </Principal>
-            <Dependent Role="Value">
-              <PropertyRef Name="id_Unit" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="id_Category" />
-          </Key>
-          <Property Name="id_Category" Type="Int32" Nullable="false" />
-          <Property Name="NameCategory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Product_Category" FromRole="Category" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="id_Product" />
-          </Key>
-          <Property Name="id_Product" Type="Int32" Nullable="false" />
-          <Property Name="NameProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Type" Type="Int32" />
-          <Property Name="id_Category" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_Guarantee" Type="Int32" />
-          <Property Name="id_Manufacturer" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Model.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="characteristic" Relationship="Model.FK_characteristic_Product" FromRole="Product" ToRole="characteristic" />
-          <NavigationProperty Name="Guarantee" Relationship="Model.FK_Product_Guarantee" FromRole="Product" ToRole="Guarantee" />
-          <NavigationProperty Name="Manufacturer" Relationship="Model.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <NavigationProperty Name="TypeProduct" Relationship="Model.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
-          <NavigationProperty Name="Price" Relationship="Model.FK_Price_Product" FromRole="Product" ToRole="Price" />
-          <NavigationProperty Name="CartOrders" Relationship="Model.FK_CartOrders_Product" FromRole="Product" ToRole="CartOrders" />
-        </EntityType>
-        <EntityType Name="TypeProduct">
-          <Key>
-            <PropertyRef Name="id_Type" />
-          </Key>
-          <Property Name="id_Type" Type="Int32" Nullable="false" />
-          <Property Name="NameType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Product_TypeProduct" FromRole="TypeProduct" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Product_Category">
-          <End Type="Model.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="Model.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="id_Category" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_characteristic_Product">
-          <End Type="Model.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Model.characteristic" Role="characteristic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="id_Product" />
-            </Principal>
-            <Dependent Role="characteristic">
-              <PropertyRef Name="id_goods" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Guarantee">
-          <End Type="Model.Guarantee" Role="Guarantee" Multiplicity="0..1" />
-          <End Type="Model.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Guarantee">
-              <PropertyRef Name="id_Guarantee" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Guarantee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Manufacturer">
-          <End Type="Model.Manufacturer" Role="Manufacturer" Multiplicity="0..1" />
-          <End Type="Model.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Manufacturer">
-              <PropertyRef Name="id_Manufacturer" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Manufacturer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_TypeProduct">
-          <End Type="Model.TypeProduct" Role="TypeProduct" Multiplicity="0..1" />
-          <End Type="Model.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeProduct">
-              <PropertyRef Name="id_Type" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="id_Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Price">
-          <Key>
-            <PropertyRef Name="Id_Price" />
-          </Key>
-          <Property Name="Id_Price" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Product" Type="Int32" />
-          <Property Name="Price1" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Sales" Type="Boolean" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Price_Product" FromRole="Price" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Price_Product">
-          <End Type="Model.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Model.Price" Role="Price" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="id_Product" />
-            </Principal>
-            <Dependent Role="Price">
-              <PropertyRef Name="id_Product" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CartOrders">
-          <Key>
-            <PropertyRef Name="id_CartOrders" />
-          </Key>
-          <Property Name="id_CartOrders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Orders" Type="Int32" />
-          <Property Name="id_Product" Type="Int32" />
-          <Property Name="quantity" Type="Int32" />
-          <NavigationProperty Name="Orders" Relationship="Model.FK_CartOrders_Orders" FromRole="CartOrders" ToRole="Orders" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_CartOrders_Product" FromRole="CartOrders" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="id_Orders" />
-          </Key>
-          <Property Name="id_Orders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="id_City" Type="Int32" />
-          <NavigationProperty Name="CartOrders" Relationship="Model.FK_CartOrders_Orders" FromRole="Orders" ToRole="CartOrders" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_Orders_AspNetUsers" FromRole="Orders" ToRole="AspNetUsers" />
-          <NavigationProperty Name="CityNew" Relationship="Model.FK_Orders_CityNew" FromRole="Orders" ToRole="CityNew" />
-        </EntityType>
         <Association Name="FK_CartOrders_Orders">
-          <End Type="Model.Orders" Role="Orders" Multiplicity="0..1" />
-          <End Type="Model.CartOrders" Role="CartOrders" Multiplicity="*" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartOrders" Type="Self.CartOrders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="id_Orders" />
@@ -1074,8 +633,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CartOrders_Product">
-          <End Type="Model.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="Model.CartOrders" Role="CartOrders" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartOrders" Type="Self.CartOrders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="id_Product" />
@@ -1085,30 +646,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Orders_AspNetUsers">
-          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
-          <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
+        <Association Name="FK_Product_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="Category">
+              <PropertyRef Name="id_Category" />
             </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Category" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CityNew">
-          <Key>
-            <PropertyRef Name="id_City" />
-          </Key>
-          <Property Name="id_City" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Orders" Relationship="Model.FK_Orders_CityNew" FromRole="CityNew" ToRole="Orders" />
-        </EntityType>
         <Association Name="FK_Orders_CityNew">
-          <End Type="Model.CityNew" Role="CityNew" Multiplicity="0..1" />
-          <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
+          <End Role="CityNew" Type="Self.CityNew" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CityNew">
               <PropertyRef Name="id_City" />
@@ -1118,12 +674,135 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <Association Name="FK_Product_Guarantee">
+          <End Role="Guarantee" Type="Self.Guarantee" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guarantee">
+              <PropertyRef Name="id_Guarantee" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Guarantee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Manufacturer">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="id_Manufacturer" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Price_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Price" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id_Product" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="id_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeProduct">
+          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProduct">
+              <PropertyRef Name="id_Type" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="CartOrders" EntityType="Self.CartOrders" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="CityNew" EntityType="Self.CityNew" />
+          <EntitySet Name="Guarantee" EntityType="Self.Guarantee" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Price" EntityType="Self.Price" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeProduct" EntityType="Self.TypeProduct" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_AspNetUsers" Association="Self.FK_Orders_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartOrders_Orders" Association="Self.FK_CartOrders_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="CartOrders" EntitySet="CartOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartOrders_Product" Association="Self.FK_CartOrders_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CartOrders" EntitySet="CartOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CityNew" Association="Self.FK_Orders_CityNew">
+            <End Role="CityNew" EntitySet="CityNew" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Guarantee" Association="Self.FK_Product_Guarantee">
+            <End Role="Guarantee" EntitySet="Guarantee" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Price_Product" Association="Self.FK_Price_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Price" EntitySet="Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeProduct" Association="Self.FK_Product_TypeProduct">
+            <End Role="TypeProduct" EntitySet="TypeProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities1">
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="Model.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -1131,23 +810,6 @@
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AdminOptions">
-            <EntityTypeMapping TypeName="Model.AdminOptions">
-              <MappingFragment StoreEntitySet="AdminOptions">
-                <ScalarProperty Name="id_Option" ColumnName="id_Option" />
-                <ScalarProperty Name="Name_Option" ColumnName="Name_Option" />
-                <ScalarProperty Name="id_Value" ColumnName="id_Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AdminOptionValue">
-            <EntityTypeMapping TypeName="Model.AdminOptionValue">
-              <MappingFragment StoreEntitySet="AdminOptionValue">
-                <ScalarProperty Name="id_Value" ColumnName="id_Value" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1196,6 +858,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CartOrders">
+            <EntityTypeMapping TypeName="Model.CartOrders">
+              <MappingFragment StoreEntitySet="CartOrders">
+                <ScalarProperty Name="id_CartOrders" ColumnName="id_CartOrders" />
+                <ScalarProperty Name="id_Orders" ColumnName="id_Orders" />
+                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
+                <ScalarProperty Name="NameCategory" ColumnName="NameCategory" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CityNew">
+            <EntityTypeMapping TypeName="Model.CityNew">
+              <MappingFragment StoreEntitySet="CityNew">
+                <ScalarProperty Name="id_City" ColumnName="id_City" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Guarantee">
             <EntityTypeMapping TypeName="Model.Guarantee">
               <MappingFragment StoreEntitySet="Guarantee">
@@ -1213,6 +903,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Model.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="id_Orders" ColumnName="id_Orders" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="id_City" ColumnName="id_City" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price">
+            <EntityTypeMapping TypeName="Model.Price">
+              <MappingFragment StoreEntitySet="Price">
+                <ScalarProperty Name="Id_Price" ColumnName="Id_Price" />
+                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+                <ScalarProperty Name="Price1" ColumnName="Price" />
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="Model.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
+                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
+                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="id_Guarantee" ColumnName="id_Guarantee" />
+                <ScalarProperty Name="id_Manufacturer" ColumnName="id_Manufacturer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1224,6 +949,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TypeProduct">
+            <EntityTypeMapping TypeName="Model.TypeProduct">
+              <MappingFragment StoreEntitySet="TypeProduct">
+                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -1232,122 +965,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="All_Characteristic">
-            <EntityTypeMapping TypeName="Model.All_Characteristic">
-              <MappingFragment StoreEntitySet="All_Characteristic">
-                <ScalarProperty Name="Name_characteristic" ColumnName="Name_characteristic" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="characteristic">
-            <EntityTypeMapping TypeName="Model.characteristic">
-              <MappingFragment StoreEntitySet="characteristic">
-                <ScalarProperty Name="id_Value" ColumnName="id_Value" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="id_Param" ColumnName="id_Param" />
-                <ScalarProperty Name="id_goods" ColumnName="id_goods" />
-                <ScalarProperty Name="id_characteristic" ColumnName="id_characteristic" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Type">
-            <EntityTypeMapping TypeName="Model.Type">
-              <MappingFragment StoreEntitySet="Type">
-                <ScalarProperty Name="Name_Type" ColumnName="Name_Type" />
-                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Unit">
-            <EntityTypeMapping TypeName="Model.Unit">
-              <MappingFragment StoreEntitySet="Unit">
-                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
-                <ScalarProperty Name="Name_Unit" ColumnName="Name_Unit" />
-                <ScalarProperty Name="id_Unit" ColumnName="id_Unit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Value">
-            <EntityTypeMapping TypeName="Model.Value">
-              <MappingFragment StoreEntitySet="Value">
-                <ScalarProperty Name="id_Unit" ColumnName="id_Unit" />
-                <ScalarProperty Name="Name_Value" ColumnName="Name_Value" />
-                <ScalarProperty Name="id_Value" ColumnName="id_Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Category">
-            <EntityTypeMapping TypeName="Model.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="NameCategory" ColumnName="NameCategory" />
-                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="Model.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="id_Manufacturer" ColumnName="id_Manufacturer" />
-                <ScalarProperty Name="id_Guarantee" ColumnName="id_Guarantee" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="id_Category" ColumnName="id_Category" />
-                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
-                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
-                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TypeProduct">
-            <EntityTypeMapping TypeName="Model.TypeProduct">
-              <MappingFragment StoreEntitySet="TypeProduct">
-                <ScalarProperty Name="NameType" ColumnName="NameType" />
-                <ScalarProperty Name="id_Type" ColumnName="id_Type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Price">
-            <EntityTypeMapping TypeName="Model.Price">
-              <MappingFragment StoreEntitySet="Price">
-                <ScalarProperty Name="Sales" ColumnName="Sales" />
-                <ScalarProperty Name="Price1" ColumnName="Price" />
-                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
-                <ScalarProperty Name="Id_Price" ColumnName="Id_Price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CartOrders">
-            <EntityTypeMapping TypeName="Model.CartOrders">
-              <MappingFragment StoreEntitySet="CartOrders">
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="id_Product" ColumnName="id_Product" />
-                <ScalarProperty Name="id_Orders" ColumnName="id_Orders" />
-                <ScalarProperty Name="id_CartOrders" ColumnName="id_CartOrders" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="Model.Orders">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="id_City" ColumnName="id_City" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="id_Orders" ColumnName="id_Orders" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CityNew">
-            <EntityTypeMapping TypeName="Model.CityNew">
-              <MappingFragment StoreEntitySet="CityNew">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="id_City" ColumnName="id_City" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

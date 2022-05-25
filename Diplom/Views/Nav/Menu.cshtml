@@ -1,6 +1,6 @@
 ﻿@{
-    @*@Html.RouteLink(item, "ShopCategory", new { category = item }, new { @class = "collapsed d-flex justify-content-between h3 text-decoration-none" })*@
-Diplom.Models.Entities db = new Diplom.Models.Entities();
+  
+Diplom.Models.Entities1 db = new Diplom.Models.Entities1();
 var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                        join categore in db.Category on product.FirstOrDefault().id_Category equals categore.id_Category
                        join typeProduct in db.TypeProduct on product.Key equals typeProduct.id_Type 
@@ -11,9 +11,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                            NameType = typeProduct.NameType
                        }).ToList();
 }
-
-@*@Html.RouteLink("Домой", "HomeShop", new { action = "Index" })*@
-
 
 <div class="col-lg-3">
     <h1 class="h2 pb-4">Категории</h1>

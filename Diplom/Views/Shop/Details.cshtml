@@ -1,28 +1,15 @@
 ﻿@using Diplom.Models
 @model Product
 @{
-    Diplom.Models.Entities db = new Diplom.Models.Entities();
-    var Characteristic = (from product in db.Product
-                          join characteristic in db.characteristic on product.id_Product equals characteristic.id_goods
-                          join all_characteristic in db.All_Characteristic on characteristic.id_Param equals all_characteristic.id
-                          join value in db.Value on characteristic.id_Value equals value.id_Value
-                          join unit in db.Unit on value.id_Unit equals unit.id_Unit
-                          select new
-                          {
-                              id_Product = product.id_Product,
-                              Position = characteristic.Position,
-                              NameCharacteristic = all_characteristic.Name_characteristic,
-                              NameValue = value.Name_Value,
-                              NameUnit = unit.Name_Unit
-
-                          }).ToList();
+    Diplom.Models.Entities1 db = new Diplom.Models.Entities1();
+    
     int? navID = ViewBag.ID;
 }
 <!-- Open Content -->
 <section class="bg-light">
     <div class="container pb-5">
         <div style="padding-top: 15px;padding-left: 15px">
-            <a title="Вернуться в магазин" style="background-color: #59ab6e !important; color: black;" class="btn btn-lg rounded-pill" href="@Url.Action("Index", "Shop")">&lt;</a>
+            <a title="Вернуться в магазин" style="background-color: #59ab6e !important; color: black;" class="btn btn-lg rounded-pill" href="javascript:history.back()">&lt;</a> 
         </div>
         <div class="row">
             <div class="col-lg-5 mt-5">
@@ -44,7 +31,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2">@Model.NameProduct</h1>
-                        <p class="h3 py-2" style="font-size: 24px !important; font-weight: 500 !important; color: green ">@Model.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1 &#8381;</p>
+                        @try
+                        {
+                            <p class="h3 py-2" style="font-size: 24px !important; font-weight: 500 !important; color: green ">@Model.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1 &#8381;</p>
+                        }
+                        catch { }
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <h6>Производитель:</h6>
@@ -57,35 +48,12 @@
                         <h6>Описание:</h6>
                         <p style="text-align:justify">@Model.Description</p>
 
-                        <h6>Характеристики:</h6>
-                        <ul class="list-unstyled pb-3">
-                            @foreach (var item in Characteristic.Where(c => c.id_Product == navID))
-                            {
-
-                                <li>
-                                    &bull; @item.NameCharacteristic @item.NameValue @if (item.NameUnit == "0") { }
-                                    else
-                                    {@item.NameUnit}
-                                </li>
-                            }
-                        </ul>
-
-
                         <form action="" method="GET">
                             <input type="hidden" name="product-title" value="Activewear">
 
                             <div class="row pb-3">
                                 <div class="col d-grid">
-                                    @*Добавление в корзину*@
-                                    @*<div class="addtocart">
-                                            <a href="#" class="addtocart btn btn-success">Добавить в корзину</a>
-                                            <span class="loader">
-                                                <img src="~/img/ajax-loader.gif" height="100" width="150" />
-                                            </span>
-                                            <div class="ajaxmsg">
-                                                Товар добавлен в вашу корзину
-                                            </div>
-                                        </div>*@
+
                                     <i class="btn btn-success btn-lg" style="width:17em; font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" onclick="addToCart(@Model.id_Product)">Добавить в корзину</a></i>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
