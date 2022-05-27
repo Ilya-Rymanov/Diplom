@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace Diplom.Controllers
@@ -54,7 +56,7 @@ namespace Diplom.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Product product, string Price1)
+        public ActionResult Create(Product product, string Price1, HttpPostedFileBase uplode)
         {
                 product = db.Product.Add(product);
             db.SaveChanges();
@@ -66,6 +68,31 @@ namespace Diplom.Controllers
             };
             db.Price.Add(priceObj);
             db.SaveChanges();
+
+            //Добавление фото
+            //Проверяем был ли файл загружен
+            if(uplode != null && uplode.ContentLength > 0)
+            {
+                string ext = uplode.ContentType.ToLower();
+                if (ext != "image/jpg" &&
+                    ext != "image/jpeg" &&
+                    ext != "image/pjpeg" &&
+                    ext != "image/gif" &&
+                    ext != "image/x-png" &&
+                    ext != "image/png")
+                {
+                    ModelState.AddModelError("", "Ваше изображение небыло загружено - неверное расширение");
+                }
+            
+
+            string imageName = uplode.FileName;
+                Product prod1 = db.Product.Find(product.id_Product);
+                prod1.Image = imageName;
+                db.SaveChanges();
+                uplode.SaveAs(Server.MapPath("~/img/" + imageName));
+
+            }
+
 
             return RedirectToAction("Index");
         }
@@ -99,7 +126,7 @@ namespace Diplom.Controllers
 
         //Post
         [HttpPost]
-        public ActionResult Edit(Product product, string Price1, string sales)
+        public ActionResult Edit(Product product, string Price1, string sales, HttpPostedFileBase uplode)
         {
             db.Entry(product).State = EntityState.Modified;
             db.SaveChanges();
@@ -111,6 +138,28 @@ namespace Diplom.Controllers
             };
             db.Price.Add(priceObj);
             db.SaveChanges();
+
+            //Добавление фото
+            //Проверяем был ли файл загружен
+          
+            if (uplode != null && uplode.ContentLength > 0)
+            {
+                string ext = uplode.ContentType.ToLower();
+                if (ext != "image/jpg" &&
+                    ext != "image/jpeg" &&
+                    ext != "image/pjpeg" &&
+                    ext != "image/gif" &&
+                    ext != "image/x-png" &&
+                    ext != "image/png")
+                {
+                    ModelState.AddModelError("", "Ваше изображение небыло загружено - неверное расширение");
+                }
+                string imageName = uplode.FileName;
+                Product prod1 = db.Product.Find(product.id_Product);
+                prod1.Image = imageName;
+                db.SaveChanges();
+                uplode.SaveAs(Server.MapPath("~/img/" + imageName));
+            }
 
             return RedirectToAction("Index");
         }

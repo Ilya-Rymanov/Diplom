@@ -9,88 +9,106 @@
     <h2 style="margin-left:10px;">Редактирование товара</h2>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(m => m.id_Product)
 
-    @Html.HiddenFor(m => m.Image)
-
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        <label>Название продукта: </label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Цена продукта: </label>
-        <label style="margin-left:10em">Добавить в акцию: </label>
-        <div class="col-md-10">
-            <div style="display:inline-flex">
-                <input id="Price1" style="margin-right:25px" name="Price1" class="form-control" value="@Model.Price.OrderByDescending(model => model.Id_Price).FirstOrDefault().Price1" />        
-                    @Html.CheckBox("Sales", Model.Price.OrderByDescending(c => c.Id_Price).FirstOrDefault().Sales)
+        <div class="form-group">
+            <label>Название продукта: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Категория: </label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.id_Category, ViewBag.idCategory as SelectList)
+        <div class="form-group">
+            <label>Фотография продукта: </label>
+            <div class="col-md-10">
+                @if (Model.Image == null)
+                {
+                    @Html.HiddenFor(m => m.Image)
+                    <input style="width:310px; border:none; background-color:white" type="file" name="uplode" id="imageUpload" />
+                    <img id="imgpreview" style="width:200px;height:200px" src="~/img/default.png">
+                }
+                else
+                {
+                   <img id="imgpreview" style="width:200px;height:200px" src="~/img/@Model.Image">
+                }
+
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Подкотегория: </label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.id_Type, ViewBag.idType as SelectList)
+        <div class="form-group">
+            <label>Цена продукта: </label>
+            <label style="margin-left:10em">Добавить в акцию: </label>
+            <div class="col-md-10">
+                <div style="display:inline-flex">
+                    <input id="Price1" style="margin-right:25px" name="Price1" class="form-control" value="@Model.Price.OrderByDescending(model => model.Id_Price).FirstOrDefault().Price1" />
+                    @Html.CheckBox("Sales", Model.Price.OrderByDescending(c => c.Id_Price).FirstOrDefault().Sales)
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Описание: </label>
-        <div class="col-md-10">
-            @Html.TextAreaFor(m => m.Description, new { @class = "t1" })
+        <div class="form-group">
+            <label>Категория: </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_Category, ViewBag.idCategory as SelectList)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Гарантия: </label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.id_Guarantee, ViewBag.idGarant as SelectList)
+        <div class="form-group">
+            <label>Подкотегория: </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_Type, ViewBag.idType as SelectList)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Производитель: </label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.id_Manufacturer, ViewBag.idManufact as SelectList)
+        <div class="form-group">
+            <label>Описание: </label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Description, new { @class = "t1" })
+            </div>
         </div>
-    </div>
-    <div style="text-align:right; margin-bottom:15px">
-        <a href="@Url.Action("_CreateCharakteristic", "Admin")" style=" font-size:22px !important; text-decoration: none; color: #59ab6e;">Добавить характеристику</a>
-    </div>
 
-    <input style="margin-top:15px; margin-bottom:15px; width:220px" type="submit" value="Сохранить изменения" class="btn btn-success" />
-</div>
+        <div class="form-group">
+            <label>Гарантия: </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_Guarantee, ViewBag.idGarant as SelectList)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Производитель: </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_Manufacturer, ViewBag.idManufact as SelectList)
+            </div>
+        </div>
+
+        <input style="margin-top:15px; margin-bottom:15px; width:220px" type="submit" value="Сохранить изменения" class="btn btn-success" />
+    </div>
 }
 <style>
     .t1 {
         width: 700px;
         height: 250px;
     }
-    .col-md-10{
-        margin-bottom:15px
+
+    .col-md-10 {
+        margin-bottom: 15px
     }
+
     .ad {
         text-decoration: none;
         color: #59ab6e
     }
 </style>
+@section Scripts
+{
+    <script src="~/js/AddProductScript.js"></script>
+}
