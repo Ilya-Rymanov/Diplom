@@ -94,14 +94,14 @@
             <td>
                 @item.Adress
             </td>
-            <td>
+            <td title="@item.price">
                 @item.CityName
             </td>
             <td style="text-align:center">
                 @Html.DisplayFor(modelItem => item.quantity)
             </td>
             <td>
-                @((item.quantity * item.priceValue + item.price)) &#8381;
+                @((item.quantity * item.priceValue)) &#8381;
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
