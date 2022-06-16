@@ -54,7 +54,8 @@ else
                         <a href="#" onclick="reload_interval(200);return false;" style="text-decoration: none; margin-right:5px;" class="scale incproduct badge rounded-pill bg-light text-dark" data-id="@item.Product.id_Product">+</a>
                         @Html.DisplayFor(model => item.Quantity)
                         <a href="#" onclick="reload_interval(200);return false;" style="text-decoration: none; margin-left: 5px" class="scale decproduct badge rounded-pill bg-light text-dark" data-id="@item.Product.id_Product">&ndash;</a>
-                        <a href="#" onclick="reload_interval(200);return false;" style="text-decoration: none; margin-left: 5px; background-color: #59ab6e !important;" class="scale removeproduct badge rounded-pill text-dark" data-id="@item.Product.id_Product"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="#" onclick="reload_interval(200);return false;" style="text-decoration: none; margin-left: 5px; background-color: #59ab6e !important;" class="scale removeproduct badge rounded-pill text-dark" data-id="@item.Product.id_Product">
+                        <i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             }

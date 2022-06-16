@@ -21,7 +21,8 @@ namespace Diplom.Controllers
             var productsPricesId = db.Price.Select(currentPrices => currentPrices.id_Product).ToList();
             ProductListViewModel model = new ProductListViewModel
             {
-                Products = db.Product.Where(product => productsPricesId.Contains(product.id_Product)).Where(b => category == null || b.Category.NameCategory == category).Where(b => genre == null || b.TypeProduct.NameType == genre).OrderBy(Product => Product.id_Product).Skip((page - 1) * pageSize).Take(pageSize).Select(c =>
+                Products = db.Product.Where(product => productsPricesId.Contains(product.id_Product)).Where(b => category == null || b.Category.NameCategory == category).Where(b => genre == null || b.TypeProduct.NameType == genre)
+                .OrderBy(Product => Product.id_Product).Skip((page - 1) * pageSize).Take(pageSize).Select(c =>
                       new ProductPrice()
                       {
                           Image = c.Image,

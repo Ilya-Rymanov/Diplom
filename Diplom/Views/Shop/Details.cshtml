@@ -1,11 +1,6 @@
 ﻿@using Diplom.Models
 @model Product
-@{
-    Diplom.Models.Entities1 db = new Diplom.Models.Entities1();
-    
-    int? navID = ViewBag.ID;
-}
-<!-- Open Content -->
+@{   Diplom.Models.Entities1 db = new Diplom.Models.Entities1(); int? navID = ViewBag.ID;}
 <section class="bg-light">
     <div class="container pb-5">
         <div style="padding-top: 15px;padding-left: 15px">
@@ -15,26 +10,17 @@
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3" style="max-width:80%; margin-left:60px">
                     @if (Model.Image == null)
-                    {
-                    <img class="card-img img-fluid" src="~/img/default.png" alt="Card image cap" id="product-detail">
-                    }
+                    {<img class="card-img img-fluid" src="~/img/default.png" alt="Card image cap" id="product-detail">}
                     else
-                    {
-                        <img class="card-img img-fluid" src="~/img/@Model.Image" alt="Card image cap" id="product-detail">
-                    }
-                    
+                    {<img class="card-img img-fluid" src="~/img/@Model.Image" alt="Card image cap" id="product-detail">}
                 </div>
-
             </div>
-            <!-- col end -->
             <div class="col-lg-7 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h1 class="h2">@Model.NameProduct</h1>
                         @try
-                        {
-                            <p class="h3 py-2" style="font-size: 24px !important; font-weight: 500 !important; color: green ">@Model.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1 &#8381;</p>
-                        }
+                        {<p class="h3 py-2" style="font-size: 24px !important; font-weight: 500 !important; color: green ">@Model.Price.OrderByDescending(price => price.Id_Price).FirstOrDefault().Price1 &#8381;</p>}
                         catch { }
                         <ul class="list-inline">
                             <li class="list-inline-item">
@@ -44,18 +30,14 @@
                                 <img src="~/img/@Model.Manufacturer.Image" style="width:4em; height:2em">
                             </li>
                         </ul>
-
                         <h6>Описание:</h6>
                         <p style="text-align:justify">@Model.Description</p>
-
                         <form action="" method="GET">
                             <input type="hidden" name="product-title" value="Activewear">
-
                             <div class="row pb-3">
                                 <div class="col d-grid">
-
-                                    <i class="btn btn-success btn-lg" style="width:17em; font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal"><a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" onclick="addToCart(@Model.id_Product)">Добавить в корзину</a></i>
-
+                                    <i class="btn btn-success btn-lg" style="width:17em; font-size: 1.25rem !important; font-weight: 400 !important; " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <a class="btn-success btn-lg" style=" font-style: initial; text-decoration: none; font-size: 20px !important;" onclick="addToCart(@Model.id_Product)">Добавить в корзину</a></i>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -66,11 +48,9 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -78,24 +58,18 @@
     </div>
 </section>
 @section Scripts
-{
-    <script>
+{<script>
         function addToCart(idProduct) {
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("AddToCart", "Cart")',
-                data: {
-                    productId: idProduct,
-                },
-                success: function (data) {
-                    var cartSum = document.getElementById('cartQuont');
-
+                data: {productId: idProduct,},
+                success: function (data) { var cartSum = document.getElementById('cartQuont');
                     if (cartSum != null) {
                         cartSum.innerHTML = data;
                     }
                 }
             });
-        }
+    }
     </script>
 }

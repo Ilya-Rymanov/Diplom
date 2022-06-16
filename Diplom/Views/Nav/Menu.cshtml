@@ -1,5 +1,4 @@
 ﻿@{
-  
 Diplom.Models.Entities1 db = new Diplom.Models.Entities1();
 var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                        join categore in db.Category on product.FirstOrDefault().id_Category equals categore.id_Category
@@ -11,7 +10,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                            NameType = typeProduct.NameType
                        }).ToList();
 }
-
 <div class="col-lg-3">
     <h1 class="h2 pb-4">Категории</h1>
     <ul class="list-unstyled templatemo-accordion">
@@ -27,7 +25,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                 }
             </ul>
         </li>
-
         <li class="pb-3">
             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                 Красота и здоровье
@@ -40,7 +37,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                 }
             </ul>
         </li>
-
         <li class="pb-3">
             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                 Массажеры
@@ -53,7 +49,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                 }
             </ul>
         </li>
-
         <li class="pb-3">
             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                 Средства реабилитации
@@ -66,7 +61,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                 }
             </ul>
         </li>
-
         <li class="pb-3">
             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                 Чистый воздух
@@ -79,7 +73,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
                 }
             </ul>
         </li>
-
         <li class="pb-3">
             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                 Ингаляторы
@@ -93,8 +86,6 @@ var categoryProducts = (from product in db.Product.GroupBy(cat =>cat.id_Type)
             </ul>
         </li>
     </ul>
-
-
     <style>
         a:hover {
             color: green !important;

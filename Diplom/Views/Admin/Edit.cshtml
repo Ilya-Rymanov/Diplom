@@ -38,7 +38,8 @@
                 }
                 else
                 {
-                   <img id="imgpreview" style="width:200px;height:200px" src="~/img/@Model.Image">
+                    @Html.HiddenFor(m => m.Image)
+                    <img id="imgpreview" style="width:200px;height:200px" src="~/img/@Model.Image">
                 }
 
             </div>

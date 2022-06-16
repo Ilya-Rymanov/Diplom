@@ -8,13 +8,9 @@
                      join product in db.Product on cartOrders.id_Product equals product.id_Product
                      join order in db.Orders on cartOrders.id_Orders equals order.id_Orders
                      join cityNew in db.CityNew on order.id_City equals cityNew.id_City
-                     //join priceProd in db.Price on product.id_Product equals priceProd.id_Product
                      join users in db.AspNetUsers on order.UserId equals users.Id
                      select new
-                     {
-                         //Стоимость товара
-                       //priceValue = priceProd.Product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1,
-                         priceValue = product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1,
+                     {priceValue = product.Price.OrderByDescending(p => p.Id_Price).FirstOrDefault().Price1,
                          mail = users.Email,
                          idProduct = product.id_Product,
                          id_Orders = order.id_Orders,
@@ -24,12 +20,9 @@
                          quantity = cartOrders.quantity,
                          price = cityNew.Price,
                          Date = order.Date
-
                      });
 }
-
 <h2 style="margin-top:15px; margin-bottom:15px">Просмотр заказов</h2>
-
 <table class="table">
     <tr>
         <th>
@@ -57,10 +50,8 @@
             Почта
         </th>
     </tr>
-
     @foreach (var item in ordersAll.OrderByDescending(x=>x.id_Orders))
-    {
-        <tr>
+    {<tr>
             <td>
                 @Html.DisplayFor(modelItem => item.id_Orders)
             </td>
@@ -77,7 +68,6 @@
                                 {
                                     <a style="text-decoration:none" href="@Url.Action("Details", "Shop", new { id = item.idProduct})" title="@item.NameProduct">@Nothtml1.Remove(18, Nothtml1.Length - 18)...</a>
                                 }
-
                             }
                             else
                             {
